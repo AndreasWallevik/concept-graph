@@ -1,0 +1,800 @@
+{
+  "schema_version": 1,
+  "id": "ignition-core",
+  "title": "Ignition Core Training",
+  "description": "Concepts introduced while teaching Ignition Core.",
+  "placement_hints": [
+    {
+      "term": "Platform",
+      "parent": "ignition",
+      "relation": "is a",
+      "type": "system category",
+      "layer": "Platform",
+      "reason": "Ignition is an industrial application platform."
+    },
+    {
+      "term": "Gateway",
+      "parent": "ignition",
+      "relation": "contains",
+      "type": "service",
+      "layer": "Platform",
+      "reason": "The Gateway is Ignition's central server service."
+    },
+    {
+      "term": "Designer",
+      "parent": "gateway",
+      "relation": "configured by",
+      "type": "tool",
+      "layer": "Design tools",
+      "reason": "The Designer connects to the Gateway to edit projects and tags."
+    },
+    {
+      "term": "Designer Launcher",
+      "parent": "designer",
+      "relation": "launched by",
+      "type": "tool",
+      "layer": "Design tools",
+      "reason": "The Designer Launcher starts a Designer session."
+    },
+    {
+      "term": "Project",
+      "parent": "gateway",
+      "relation": "hosts",
+      "type": "resource",
+      "layer": "Projects",
+      "reason": "Projects are saved on the Gateway."
+    },
+    {
+      "term": "Device",
+      "parent": "gateway",
+      "relation": "connects to",
+      "type": "equipment",
+      "layer": "Devices and tags",
+      "reason": "The Gateway connects to industrial devices."
+    },
+    {
+      "term": "Device Connection",
+      "parent": "gateway",
+      "relation": "manages",
+      "type": "connection",
+      "layer": "Devices and tags",
+      "reason": "Device connections are configured at the Gateway."
+    },
+    {
+      "term": "Devices and Tags",
+      "parent": "gateway",
+      "relation": "manages",
+      "type": "course topic",
+      "layer": "Devices and tags",
+      "reason": "The Gateway manages device connections and tags."
+    },
+    {
+      "term": "OPC UA",
+      "parent": "gateway",
+      "relation": "supports",
+      "type": "protocol",
+      "layer": "Devices and tags",
+      "reason": "The Gateway uses OPC UA for industrial data connections."
+    },
+    {
+      "term": "Tag Provider",
+      "parent": "gateway",
+      "relation": "hosts",
+      "type": "resource",
+      "layer": "Devices and tags",
+      "reason": "Tag providers organize tags on the Gateway."
+    },
+    {
+      "term": "Tag",
+      "parent": "tag-provider",
+      "relation": "contains",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "manages",
+          "reason": "Tags are managed by the Gateway."
+        }
+      ],
+      "type": "data point",
+      "layer": "Devices and tags",
+      "reason": "A tag belongs to a tag provider."
+    },
+    {
+      "term": "Tag Group",
+      "parent": "gateway",
+      "relation": "configures",
+      "type": "configuration",
+      "layer": "Devices and tags",
+      "reason": "Tag Groups control how often tags execute."
+    },
+    {
+      "term": "UDT",
+      "aliases": [
+        "Tag UDT",
+        "Tag UDTs"
+      ],
+      "parent": "tag-provider",
+      "relation": "contains",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "manages",
+          "reason": "UDTs are defined with the Gateway's tags."
+        }
+      ],
+      "type": "tag type",
+      "layer": "Devices and tags",
+      "reason": "A UDT is a reusable tag type in a tag provider."
+    },
+    {
+      "term": "UDT Definition",
+      "parent": "tag-provider",
+      "relation": "contains",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "manages",
+          "reason": "UDT definitions are managed with Gateway tags."
+        }
+      ],
+      "type": "tag template",
+      "layer": "Devices and tags",
+      "reason": "A tag provider contains reusable UDT definitions."
+    },
+    {
+      "term": "UDT Instance",
+      "parent": "udt-definition",
+      "relation": "instantiates",
+      "alternates": [
+        {
+          "parent": "tag-provider",
+          "relation": "contains",
+          "reason": "A tag provider contains UDT instances."
+        }
+      ],
+      "type": "tag instance",
+      "layer": "Devices and tags",
+      "reason": "A UDT definition is used to create instances."
+    },
+    {
+      "term": "Perspective",
+      "parent": "gateway",
+      "relation": "hosts",
+      "type": "module",
+      "layer": "Visualization",
+      "reason": "Perspective is a visualization module installed in the Gateway."
+    },
+    {
+      "term": "Perspective Basics",
+      "parent": "perspective",
+      "relation": "covers",
+      "type": "course topic",
+      "layer": "Perspective",
+      "reason": "This topic introduces the core Perspective resources."
+    },
+    {
+      "term": "Perspective Session",
+      "parent": "perspective",
+      "relation": "runs as",
+      "type": "runtime",
+      "layer": "Perspective",
+      "reason": "A Perspective project runs in browser or mobile sessions."
+    },
+    {
+      "term": "View",
+      "aliases": [
+        "Perspective View"
+      ],
+      "parent": "perspective",
+      "relation": "uses",
+      "type": "screen",
+      "layer": "Perspective",
+      "reason": "Views are the primary visual resources in Perspective."
+    },
+    {
+      "term": "Component",
+      "parent": "view",
+      "relation": "contains",
+      "alternates": [
+        {
+          "parent": "perspective",
+          "relation": "uses",
+          "reason": "Perspective uses components to build views."
+        }
+      ],
+      "type": "interface element",
+      "layer": "Perspective",
+      "reason": "A Perspective view contains components."
+    },
+    {
+      "term": "Binding",
+      "parent": "component",
+      "relation": "uses",
+      "alternates": [
+        {
+          "parent": "perspective",
+          "relation": "supports",
+          "reason": "Perspective supports property bindings."
+        }
+      ],
+      "type": "data link",
+      "layer": "Perspective",
+      "reason": "A component uses bindings to connect properties to data."
+    },
+    {
+      "term": "Transform",
+      "parent": "binding",
+      "relation": "applies",
+      "alternates": [
+        {
+          "parent": "perspective",
+          "relation": "supports",
+          "reason": "Perspective supports transforms on bindings."
+        }
+      ],
+      "type": "data transformation",
+      "layer": "Perspective",
+      "reason": "A binding can apply transforms to its result."
+    },
+    {
+      "term": "Style",
+      "aliases": [
+        "Styles"
+      ],
+      "parent": "perspective",
+      "relation": "uses",
+      "type": "visual styling",
+      "layer": "Perspective",
+      "reason": "Perspective uses styles to control the appearance of views and components."
+    },
+    {
+      "term": "Style Class",
+      "parent": "perspective",
+      "relation": "uses",
+      "type": "style",
+      "layer": "Perspective",
+      "reason": "Perspective uses style classes to share visual styles."
+    },
+    {
+      "term": "Flex Container",
+      "parent": "view",
+      "relation": "contains",
+      "alternates": [
+        {
+          "parent": "perspective",
+          "relation": "uses",
+          "reason": "Perspective uses Flex Containers for layout."
+        }
+      ],
+      "type": "container",
+      "layer": "Perspective",
+      "reason": "A view can contain a Flex Container for responsive layout."
+    },
+    {
+      "term": "Embedded View",
+      "aliases": [
+        "Embedded Views"
+      ],
+      "parent": "view",
+      "relation": "embeds",
+      "alternates": [
+        {
+          "parent": "perspective",
+          "relation": "supports",
+          "reason": "Perspective supports reusing views inside other views."
+        }
+      ],
+      "type": "component",
+      "layer": "Perspective",
+      "reason": "A view can embed another view."
+    },
+    {
+      "term": "Flex Repeater",
+      "parent": "perspective",
+      "relation": "provides",
+      "type": "component",
+      "layer": "Perspective",
+      "reason": "Perspective provides Flex Repeater to show repeated views."
+    },
+    {
+      "term": "Page",
+      "aliases": [
+        "Perspective Page"
+      ],
+      "parent": "perspective",
+      "relation": "defines",
+      "type": "navigation resource",
+      "layer": "Perspective",
+      "reason": "Pages are the main navigation units of Perspective sessions."
+    },
+    {
+      "term": "Docked View",
+      "parent": "page",
+      "relation": "displays",
+      "alternates": [
+        {
+          "parent": "perspective",
+          "relation": "supports",
+          "reason": "Perspective supports docking views at page edges."
+        }
+      ],
+      "type": "screen",
+      "layer": "Perspective",
+      "reason": "A Perspective page can display docked views."
+    },
+    {
+      "term": "Navigation",
+      "aliases": [
+        "Docked Views and Navigation"
+      ],
+      "parent": "page",
+      "relation": "enables",
+      "alternates": [
+        {
+          "parent": "perspective",
+          "relation": "supports",
+          "reason": "Perspective supports navigation between pages."
+        }
+      ],
+      "type": "interaction",
+      "layer": "Perspective",
+      "reason": "Pages provide destinations for Perspective navigation."
+    },
+    {
+      "term": "Identity Provider",
+      "parent": "gateway",
+      "relation": "configures",
+      "type": "security service",
+      "layer": "Security",
+      "reason": "Identity providers are configured on the Gateway for authentication."
+    },
+    {
+      "term": "Security",
+      "parent": "gateway",
+      "relation": "configures",
+      "type": "capability",
+      "layer": "Security",
+      "reason": "Gateway settings configure authentication and access controls."
+    },
+    {
+      "term": "Security Level",
+      "parent": "perspective",
+      "relation": "uses",
+      "type": "access control",
+      "layer": "Security",
+      "reason": "Perspective uses security levels to control access."
+    },
+    {
+      "term": "Security Zone",
+      "parent": "perspective",
+      "relation": "uses",
+      "type": "access control",
+      "layer": "Security",
+      "reason": "Perspective can use security zones for access rules."
+    },
+    {
+      "term": "Alarm",
+      "aliases": [
+        "Alarming"
+      ],
+      "parent": "tag",
+      "relation": "defines",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "manages",
+          "reason": "The Gateway manages alarms."
+        }
+      ],
+      "type": "event condition",
+      "layer": "Alarming",
+      "reason": "Alarms are commonly defined on tags."
+    },
+    {
+      "term": "Alarm Journal",
+      "parent": "gateway",
+      "relation": "configures",
+      "type": "alarm record",
+      "layer": "Alarming",
+      "reason": "The Gateway configures alarm journal storage."
+    },
+    {
+      "term": "Alarm Pipeline",
+      "parent": "project",
+      "relation": "contains",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "runs",
+          "reason": "The Gateway runs alarm notification pipelines."
+        }
+      ],
+      "type": "notification workflow",
+      "layer": "Alarming",
+      "reason": "Alarm notification pipelines are project resources."
+    },
+    {
+      "term": "Alarm Notification",
+      "parent": "gateway",
+      "relation": "sends",
+      "type": "notification",
+      "layer": "Alarming",
+      "reason": "The Gateway sends configured alarm notifications."
+    },
+    {
+      "term": "History",
+      "aliases": [
+        "Historical Data",
+        "History Logging",
+        "Historical Data Logging"
+      ],
+      "parent": "gateway",
+      "relation": "manages",
+      "type": "capability",
+      "layer": "History and data",
+      "reason": "The Gateway manages historian configuration and tag history collection."
+    },
+    {
+      "term": "Tag History",
+      "parent": "tag",
+      "relation": "records",
+      "alternates": [
+        {
+          "parent": "historian-core",
+          "relation": "manages",
+          "reason": "Historian Core manages tag history."
+        },
+        {
+          "parent": "gateway",
+          "relation": "manages",
+          "reason": "The Gateway manages tag history collection."
+        }
+      ],
+      "type": "historical data",
+      "layer": "History and data",
+      "reason": "Tag history records values from tags."
+    },
+    {
+      "term": "Historian Core",
+      "aliases": [
+        "Historian",
+        "Tag Historian",
+        "Historian Module",
+        "Data Historian",
+        "Historian Core Module",
+        "Tag Historian Module"
+      ],
+      "parent": "gateway",
+      "relation": "hosts",
+      "type": "module",
+      "layer": "History and data",
+      "reason": "The Gateway hosts the Historian Core module, which manages tag history."
+    },
+    {
+      "term": "History Provider",
+      "parent": "historian-core",
+      "relation": "supports",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "configures",
+          "reason": "History providers are configured on the Gateway."
+        }
+      ],
+      "type": "storage provider",
+      "layer": "History and data",
+      "reason": "Historian Core supports configurable history providers."
+    },
+    {
+      "term": "Core Historian",
+      "aliases": [
+        "Core Historian Provider"
+      ],
+      "parent": "historian-core",
+      "relation": "provides",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "configures",
+          "reason": "The Gateway configures the Core Historian provider."
+        }
+      ],
+      "type": "history provider",
+      "layer": "History and data",
+      "reason": "Historian Core includes the embedded Core Historian storage provider."
+    },
+    {
+      "term": "SQL Historian Module",
+      "parent": "historian-core",
+      "relation": "extended by",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "hosts",
+          "reason": "The Gateway hosts the SQL Historian module."
+        }
+      ],
+      "type": "module",
+      "layer": "History and data",
+      "reason": "The SQL Historian module extends Historian Core."
+    },
+    {
+      "term": "SQL Historian",
+      "aliases": [
+        "SQL Historian Provider"
+      ],
+      "parent": "sql-historian-module",
+      "relation": "provides",
+      "alternates": [
+        {
+          "parent": "historian-core",
+          "relation": "supports",
+          "reason": "Historian Core supports the SQL Historian provider when its module is installed."
+        },
+        {
+          "parent": "gateway",
+          "relation": "configures",
+          "reason": "The SQL Historian provider is configured on the Gateway."
+        }
+      ],
+      "type": "history provider",
+      "layer": "History and data",
+      "reason": "The SQL Historian module adds the SQL-backed history provider."
+    },
+    {
+      "term": "Database Connection",
+      "parent": "gateway",
+      "relation": "manages",
+      "type": "connection",
+      "layer": "History and data",
+      "reason": "Database connections are managed at the Gateway."
+    },
+    {
+      "term": "Transaction Group",
+      "aliases": [
+        "Transaction Groups"
+      ],
+      "parent": "project",
+      "relation": "contains",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "executes",
+          "reason": "The Gateway executes configured Transaction Groups."
+        }
+      ],
+      "type": "data workflow",
+      "layer": "History and data",
+      "reason": "Transaction Groups are project resources that exchange tag and database data."
+    },
+    {
+      "term": "Reporting Module",
+      "aliases": [
+        "Reporting"
+      ],
+      "parent": "gateway",
+      "relation": "hosts",
+      "type": "module",
+      "layer": "Reporting",
+      "reason": "The Gateway hosts the Reporting module."
+    },
+    {
+      "term": "Report",
+      "parent": "project",
+      "relation": "contains",
+      "alternates": [
+        {
+          "parent": "reporting-module",
+          "relation": "supports",
+          "reason": "The Reporting module supports project reports."
+        }
+      ],
+      "type": "document",
+      "layer": "Reporting",
+      "reason": "Reports are resources within an Ignition project."
+    },
+    {
+      "term": "Report Schedule",
+      "parent": "report",
+      "relation": "has",
+      "alternates": [
+        {
+          "parent": "reporting-module",
+          "relation": "supports",
+          "reason": "The Reporting module supports scheduled reports."
+        }
+      ],
+      "type": "schedule",
+      "layer": "Reporting",
+      "reason": "A report can have a schedule for automatic delivery."
+    },
+    {
+      "term": "Vision",
+      "parent": "gateway",
+      "relation": "hosts",
+      "type": "module",
+      "layer": "Visualization",
+      "reason": "Vision is a visualization module installed in the Gateway."
+    },
+    {
+      "term": "Vision Client",
+      "parent": "vision",
+      "relation": "runs as",
+      "type": "runtime",
+      "layer": "Vision",
+      "reason": "Vision projects run in desktop clients."
+    },
+    {
+      "term": "Vision Window",
+      "parent": "vision",
+      "relation": "uses",
+      "type": "screen",
+      "layer": "Vision",
+      "reason": "Vision uses windows to build client screens."
+    },
+    {
+      "term": "Vision Template",
+      "parent": "vision",
+      "relation": "uses",
+      "type": "reusable screen",
+      "layer": "Vision",
+      "reason": "Vision uses templates to reuse interface designs."
+    },
+    {
+      "term": "Backup",
+      "aliases": [
+        "Backups"
+      ],
+      "parent": "gateway",
+      "relation": "supports",
+      "type": "data export",
+      "layer": "Backups",
+      "reason": "The Gateway supports system and project backups."
+    },
+    {
+      "term": "Gateway Backup",
+      "parent": "gateway",
+      "relation": "exports",
+      "type": "backup",
+      "layer": "Backups",
+      "reason": "A Gateway backup captures Gateway configuration and projects."
+    },
+    {
+      "term": "Project Backup",
+      "parent": "project",
+      "relation": "exports",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "supports",
+          "reason": "The Gateway supports export of individual projects."
+        }
+      ],
+      "type": "backup",
+      "layer": "Backups",
+      "reason": "A project backup exports project-scoped resources."
+    },
+    {
+      "term": "Tag Backup",
+      "parent": "tag-provider",
+      "relation": "exports",
+      "alternates": [
+        {
+          "parent": "gateway",
+          "relation": "supports",
+          "reason": "The Gateway supports exporting tags."
+        }
+      ],
+      "type": "backup",
+      "layer": "Backups",
+      "reason": "Tags can be exported from a tag provider."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ignition",
+      "label": "Ignition",
+      "type": "platform",
+      "layer": "Platform",
+      "description": ""
+    },
+    {
+      "id": "gateway",
+      "label": "Gateway",
+      "type": "concept",
+      "layer": "Platform",
+      "description": ""
+    },
+    {
+      "id": "designer",
+      "label": "designer",
+      "type": "tool",
+      "layer": "Design tools",
+      "description": ""
+    },
+    {
+      "id": "perspective",
+      "label": "Perspective",
+      "type": "module",
+      "layer": "Visualization",
+      "description": "Ignition visualization module for responsive web and mobile applications."
+    },
+    {
+      "id": "container",
+      "label": "Container",
+      "type": "concept",
+      "layer": "Visualization",
+      "description": ""
+    },
+    {
+      "id": "component",
+      "label": "Component",
+      "type": "interface element",
+      "layer": "Perspective",
+      "description": ""
+    },
+    {
+      "id": "tag-historian",
+      "label": "Tag Historian",
+      "type": "module",
+      "layer": "History and data",
+      "description": ""
+    },
+    {
+      "id": "historian",
+      "label": "Historian",
+      "type": "module",
+      "layer": "History and data",
+      "description": ""
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-ignition-gateway",
+      "source": "ignition",
+      "target": "gateway",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-gateway-designer",
+      "source": "gateway",
+      "target": "designer",
+      "relation": "configured by"
+    },
+    {
+      "id": "edge-gateway-perspective",
+      "source": "gateway",
+      "target": "perspective",
+      "relation": "hosts"
+    },
+    {
+      "id": "edge-perspective-container",
+      "source": "perspective",
+      "target": "container",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-perspective-component",
+      "source": "perspective",
+      "target": "component",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-gateway-tag-historian",
+      "source": "gateway",
+      "target": "tag-historian",
+      "relation": "hosts"
+    },
+    {
+      "id": "edge-gateway-historian",
+      "source": "gateway",
+      "target": "historian",
+      "relation": "hosts"
+    }
+  ],
+  "placement_hint_fallback": {
+    "parent": "ignition",
+    "relation": "includes",
+    "reason": "Ignition includes this course concept. Add a more specific connection when its related topic appears."
+  }
+}

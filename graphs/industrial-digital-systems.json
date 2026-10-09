@@ -1,0 +1,1743 @@
+{
+  "schema_version": 1,
+  "id": "industrial-digital-systems",
+  "title": "Industrial & Digital Systems",
+  "description": "Industrial automation, software architecture, data, DevOps, security, and AI concepts.",
+  "nodes": [
+    {
+      "id": "enterprise",
+      "label": "Enterprise / Business",
+      "type": "domain",
+      "layer": "Business",
+      "description": "Business planning, finance, logistics, commercial processes and enterprise-wide systems."
+    },
+    {
+      "id": "mom",
+      "label": "Manufacturing Operations",
+      "type": "domain",
+      "layer": "ISA-95 L3",
+      "description": "Manufacturing operations management: execution, quality, maintenance, inventory and production coordination."
+    },
+    {
+      "id": "supervisory",
+      "label": "Supervisory Control",
+      "type": "domain",
+      "layer": "ISA-95 L2",
+      "description": "Supervision, visualization, alarming and process monitoring."
+    },
+    {
+      "id": "control",
+      "label": "Basic Control",
+      "type": "domain",
+      "layer": "ISA-95 L1",
+      "description": "Controllers and devices that manipulate or regulate the physical process."
+    },
+    {
+      "id": "physical",
+      "label": "Physical Process",
+      "type": "domain",
+      "layer": "ISA-95 L0",
+      "description": "Machines, production lines, sensors, actuators and the physical process."
+    },
+    {
+      "id": "data",
+      "label": "Data & Integration",
+      "type": "domain",
+      "layer": "Cross-cutting",
+      "description": "Moving, contextualizing, storing and exposing industrial data."
+    },
+    {
+      "id": "software",
+      "label": "Software Architecture",
+      "type": "domain",
+      "layer": "Cross-cutting",
+      "description": "Application structure, services, APIs, middleware and reusable software building blocks."
+    },
+    {
+      "id": "delivery",
+      "label": "Delivery / DevOps",
+      "type": "domain",
+      "layer": "Cross-cutting",
+      "description": "Version control, build, test, deployment, infrastructure and operations workflows."
+    },
+    {
+      "id": "security",
+      "label": "Security / DevSecOps",
+      "type": "domain",
+      "layer": "Cross-cutting",
+      "description": "Identity, authorization, segmentation, secrets and security controls across the lifecycle."
+    },
+    {
+      "id": "ai",
+      "label": "AI / Agentic Systems",
+      "type": "domain",
+      "layer": "Cross-cutting",
+      "description": "LLMs, agents, MCP, retrieval and AI-assisted engineering/operations."
+    },
+    {
+      "id": "cloudedge",
+      "label": "Edge / Cloud / Platform",
+      "type": "domain",
+      "layer": "Cross-cutting",
+      "description": "Runtime placement and infrastructure patterns from plant-floor edge to cloud."
+    },
+    {
+      "id": "erp",
+      "label": "ERP",
+      "type": "concept",
+      "layer": "Business",
+      "description": "Enterprise Resource Planning. Finance, purchasing, orders, material planning and business logistics."
+    },
+    {
+      "id": "crm",
+      "label": "CRM",
+      "type": "concept",
+      "layer": "Business",
+      "description": "Customer Relationship Management."
+    },
+    {
+      "id": "scm",
+      "label": "SCM",
+      "type": "concept",
+      "layer": "Business",
+      "description": "Supply Chain Management."
+    },
+    {
+      "id": "wms",
+      "label": "WMS",
+      "type": "concept",
+      "layer": "Business",
+      "description": "Warehouse Management System."
+    },
+    {
+      "id": "plm",
+      "label": "PLM",
+      "type": "concept",
+      "layer": "Business",
+      "description": "Product Lifecycle Management."
+    },
+    {
+      "id": "aps",
+      "label": "APS",
+      "type": "concept",
+      "layer": "Business",
+      "description": "Advanced Planning and Scheduling."
+    },
+    {
+      "id": "bi",
+      "label": "BI / Analytics",
+      "type": "concept",
+      "layer": "Business",
+      "description": "Business intelligence, reporting and analytical applications."
+    },
+    {
+      "id": "mes",
+      "label": "MES",
+      "type": "concept",
+      "layer": "ISA-95 L3",
+      "description": "Manufacturing Execution System. Coordinates and tracks production execution."
+    },
+    {
+      "id": "momterm",
+      "label": "MOM",
+      "type": "concept",
+      "layer": "ISA-95 L3",
+      "description": "Manufacturing Operations Management. Broader umbrella around production, quality, maintenance and inventory operations."
+    },
+    {
+      "id": "oee",
+      "label": "OEE",
+      "type": "concept",
+      "layer": "ISA-95 L3",
+      "description": "Overall Equipment Effectiveness = Availability × Performance × Quality."
+    },
+    {
+      "id": "qms",
+      "label": "QMS",
+      "type": "concept",
+      "layer": "ISA-95 L3",
+      "description": "Quality Management System / quality operations."
+    },
+    {
+      "id": "cmms",
+      "label": "CMMS / EAM",
+      "type": "concept",
+      "layer": "ISA-95 L3",
+      "description": "Maintenance work management and asset lifecycle management."
+    },
+    {
+      "id": "batch",
+      "label": "Batch / Recipe",
+      "type": "concept",
+      "layer": "ISA-95 L3",
+      "description": "Recipe, batch execution and procedural control concepts."
+    },
+    {
+      "id": "trace",
+      "label": "Track & Trace / Genealogy",
+      "type": "concept",
+      "layer": "ISA-95 L3",
+      "description": "Material, lot and product genealogy across production."
+    },
+    {
+      "id": "schedule",
+      "label": "Production Scheduling",
+      "type": "concept",
+      "layer": "ISA-95 L3",
+      "description": "Finite or dispatch-level scheduling of production work."
+    },
+    {
+      "id": "scada",
+      "label": "SCADA",
+      "type": "concept",
+      "layer": "ISA-95 L2",
+      "description": "Supervisory Control and Data Acquisition. Supervises, visualizes and interacts with industrial processes."
+    },
+    {
+      "id": "hmi",
+      "label": "HMI",
+      "type": "concept",
+      "layer": "ISA-95 L2",
+      "description": "Human-Machine Interface used by operators to visualize and control a process."
+    },
+    {
+      "id": "historian",
+      "label": "Historian",
+      "type": "concept",
+      "layer": "Data",
+      "description": "Time-series storage optimized for process and operational history."
+    },
+    {
+      "id": "alarm",
+      "label": "Alarm Management",
+      "type": "concept",
+      "layer": "ISA-95 L2",
+      "description": "Alarm generation, prioritization, routing, acknowledgement and lifecycle management."
+    },
+    {
+      "id": "plc",
+      "label": "PLC",
+      "type": "concept",
+      "layer": "ISA-95 L1",
+      "description": "Programmable Logic Controller."
+    },
+    {
+      "id": "dcs",
+      "label": "DCS",
+      "type": "concept",
+      "layer": "ISA-95 L1-L2",
+      "description": "Distributed Control System, common in continuous/process industries."
+    },
+    {
+      "id": "rtu",
+      "label": "RTU",
+      "type": "concept",
+      "layer": "ISA-95 L1-L2",
+      "description": "Remote Terminal Unit, common in distributed telemetry/control."
+    },
+    {
+      "id": "pac",
+      "label": "PAC",
+      "type": "concept",
+      "layer": "ISA-95 L1",
+      "description": "Programmable Automation Controller."
+    },
+    {
+      "id": "io",
+      "label": "I/O",
+      "type": "concept",
+      "layer": "ISA-95 L1",
+      "description": "Input/output modules connecting controllers to field devices."
+    },
+    {
+      "id": "sensor",
+      "label": "Sensors",
+      "type": "concept",
+      "layer": "ISA-95 L0-L1",
+      "description": "Devices that measure the physical process."
+    },
+    {
+      "id": "actuator",
+      "label": "Actuators",
+      "type": "concept",
+      "layer": "ISA-95 L0-L1",
+      "description": "Valves, motors, drives and devices that affect the physical process."
+    },
+    {
+      "id": "vfd",
+      "label": "VFD / Drives",
+      "type": "concept",
+      "layer": "ISA-95 L1",
+      "description": "Variable Frequency Drives and motor control devices."
+    },
+    {
+      "id": "dataops",
+      "label": "DataOps",
+      "type": "concept",
+      "layer": "Data",
+      "description": "People, processes and technology for delivering trusted, usable data reliably to consumers."
+    },
+    {
+      "id": "industrialdataops",
+      "label": "Industrial DataOps",
+      "type": "concept",
+      "layer": "Data",
+      "description": "DataOps applied to OT/industrial data: connectivity, contextualization, standardization, governance and delivery."
+    },
+    {
+      "id": "dataeng",
+      "label": "Data Engineering",
+      "type": "concept",
+      "layer": "Data",
+      "description": "Building pipelines and transformations for collecting, validating, modeling and delivering data."
+    },
+    {
+      "id": "etl",
+      "label": "ETL / ELT",
+      "type": "concept",
+      "layer": "Data",
+      "description": "Extract-transform-load / extract-load-transform data pipeline patterns."
+    },
+    {
+      "id": "context",
+      "label": "Contextualization",
+      "type": "concept",
+      "layer": "Data",
+      "description": "Adding asset, hierarchy, units, semantics and relationships so raw data becomes meaningful."
+    },
+    {
+      "id": "namespace",
+      "label": "UNS",
+      "type": "concept",
+      "layer": "Data",
+      "description": "Unified Namespace. Event-driven shared namespace for normalized industrial information, often implemented with MQTT."
+    },
+    {
+      "id": "mqtt",
+      "label": "MQTT",
+      "type": "protocol",
+      "layer": "Data",
+      "description": "Lightweight publish/subscribe messaging protocol."
+    },
+    {
+      "id": "sparkplug",
+      "label": "Sparkplug B",
+      "type": "protocol",
+      "layer": "Data",
+      "description": "Industrial MQTT specification defining topic namespace, payload and state management."
+    },
+    {
+      "id": "opcua",
+      "label": "OPC UA",
+      "type": "protocol",
+      "layer": "Data",
+      "description": "Industrial interoperability standard for secure, structured data exchange."
+    },
+    {
+      "id": "rest",
+      "label": "REST API",
+      "type": "protocol",
+      "layer": "Software",
+      "description": "HTTP-based resource-oriented application interface."
+    },
+    {
+      "id": "graphql",
+      "label": "GraphQL",
+      "type": "protocol",
+      "layer": "Software",
+      "description": "Query-oriented API technology."
+    },
+    {
+      "id": "pubsub",
+      "label": "Pub/Sub",
+      "type": "pattern",
+      "layer": "Data",
+      "description": "Publish/subscribe messaging pattern that decouples producers and consumers."
+    },
+    {
+      "id": "eventstream",
+      "label": "Event Streaming",
+      "type": "pattern",
+      "layer": "Data",
+      "description": "Continuous transport and processing of ordered events, often with Kafka-like platforms."
+    },
+    {
+      "id": "broker",
+      "label": "Message Broker",
+      "type": "component",
+      "layer": "Data",
+      "description": "Infrastructure that receives, routes and distributes messages/events."
+    },
+    {
+      "id": "datacontract",
+      "label": "Data Contract",
+      "type": "concept",
+      "layer": "Data",
+      "description": "Explicit agreement on schema, semantics, quality and ownership between data producer and consumer."
+    },
+    {
+      "id": "timeseries",
+      "label": "Time-series DB",
+      "type": "component",
+      "layer": "Data",
+      "description": "Database optimized for timestamped observations."
+    },
+    {
+      "id": "sql",
+      "label": "Relational DB / SQL",
+      "type": "component",
+      "layer": "Data",
+      "description": "Structured transactional/relational data storage and query."
+    },
+    {
+      "id": "datalake",
+      "label": "Data Lake / Lakehouse",
+      "type": "component",
+      "layer": "Data",
+      "description": "Large-scale analytical storage, often combining object storage with table/warehouse semantics."
+    },
+    {
+      "id": "knowledgegraph",
+      "label": "Knowledge Graph",
+      "type": "concept",
+      "layer": "Data",
+      "description": "Graph of entities and relationships used to represent context and semantics."
+    },
+    {
+      "id": "semantic",
+      "label": "Semantic Model",
+      "type": "concept",
+      "layer": "Data",
+      "description": "Formal representation of meaning, entities, relationships and business/industrial concepts."
+    },
+    {
+      "id": "frontend",
+      "label": "Frontend / UI",
+      "type": "component",
+      "layer": "Software",
+      "description": "User-facing application layer, e.g. Perspective or React."
+    },
+    {
+      "id": "backend",
+      "label": "Backend / Service",
+      "type": "component",
+      "layer": "Software",
+      "description": "Server-side business logic, APIs, workers and integrations."
+    },
+    {
+      "id": "middleware",
+      "label": "Middleware",
+      "type": "component",
+      "layer": "Software",
+      "description": "Software between systems that handles integration, translation, messaging or orchestration."
+    },
+    {
+      "id": "api",
+      "label": "API",
+      "type": "concept",
+      "layer": "Software",
+      "description": "Defined interface through which software systems exchange functionality or data."
+    },
+    {
+      "id": "microservices",
+      "label": "Microservices",
+      "type": "pattern",
+      "layer": "Software",
+      "description": "Architecture where capabilities are split into independently deployable services."
+    },
+    {
+      "id": "monolith",
+      "label": "Monolith",
+      "type": "pattern",
+      "layer": "Software",
+      "description": "Application architecture where many capabilities are packaged and deployed together."
+    },
+    {
+      "id": "eventdriven",
+      "label": "Event-driven Architecture",
+      "type": "pattern",
+      "layer": "Software",
+      "description": "Architecture based on producing, consuming and reacting to events."
+    },
+    {
+      "id": "repo",
+      "label": "Repository",
+      "type": "component",
+      "layer": "Software",
+      "description": "Version-controlled source of code/configuration, commonly Git."
+    },
+    {
+      "id": "sdk",
+      "label": "SDK",
+      "type": "concept",
+      "layer": "Software",
+      "description": "Software Development Kit: libraries, tools and examples for building against a platform."
+    },
+    {
+      "id": "runtime",
+      "label": "Runtime",
+      "type": "concept",
+      "layer": "Software",
+      "description": "Environment in which an application executes."
+    },
+    {
+      "id": "devops",
+      "label": "DevOps",
+      "type": "concept",
+      "layer": "Delivery",
+      "description": "Practices joining software development and operations across planning, build, delivery and operation."
+    },
+    {
+      "id": "devsecops",
+      "label": "DevSecOps",
+      "type": "concept",
+      "layer": "Delivery",
+      "description": "DevOps with security and compliance integrated throughout the lifecycle."
+    },
+    {
+      "id": "git",
+      "label": "Git",
+      "type": "tool",
+      "layer": "Delivery",
+      "description": "Distributed version control system."
+    },
+    {
+      "id": "cicd",
+      "label": "CI/CD",
+      "type": "concept",
+      "layer": "Delivery",
+      "description": "Continuous Integration and Continuous Delivery/Deployment."
+    },
+    {
+      "id": "iac",
+      "label": "Infrastructure as Code",
+      "type": "concept",
+      "layer": "Delivery",
+      "description": "Infrastructure defined and managed through version-controlled declarative or scripted configuration."
+    },
+    {
+      "id": "ansible",
+      "label": "Ansible",
+      "type": "tool",
+      "layer": "Delivery",
+      "description": "Automation/configuration management tool commonly used for deployment and infrastructure tasks."
+    },
+    {
+      "id": "docker",
+      "label": "Docker / Containers",
+      "type": "tool",
+      "layer": "Delivery",
+      "description": "Application packaging and isolation using containers."
+    },
+    {
+      "id": "k8s",
+      "label": "Kubernetes",
+      "type": "tool",
+      "layer": "Delivery",
+      "description": "Container orchestration platform."
+    },
+    {
+      "id": "artifact",
+      "label": "Build Artifact",
+      "type": "concept",
+      "layer": "Delivery",
+      "description": "Versioned deployable output produced by a build/release process."
+    },
+    {
+      "id": "observability",
+      "label": "Observability",
+      "type": "concept",
+      "layer": "Delivery",
+      "description": "Understanding system behavior through logs, metrics and traces."
+    },
+    {
+      "id": "sre",
+      "label": "SRE",
+      "type": "concept",
+      "layer": "Delivery",
+      "description": "Site Reliability Engineering: applying software engineering to operations and reliability."
+    },
+    {
+      "id": "iam",
+      "label": "IAM",
+      "type": "concept",
+      "layer": "Security",
+      "description": "Identity and Access Management."
+    },
+    {
+      "id": "idp",
+      "label": "Identity Provider (IdP)",
+      "type": "component",
+      "layer": "Security",
+      "description": "System that authenticates users and issues identity assertions/tokens."
+    },
+    {
+      "id": "rbac",
+      "label": "RBAC",
+      "type": "concept",
+      "layer": "Security",
+      "description": "Role-Based Access Control."
+    },
+    {
+      "id": "mfa",
+      "label": "MFA / 2FA",
+      "type": "concept",
+      "layer": "Security",
+      "description": "Multi-factor authentication."
+    },
+    {
+      "id": "secrets",
+      "label": "Secrets Management",
+      "type": "concept",
+      "layer": "Security",
+      "description": "Secure storage, retrieval, rotation and auditing of passwords, tokens, keys and certificates."
+    },
+    {
+      "id": "zerotrust",
+      "label": "Zero Trust",
+      "type": "concept",
+      "layer": "Security",
+      "description": "Security model based on continuous verification and least privilege rather than implicit network trust."
+    },
+    {
+      "id": "segmentation",
+      "label": "Network Segmentation",
+      "type": "concept",
+      "layer": "Security",
+      "description": "Separating systems/zones to reduce attack paths and control traffic."
+    },
+    {
+      "id": "dmz",
+      "label": "Industrial DMZ",
+      "type": "concept",
+      "layer": "Security",
+      "description": "Buffer zone between enterprise IT and industrial control networks."
+    },
+    {
+      "id": "purdue",
+      "label": "Purdue Model",
+      "type": "framework",
+      "layer": "Security",
+      "description": "Hierarchical reference model commonly used to discuss industrial architecture and network segmentation."
+    },
+    {
+      "id": "llm",
+      "label": "LLM",
+      "type": "concept",
+      "layer": "AI",
+      "description": "Large Language Model."
+    },
+    {
+      "id": "agent",
+      "label": "AI Agent",
+      "type": "concept",
+      "layer": "AI",
+      "description": "LLM-driven system that can reason, select tools and perform actions toward a goal."
+    },
+    {
+      "id": "agentic",
+      "label": "Agentic Development",
+      "type": "concept",
+      "layer": "AI",
+      "description": "Software development where agents inspect code/context, modify files, run tools and iterate on tasks."
+    },
+    {
+      "id": "mcp",
+      "label": "MCP",
+      "type": "protocol",
+      "layer": "AI",
+      "description": "Model Context Protocol: standard interface for exposing tools and context to AI agents."
+    },
+    {
+      "id": "rag",
+      "label": "RAG",
+      "type": "concept",
+      "layer": "AI",
+      "description": "Retrieval-Augmented Generation: retrieving external context and supplying it to a model at generation time."
+    },
+    {
+      "id": "embedding",
+      "label": "Embeddings",
+      "type": "concept",
+      "layer": "AI",
+      "description": "Vector representations used for semantic search, retrieval and similarity."
+    },
+    {
+      "id": "vector",
+      "label": "Vector DB",
+      "type": "component",
+      "layer": "AI",
+      "description": "Storage/search optimized for embedding vectors."
+    },
+    {
+      "id": "promptinj",
+      "label": "Prompt Injection",
+      "type": "risk",
+      "layer": "AI",
+      "description": "Untrusted content attempts to manipulate an AI system into ignoring or overriding intended instructions."
+    },
+    {
+      "id": "toolcalling",
+      "label": "Tool Calling",
+      "type": "concept",
+      "layer": "AI",
+      "description": "Model selects and invokes external functions/tools."
+    },
+    {
+      "id": "contextwindow",
+      "label": "Context Window / Tokens",
+      "type": "concept",
+      "layer": "AI",
+      "description": "Amount of text/tool context a model can process in one request; token usage often affects API cost."
+    },
+    {
+      "id": "edge",
+      "label": "Edge Computing",
+      "type": "concept",
+      "layer": "Platform",
+      "description": "Running compute close to machines/processes for latency, resilience or bandwidth reasons."
+    },
+    {
+      "id": "cloud",
+      "label": "Cloud",
+      "type": "concept",
+      "layer": "Platform",
+      "description": "Externally hosted compute/storage/platform services."
+    },
+    {
+      "id": "onprem",
+      "label": "On-premises",
+      "type": "concept",
+      "layer": "Platform",
+      "description": "Systems hosted on infrastructure physically or administratively controlled by the organization."
+    },
+    {
+      "id": "hybrid",
+      "label": "Hybrid Architecture",
+      "type": "pattern",
+      "layer": "Platform",
+      "description": "Architecture spanning edge/on-prem and cloud."
+    },
+    {
+      "id": "ignition",
+      "label": "Ignition",
+      "type": "platform",
+      "layer": "Example",
+      "description": "Industrial application platform commonly used for SCADA, HMI, historian, MES integrations and industrial data applications."
+    },
+    {
+      "id": "perspective",
+      "label": "Ignition Perspective",
+      "type": "product",
+      "layer": "Example",
+      "description": "Ignition web visualization module for industrial applications."
+    },
+    {
+      "id": "highbyte",
+      "label": "HighByte Intelligence Hub",
+      "type": "platform",
+      "layer": "Example",
+      "description": "Industrial DataOps platform focused on industrial connectivity, contextualization, modeling and data delivery."
+    },
+    {
+      "id": "react",
+      "label": "React",
+      "type": "framework",
+      "layer": "Example",
+      "description": "JavaScript UI library used for building web frontends."
+    },
+    {
+      "id": "kepware",
+      "label": "Kepware / OPC Server",
+      "type": "platform",
+      "layer": "Example",
+      "description": "Industrial connectivity layer exposing device data through protocols such as OPC UA."
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-0001",
+      "source": "enterprise",
+      "target": "erp",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0002",
+      "source": "enterprise",
+      "target": "crm",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0003",
+      "source": "enterprise",
+      "target": "scm",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0004",
+      "source": "enterprise",
+      "target": "wms",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0005",
+      "source": "enterprise",
+      "target": "plm",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0006",
+      "source": "enterprise",
+      "target": "aps",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0007",
+      "source": "enterprise",
+      "target": "bi",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0008",
+      "source": "mom",
+      "target": "mes",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0009",
+      "source": "mom",
+      "target": "momterm",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0010",
+      "source": "mom",
+      "target": "oee",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0011",
+      "source": "mom",
+      "target": "qms",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0012",
+      "source": "mom",
+      "target": "cmms",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0013",
+      "source": "mom",
+      "target": "batch",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0014",
+      "source": "mom",
+      "target": "trace",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0015",
+      "source": "mom",
+      "target": "schedule",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0016",
+      "source": "supervisory",
+      "target": "scada",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0017",
+      "source": "supervisory",
+      "target": "hmi",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0018",
+      "source": "supervisory",
+      "target": "alarm",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0019",
+      "source": "control",
+      "target": "plc",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0020",
+      "source": "control",
+      "target": "dcs",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0021",
+      "source": "control",
+      "target": "rtu",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0022",
+      "source": "control",
+      "target": "pac",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0023",
+      "source": "control",
+      "target": "io",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0024",
+      "source": "control",
+      "target": "vfd",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0025",
+      "source": "physical",
+      "target": "sensor",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0026",
+      "source": "physical",
+      "target": "actuator",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0027",
+      "source": "data",
+      "target": "dataops",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0028",
+      "source": "data",
+      "target": "industrialdataops",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0029",
+      "source": "data",
+      "target": "dataeng",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0030",
+      "source": "data",
+      "target": "etl",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0031",
+      "source": "data",
+      "target": "context",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0032",
+      "source": "data",
+      "target": "namespace",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0033",
+      "source": "data",
+      "target": "mqtt",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0034",
+      "source": "data",
+      "target": "sparkplug",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0035",
+      "source": "data",
+      "target": "opcua",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0036",
+      "source": "data",
+      "target": "rest",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0037",
+      "source": "data",
+      "target": "graphql",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0038",
+      "source": "data",
+      "target": "pubsub",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0039",
+      "source": "data",
+      "target": "eventstream",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0040",
+      "source": "data",
+      "target": "broker",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0041",
+      "source": "data",
+      "target": "datacontract",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0042",
+      "source": "data",
+      "target": "timeseries",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0043",
+      "source": "data",
+      "target": "sql",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0044",
+      "source": "data",
+      "target": "datalake",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0045",
+      "source": "data",
+      "target": "knowledgegraph",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0046",
+      "source": "data",
+      "target": "semantic",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0047",
+      "source": "data",
+      "target": "historian",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0048",
+      "source": "software",
+      "target": "frontend",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0049",
+      "source": "software",
+      "target": "backend",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0050",
+      "source": "software",
+      "target": "middleware",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0051",
+      "source": "software",
+      "target": "api",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0052",
+      "source": "software",
+      "target": "microservices",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0053",
+      "source": "software",
+      "target": "monolith",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0054",
+      "source": "software",
+      "target": "eventdriven",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0055",
+      "source": "software",
+      "target": "repo",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0056",
+      "source": "software",
+      "target": "sdk",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0057",
+      "source": "software",
+      "target": "runtime",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0058",
+      "source": "delivery",
+      "target": "devops",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0059",
+      "source": "delivery",
+      "target": "devsecops",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0060",
+      "source": "delivery",
+      "target": "git",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0061",
+      "source": "delivery",
+      "target": "cicd",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0062",
+      "source": "delivery",
+      "target": "iac",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0063",
+      "source": "delivery",
+      "target": "ansible",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0064",
+      "source": "delivery",
+      "target": "docker",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0065",
+      "source": "delivery",
+      "target": "k8s",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0066",
+      "source": "delivery",
+      "target": "artifact",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0067",
+      "source": "delivery",
+      "target": "observability",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0068",
+      "source": "delivery",
+      "target": "sre",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0069",
+      "source": "security",
+      "target": "iam",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0070",
+      "source": "security",
+      "target": "idp",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0071",
+      "source": "security",
+      "target": "rbac",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0072",
+      "source": "security",
+      "target": "mfa",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0073",
+      "source": "security",
+      "target": "secrets",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0074",
+      "source": "security",
+      "target": "zerotrust",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0075",
+      "source": "security",
+      "target": "segmentation",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0076",
+      "source": "security",
+      "target": "dmz",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0077",
+      "source": "security",
+      "target": "purdue",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0078",
+      "source": "ai",
+      "target": "llm",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0079",
+      "source": "ai",
+      "target": "agent",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0080",
+      "source": "ai",
+      "target": "agentic",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0081",
+      "source": "ai",
+      "target": "mcp",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0082",
+      "source": "ai",
+      "target": "rag",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0083",
+      "source": "ai",
+      "target": "embedding",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0084",
+      "source": "ai",
+      "target": "vector",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0085",
+      "source": "ai",
+      "target": "promptinj",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0086",
+      "source": "ai",
+      "target": "toolcalling",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0087",
+      "source": "ai",
+      "target": "contextwindow",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0088",
+      "source": "cloudedge",
+      "target": "edge",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0089",
+      "source": "cloudedge",
+      "target": "cloud",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0090",
+      "source": "cloudedge",
+      "target": "onprem",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0091",
+      "source": "cloudedge",
+      "target": "hybrid",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-0092",
+      "source": "physical",
+      "target": "control",
+      "relation": "process signals"
+    },
+    {
+      "id": "edge-0093",
+      "source": "control",
+      "target": "supervisory",
+      "relation": "control/status"
+    },
+    {
+      "id": "edge-0094",
+      "source": "supervisory",
+      "target": "mom",
+      "relation": "operations data"
+    },
+    {
+      "id": "edge-0095",
+      "source": "mom",
+      "target": "enterprise",
+      "relation": "production/business integration"
+    },
+    {
+      "id": "edge-0096",
+      "source": "erp",
+      "target": "mes",
+      "relation": "orders / schedules / confirmations"
+    },
+    {
+      "id": "edge-0097",
+      "source": "mes",
+      "target": "scada",
+      "relation": "work context / execution"
+    },
+    {
+      "id": "edge-0098",
+      "source": "scada",
+      "target": "plc",
+      "relation": "supervision / commands"
+    },
+    {
+      "id": "edge-0099",
+      "source": "plc",
+      "target": "sensor",
+      "relation": "reads"
+    },
+    {
+      "id": "edge-0100",
+      "source": "plc",
+      "target": "actuator",
+      "relation": "controls"
+    },
+    {
+      "id": "edge-0101",
+      "source": "dataops",
+      "target": "dataeng",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-0102",
+      "source": "industrialdataops",
+      "target": "dataops",
+      "relation": "specializes"
+    },
+    {
+      "id": "edge-0103",
+      "source": "industrialdataops",
+      "target": "opcua",
+      "relation": "connects via"
+    },
+    {
+      "id": "edge-0104",
+      "source": "industrialdataops",
+      "target": "mqtt",
+      "relation": "publishes via"
+    },
+    {
+      "id": "edge-0105",
+      "source": "context",
+      "target": "semantic",
+      "relation": "creates"
+    },
+    {
+      "id": "edge-0106",
+      "source": "context",
+      "target": "knowledgegraph",
+      "relation": "can create"
+    },
+    {
+      "id": "edge-0107",
+      "source": "mqtt",
+      "target": "sparkplug",
+      "relation": "industrial convention"
+    },
+    {
+      "id": "edge-0108",
+      "source": "mqtt",
+      "target": "namespace",
+      "relation": "often implements"
+    },
+    {
+      "id": "edge-0109",
+      "source": "pubsub",
+      "target": "mqtt",
+      "relation": "implemented by"
+    },
+    {
+      "id": "edge-0110",
+      "source": "eventdriven",
+      "target": "pubsub",
+      "relation": "often uses"
+    },
+    {
+      "id": "edge-0111",
+      "source": "broker",
+      "target": "mqtt",
+      "relation": "routes"
+    },
+    {
+      "id": "edge-0112",
+      "source": "historian",
+      "target": "timeseries",
+      "relation": "implemented with"
+    },
+    {
+      "id": "edge-0113",
+      "source": "etl",
+      "target": "sql",
+      "relation": "reads/writes"
+    },
+    {
+      "id": "edge-0114",
+      "source": "etl",
+      "target": "datalake",
+      "relation": "lands data"
+    },
+    {
+      "id": "edge-0115",
+      "source": "datacontract",
+      "target": "semantic",
+      "relation": "defines meaning"
+    },
+    {
+      "id": "edge-0116",
+      "source": "api",
+      "target": "rest",
+      "relation": "often implemented as"
+    },
+    {
+      "id": "edge-0117",
+      "source": "frontend",
+      "target": "api",
+      "relation": "consumes"
+    },
+    {
+      "id": "edge-0118",
+      "source": "backend",
+      "target": "api",
+      "relation": "exposes"
+    },
+    {
+      "id": "edge-0119",
+      "source": "middleware",
+      "target": "api",
+      "relation": "integrates"
+    },
+    {
+      "id": "edge-0120",
+      "source": "microservices",
+      "target": "api",
+      "relation": "communicate via"
+    },
+    {
+      "id": "edge-0121",
+      "source": "microservices",
+      "target": "eventdriven",
+      "relation": "often uses"
+    },
+    {
+      "id": "edge-0122",
+      "source": "repo",
+      "target": "git",
+      "relation": "versioned by"
+    },
+    {
+      "id": "edge-0123",
+      "source": "devops",
+      "target": "git",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-0124",
+      "source": "devops",
+      "target": "cicd",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-0125",
+      "source": "devops",
+      "target": "iac",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-0126",
+      "source": "devops",
+      "target": "docker",
+      "relation": "often uses"
+    },
+    {
+      "id": "edge-0127",
+      "source": "devsecops",
+      "target": "devops",
+      "relation": "extends"
+    },
+    {
+      "id": "edge-0128",
+      "source": "devsecops",
+      "target": "secrets",
+      "relation": "protects"
+    },
+    {
+      "id": "edge-0129",
+      "source": "devsecops",
+      "target": "iam",
+      "relation": "integrates"
+    },
+    {
+      "id": "edge-0130",
+      "source": "cicd",
+      "target": "artifact",
+      "relation": "produces/deploys"
+    },
+    {
+      "id": "edge-0131",
+      "source": "iac",
+      "target": "ansible",
+      "relation": "can use"
+    },
+    {
+      "id": "edge-0132",
+      "source": "docker",
+      "target": "k8s",
+      "relation": "orchestrated by"
+    },
+    {
+      "id": "edge-0133",
+      "source": "observability",
+      "target": "sre",
+      "relation": "supports"
+    },
+    {
+      "id": "edge-0134",
+      "source": "idp",
+      "target": "iam",
+      "relation": "part of"
+    },
+    {
+      "id": "edge-0135",
+      "source": "rbac",
+      "target": "iam",
+      "relation": "authorization model"
+    },
+    {
+      "id": "edge-0136",
+      "source": "mfa",
+      "target": "idp",
+      "relation": "strengthens"
+    },
+    {
+      "id": "edge-0137",
+      "source": "segmentation",
+      "target": "purdue",
+      "relation": "often guided by"
+    },
+    {
+      "id": "edge-0138",
+      "source": "dmz",
+      "target": "segmentation",
+      "relation": "is a zone pattern"
+    },
+    {
+      "id": "edge-0139",
+      "source": "agent",
+      "target": "llm",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-0140",
+      "source": "agent",
+      "target": "toolcalling",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-0141",
+      "source": "agent",
+      "target": "mcp",
+      "relation": "can discover tools via"
+    },
+    {
+      "id": "edge-0142",
+      "source": "agentic",
+      "target": "agent",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-0143",
+      "source": "rag",
+      "target": "embedding",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-0144",
+      "source": "rag",
+      "target": "vector",
+      "relation": "often uses"
+    },
+    {
+      "id": "edge-0145",
+      "source": "mcp",
+      "target": "api",
+      "relation": "can wrap/expose"
+    },
+    {
+      "id": "edge-0146",
+      "source": "agent",
+      "target": "promptinj",
+      "relation": "exposed to"
+    },
+    {
+      "id": "edge-0147",
+      "source": "llm",
+      "target": "contextwindow",
+      "relation": "bounded by"
+    },
+    {
+      "id": "edge-0148",
+      "source": "hybrid",
+      "target": "edge",
+      "relation": "combines"
+    },
+    {
+      "id": "edge-0149",
+      "source": "hybrid",
+      "target": "cloud",
+      "relation": "combines"
+    },
+    {
+      "id": "edge-0150",
+      "source": "hybrid",
+      "target": "onprem",
+      "relation": "combines"
+    },
+    {
+      "id": "edge-0151",
+      "source": "ignition",
+      "target": "scada",
+      "relation": "can implement"
+    },
+    {
+      "id": "edge-0152",
+      "source": "ignition",
+      "target": "hmi",
+      "relation": "can implement"
+    },
+    {
+      "id": "edge-0153",
+      "source": "ignition",
+      "target": "historian",
+      "relation": "can provide"
+    },
+    {
+      "id": "edge-0154",
+      "source": "ignition",
+      "target": "mes",
+      "relation": "can integrate/extend"
+    },
+    {
+      "id": "edge-0155",
+      "source": "ignition",
+      "target": "opcua",
+      "relation": "supports"
+    },
+    {
+      "id": "edge-0156",
+      "source": "ignition",
+      "target": "mqtt",
+      "relation": "via modules/integration"
+    },
+    {
+      "id": "edge-0157",
+      "source": "perspective",
+      "target": "ignition",
+      "relation": "module of"
+    },
+    {
+      "id": "edge-0158",
+      "source": "perspective",
+      "target": "frontend",
+      "relation": "is"
+    },
+    {
+      "id": "edge-0159",
+      "source": "highbyte",
+      "target": "industrialdataops",
+      "relation": "is"
+    },
+    {
+      "id": "edge-0160",
+      "source": "highbyte",
+      "target": "opcua",
+      "relation": "connects"
+    },
+    {
+      "id": "edge-0161",
+      "source": "highbyte",
+      "target": "mqtt",
+      "relation": "connects/publishes"
+    },
+    {
+      "id": "edge-0162",
+      "source": "highbyte",
+      "target": "context",
+      "relation": "performs"
+    },
+    {
+      "id": "edge-0163",
+      "source": "react",
+      "target": "frontend",
+      "relation": "builds"
+    },
+    {
+      "id": "edge-0164",
+      "source": "kepware",
+      "target": "opcua",
+      "relation": "exposes"
+    }
+  ]
+}

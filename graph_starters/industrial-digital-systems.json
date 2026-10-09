@@ -1,4 +1,8 @@
 {
+  "schema_version": 1,
+  "id": "industrial-digital-systems",
+  "title": "Industrial & Digital Systems",
+  "description": "Industrial automation, software architecture, data, DevOps, security, and AI concepts.",
   "nodes": [
     {
       "id": "enterprise",
@@ -145,7 +149,7 @@
       "label": "OEE",
       "type": "concept",
       "layer": "ISA-95 L3",
-      "description": "Overall Equipment Effectiveness = Availability \u00d7 Performance \u00d7 Quality."
+      "description": "Overall Equipment Effectiveness = Availability × Performance × Quality."
     },
     {
       "id": "qms",
@@ -752,824 +756,988 @@
   ],
   "edges": [
     {
+      "id": "edge-0001",
       "source": "enterprise",
       "target": "erp",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0002",
       "source": "enterprise",
       "target": "crm",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0003",
       "source": "enterprise",
       "target": "scm",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0004",
       "source": "enterprise",
       "target": "wms",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0005",
       "source": "enterprise",
       "target": "plm",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0006",
       "source": "enterprise",
       "target": "aps",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0007",
       "source": "enterprise",
       "target": "bi",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0008",
       "source": "mom",
       "target": "mes",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0009",
       "source": "mom",
       "target": "momterm",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0010",
       "source": "mom",
       "target": "oee",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0011",
       "source": "mom",
       "target": "qms",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0012",
       "source": "mom",
       "target": "cmms",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0013",
       "source": "mom",
       "target": "batch",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0014",
       "source": "mom",
       "target": "trace",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0015",
       "source": "mom",
       "target": "schedule",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0016",
       "source": "supervisory",
       "target": "scada",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0017",
       "source": "supervisory",
       "target": "hmi",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0018",
       "source": "supervisory",
       "target": "alarm",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0019",
       "source": "control",
       "target": "plc",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0020",
       "source": "control",
       "target": "dcs",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0021",
       "source": "control",
       "target": "rtu",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0022",
       "source": "control",
       "target": "pac",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0023",
       "source": "control",
       "target": "io",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0024",
       "source": "control",
       "target": "vfd",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0025",
       "source": "physical",
       "target": "sensor",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0026",
       "source": "physical",
       "target": "actuator",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0027",
       "source": "data",
       "target": "dataops",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0028",
       "source": "data",
       "target": "industrialdataops",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0029",
       "source": "data",
       "target": "dataeng",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0030",
       "source": "data",
       "target": "etl",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0031",
       "source": "data",
       "target": "context",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0032",
       "source": "data",
       "target": "namespace",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0033",
       "source": "data",
       "target": "mqtt",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0034",
       "source": "data",
       "target": "sparkplug",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0035",
       "source": "data",
       "target": "opcua",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0036",
       "source": "data",
       "target": "rest",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0037",
       "source": "data",
       "target": "graphql",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0038",
       "source": "data",
       "target": "pubsub",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0039",
       "source": "data",
       "target": "eventstream",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0040",
       "source": "data",
       "target": "broker",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0041",
       "source": "data",
       "target": "datacontract",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0042",
       "source": "data",
       "target": "timeseries",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0043",
       "source": "data",
       "target": "sql",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0044",
       "source": "data",
       "target": "datalake",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0045",
       "source": "data",
       "target": "knowledgegraph",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0046",
       "source": "data",
       "target": "semantic",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0047",
       "source": "data",
       "target": "historian",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0048",
       "source": "software",
       "target": "frontend",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0049",
       "source": "software",
       "target": "backend",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0050",
       "source": "software",
       "target": "middleware",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0051",
       "source": "software",
       "target": "api",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0052",
       "source": "software",
       "target": "microservices",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0053",
       "source": "software",
       "target": "monolith",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0054",
       "source": "software",
       "target": "eventdriven",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0055",
       "source": "software",
       "target": "repo",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0056",
       "source": "software",
       "target": "sdk",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0057",
       "source": "software",
       "target": "runtime",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0058",
       "source": "delivery",
       "target": "devops",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0059",
       "source": "delivery",
       "target": "devsecops",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0060",
       "source": "delivery",
       "target": "git",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0061",
       "source": "delivery",
       "target": "cicd",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0062",
       "source": "delivery",
       "target": "iac",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0063",
       "source": "delivery",
       "target": "ansible",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0064",
       "source": "delivery",
       "target": "docker",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0065",
       "source": "delivery",
       "target": "k8s",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0066",
       "source": "delivery",
       "target": "artifact",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0067",
       "source": "delivery",
       "target": "observability",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0068",
       "source": "delivery",
       "target": "sre",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0069",
       "source": "security",
       "target": "iam",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0070",
       "source": "security",
       "target": "idp",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0071",
       "source": "security",
       "target": "rbac",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0072",
       "source": "security",
       "target": "mfa",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0073",
       "source": "security",
       "target": "secrets",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0074",
       "source": "security",
       "target": "zerotrust",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0075",
       "source": "security",
       "target": "segmentation",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0076",
       "source": "security",
       "target": "dmz",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0077",
       "source": "security",
       "target": "purdue",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0078",
       "source": "ai",
       "target": "llm",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0079",
       "source": "ai",
       "target": "agent",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0080",
       "source": "ai",
       "target": "agentic",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0081",
       "source": "ai",
       "target": "mcp",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0082",
       "source": "ai",
       "target": "rag",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0083",
       "source": "ai",
       "target": "embedding",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0084",
       "source": "ai",
       "target": "vector",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0085",
       "source": "ai",
       "target": "promptinj",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0086",
       "source": "ai",
       "target": "toolcalling",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0087",
       "source": "ai",
       "target": "contextwindow",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0088",
       "source": "cloudedge",
       "target": "edge",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0089",
       "source": "cloudedge",
       "target": "cloud",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0090",
       "source": "cloudedge",
       "target": "onprem",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0091",
       "source": "cloudedge",
       "target": "hybrid",
-      "label": "contains"
+      "relation": "contains"
     },
     {
+      "id": "edge-0092",
       "source": "physical",
       "target": "control",
-      "label": "process signals"
+      "relation": "process signals"
     },
     {
+      "id": "edge-0093",
       "source": "control",
       "target": "supervisory",
-      "label": "control/status"
+      "relation": "control/status"
     },
     {
+      "id": "edge-0094",
       "source": "supervisory",
       "target": "mom",
-      "label": "operations data"
+      "relation": "operations data"
     },
     {
+      "id": "edge-0095",
       "source": "mom",
       "target": "enterprise",
-      "label": "production/business integration"
+      "relation": "production/business integration"
     },
     {
+      "id": "edge-0096",
       "source": "erp",
       "target": "mes",
-      "label": "orders / schedules / confirmations"
+      "relation": "orders / schedules / confirmations"
     },
     {
+      "id": "edge-0097",
       "source": "mes",
       "target": "scada",
-      "label": "work context / execution"
+      "relation": "work context / execution"
     },
     {
+      "id": "edge-0098",
       "source": "scada",
       "target": "plc",
-      "label": "supervision / commands"
+      "relation": "supervision / commands"
     },
     {
+      "id": "edge-0099",
       "source": "plc",
       "target": "sensor",
-      "label": "reads"
+      "relation": "reads"
     },
     {
+      "id": "edge-0100",
       "source": "plc",
       "target": "actuator",
-      "label": "controls"
+      "relation": "controls"
     },
     {
+      "id": "edge-0101",
       "source": "dataops",
       "target": "dataeng",
-      "label": "includes"
+      "relation": "includes"
     },
     {
+      "id": "edge-0102",
       "source": "industrialdataops",
       "target": "dataops",
-      "label": "specializes"
+      "relation": "specializes"
     },
     {
+      "id": "edge-0103",
       "source": "industrialdataops",
       "target": "opcua",
-      "label": "connects via"
+      "relation": "connects via"
     },
     {
+      "id": "edge-0104",
       "source": "industrialdataops",
       "target": "mqtt",
-      "label": "publishes via"
+      "relation": "publishes via"
     },
     {
+      "id": "edge-0105",
       "source": "context",
       "target": "semantic",
-      "label": "creates"
+      "relation": "creates"
     },
     {
+      "id": "edge-0106",
       "source": "context",
       "target": "knowledgegraph",
-      "label": "can create"
+      "relation": "can create"
     },
     {
+      "id": "edge-0107",
       "source": "mqtt",
       "target": "sparkplug",
-      "label": "industrial convention"
+      "relation": "industrial convention"
     },
     {
+      "id": "edge-0108",
       "source": "mqtt",
       "target": "namespace",
-      "label": "often implements"
+      "relation": "often implements"
     },
     {
+      "id": "edge-0109",
       "source": "pubsub",
       "target": "mqtt",
-      "label": "implemented by"
+      "relation": "implemented by"
     },
     {
+      "id": "edge-0110",
       "source": "eventdriven",
       "target": "pubsub",
-      "label": "often uses"
+      "relation": "often uses"
     },
     {
+      "id": "edge-0111",
       "source": "broker",
       "target": "mqtt",
-      "label": "routes"
+      "relation": "routes"
     },
     {
+      "id": "edge-0112",
       "source": "historian",
       "target": "timeseries",
-      "label": "implemented with"
+      "relation": "implemented with"
     },
     {
+      "id": "edge-0113",
       "source": "etl",
       "target": "sql",
-      "label": "reads/writes"
+      "relation": "reads/writes"
     },
     {
+      "id": "edge-0114",
       "source": "etl",
       "target": "datalake",
-      "label": "lands data"
+      "relation": "lands data"
     },
     {
+      "id": "edge-0115",
       "source": "datacontract",
       "target": "semantic",
-      "label": "defines meaning"
+      "relation": "defines meaning"
     },
     {
+      "id": "edge-0116",
       "source": "api",
       "target": "rest",
-      "label": "often implemented as"
+      "relation": "often implemented as"
     },
     {
+      "id": "edge-0117",
       "source": "frontend",
       "target": "api",
-      "label": "consumes"
+      "relation": "consumes"
     },
     {
+      "id": "edge-0118",
       "source": "backend",
       "target": "api",
-      "label": "exposes"
+      "relation": "exposes"
     },
     {
+      "id": "edge-0119",
       "source": "middleware",
       "target": "api",
-      "label": "integrates"
+      "relation": "integrates"
     },
     {
+      "id": "edge-0120",
       "source": "microservices",
       "target": "api",
-      "label": "communicate via"
+      "relation": "communicate via"
     },
     {
+      "id": "edge-0121",
       "source": "microservices",
       "target": "eventdriven",
-      "label": "often uses"
+      "relation": "often uses"
     },
     {
+      "id": "edge-0122",
       "source": "repo",
       "target": "git",
-      "label": "versioned by"
+      "relation": "versioned by"
     },
     {
+      "id": "edge-0123",
       "source": "devops",
       "target": "git",
-      "label": "uses"
+      "relation": "uses"
     },
     {
+      "id": "edge-0124",
       "source": "devops",
       "target": "cicd",
-      "label": "uses"
+      "relation": "uses"
     },
     {
+      "id": "edge-0125",
       "source": "devops",
       "target": "iac",
-      "label": "uses"
+      "relation": "uses"
     },
     {
+      "id": "edge-0126",
       "source": "devops",
       "target": "docker",
-      "label": "often uses"
+      "relation": "often uses"
     },
     {
+      "id": "edge-0127",
       "source": "devsecops",
       "target": "devops",
-      "label": "extends"
+      "relation": "extends"
     },
     {
+      "id": "edge-0128",
       "source": "devsecops",
       "target": "secrets",
-      "label": "protects"
+      "relation": "protects"
     },
     {
+      "id": "edge-0129",
       "source": "devsecops",
       "target": "iam",
-      "label": "integrates"
+      "relation": "integrates"
     },
     {
+      "id": "edge-0130",
       "source": "cicd",
       "target": "artifact",
-      "label": "produces/deploys"
+      "relation": "produces/deploys"
     },
     {
+      "id": "edge-0131",
       "source": "iac",
       "target": "ansible",
-      "label": "can use"
+      "relation": "can use"
     },
     {
+      "id": "edge-0132",
       "source": "docker",
       "target": "k8s",
-      "label": "orchestrated by"
+      "relation": "orchestrated by"
     },
     {
+      "id": "edge-0133",
       "source": "observability",
       "target": "sre",
-      "label": "supports"
+      "relation": "supports"
     },
     {
+      "id": "edge-0134",
       "source": "idp",
       "target": "iam",
-      "label": "part of"
+      "relation": "part of"
     },
     {
+      "id": "edge-0135",
       "source": "rbac",
       "target": "iam",
-      "label": "authorization model"
+      "relation": "authorization model"
     },
     {
+      "id": "edge-0136",
       "source": "mfa",
       "target": "idp",
-      "label": "strengthens"
+      "relation": "strengthens"
     },
     {
+      "id": "edge-0137",
       "source": "segmentation",
       "target": "purdue",
-      "label": "often guided by"
+      "relation": "often guided by"
     },
     {
+      "id": "edge-0138",
       "source": "dmz",
       "target": "segmentation",
-      "label": "is a zone pattern"
+      "relation": "is a zone pattern"
     },
     {
+      "id": "edge-0139",
       "source": "agent",
       "target": "llm",
-      "label": "uses"
+      "relation": "uses"
     },
     {
+      "id": "edge-0140",
       "source": "agent",
       "target": "toolcalling",
-      "label": "uses"
+      "relation": "uses"
     },
     {
+      "id": "edge-0141",
       "source": "agent",
       "target": "mcp",
-      "label": "can discover tools via"
+      "relation": "can discover tools via"
     },
     {
+      "id": "edge-0142",
       "source": "agentic",
       "target": "agent",
-      "label": "uses"
+      "relation": "uses"
     },
     {
+      "id": "edge-0143",
       "source": "rag",
       "target": "embedding",
-      "label": "uses"
+      "relation": "uses"
     },
     {
+      "id": "edge-0144",
       "source": "rag",
       "target": "vector",
-      "label": "often uses"
+      "relation": "often uses"
     },
     {
+      "id": "edge-0145",
       "source": "mcp",
       "target": "api",
-      "label": "can wrap/expose"
+      "relation": "can wrap/expose"
     },
     {
+      "id": "edge-0146",
       "source": "agent",
       "target": "promptinj",
-      "label": "exposed to"
+      "relation": "exposed to"
     },
     {
+      "id": "edge-0147",
       "source": "llm",
       "target": "contextwindow",
-      "label": "bounded by"
+      "relation": "bounded by"
     },
     {
+      "id": "edge-0148",
       "source": "hybrid",
       "target": "edge",
-      "label": "combines"
+      "relation": "combines"
     },
     {
+      "id": "edge-0149",
       "source": "hybrid",
       "target": "cloud",
-      "label": "combines"
+      "relation": "combines"
     },
     {
+      "id": "edge-0150",
       "source": "hybrid",
       "target": "onprem",
-      "label": "combines"
+      "relation": "combines"
     },
     {
+      "id": "edge-0151",
       "source": "ignition",
       "target": "scada",
-      "label": "can implement"
+      "relation": "can implement"
     },
     {
+      "id": "edge-0152",
       "source": "ignition",
       "target": "hmi",
-      "label": "can implement"
+      "relation": "can implement"
     },
     {
+      "id": "edge-0153",
       "source": "ignition",
       "target": "historian",
-      "label": "can provide"
+      "relation": "can provide"
     },
     {
+      "id": "edge-0154",
       "source": "ignition",
       "target": "mes",
-      "label": "can integrate/extend"
+      "relation": "can integrate/extend"
     },
     {
+      "id": "edge-0155",
       "source": "ignition",
       "target": "opcua",
-      "label": "supports"
+      "relation": "supports"
     },
     {
+      "id": "edge-0156",
       "source": "ignition",
       "target": "mqtt",
-      "label": "via modules/integration"
+      "relation": "via modules/integration"
     },
     {
+      "id": "edge-0157",
       "source": "perspective",
       "target": "ignition",
-      "label": "module of"
+      "relation": "module of"
     },
     {
+      "id": "edge-0158",
       "source": "perspective",
       "target": "frontend",
-      "label": "is"
+      "relation": "is"
     },
     {
+      "id": "edge-0159",
       "source": "highbyte",
       "target": "industrialdataops",
-      "label": "is"
+      "relation": "is"
     },
     {
+      "id": "edge-0160",
       "source": "highbyte",
       "target": "opcua",
-      "label": "connects"
+      "relation": "connects"
     },
     {
+      "id": "edge-0161",
       "source": "highbyte",
       "target": "mqtt",
-      "label": "connects/publishes"
+      "relation": "connects/publishes"
     },
     {
+      "id": "edge-0162",
       "source": "highbyte",
       "target": "context",
-      "label": "performs"
+      "relation": "performs"
     },
     {
+      "id": "edge-0163",
       "source": "react",
       "target": "frontend",
-      "label": "builds"
+      "relation": "builds"
     },
     {
+      "id": "edge-0164",
       "source": "kepware",
       "target": "opcua",
-      "label": "exposes"
+      "relation": "exposes"
     }
   ]
 }

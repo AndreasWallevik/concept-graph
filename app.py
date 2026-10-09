@@ -1,125 +1,160 @@
+import os
+from pathlib import Path
 
-import os, json, re
-from flask import Flask, render_template, request, jsonify
-from urllib.request import Request, urlopen
+from flask import Flask, jsonify, render_template, request
+
+from classifier import suggest_placement
+from graph_service import (
+    GraphConflictError,
+    GraphInputError,
+    GraphItemNotFoundError,
+    add_edge as create_edge_in_graph,
+    add_node as create_node_in_graph,
+    delete_edge as remove_edge_from_graph,
+    delete_node as remove_node_from_graph,
+    new_graph,
+    update_edge as update_edge_in_graph,
+    update_node as update_node_in_graph,
+)
+from graph_store import GraphAlreadyExistsError, GraphNotFoundError, GraphStore
 
 app = Flask(__name__)
-DATA_PATH = os.path.join(os.path.dirname(__file__), "graph_data.json")
+app.config["GRAPH_DATA_DIR"] = os.environ.get(
+    "GRAPH_DATA_DIR", str(Path(__file__).resolve().parent / "graphs")
+)
+app.config["GRAPH_STARTER_DIR"] = str(Path(__file__).resolve().parent / "graph_starters")
+app.config["DEFAULT_GRAPH_ID"] = "industrial-digital-systems"
 
-def load_graph():
-    with open(DATA_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
 
-def save_graph(data):
-    with open(DATA_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+def graph_store():
+    return GraphStore(app.config["GRAPH_DATA_DIR"], app.config["GRAPH_STARTER_DIR"])
+
+
+def load_graph(graph_id=None):
+    return graph_store().load(graph_id or app.config["DEFAULT_GRAPH_ID"])
+
+
+def save_graph(graph_id, data):
+    graph_store().save(graph_id, data)
+
+
+@app.errorhandler(GraphNotFoundError)
+def graph_not_found(error):
+    return jsonify({"error": f"graph not found: {error}"}), 404
+
+
+@app.errorhandler(GraphItemNotFoundError)
+def item_not_found(error):
+    return jsonify({"error": str(error)}), 404
+
+
+@app.errorhandler(GraphInputError)
+def invalid_input(error):
+    return jsonify({"error": str(error)}), 400
+
+
+@app.errorhandler(GraphConflictError)
+@app.errorhandler(GraphAlreadyExistsError)
+def conflict(error):
+    return jsonify({"error": str(error)}), 409
+
+
+def request_data():
+    body = request.get_json(force=True, silent=True)
+    if not isinstance(body, dict):
+        raise GraphInputError("JSON object required")
+    return body
+
 
 @app.get("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", default_graph_id=app.config["DEFAULT_GRAPH_ID"])
 
 @app.get("/api/graph")
-def get_graph():
-    return jsonify(load_graph())
+@app.get("/api/graphs/<graph_id>")
+def get_graph(graph_id=None):
+    return jsonify(load_graph(graph_id))
+
+
+@app.get("/api/graphs")
+def get_graphs():
+    return jsonify({"graphs": graph_store().list()})
+
+
+@app.post("/api/graphs")
+def create_graph():
+    graph = new_graph(request_data())
+    graph_store().create(graph)
+    return jsonify({"id": graph["id"], "title": graph["title"]}), 201
+
+
+@app.post("/api/graphs/<graph_id>/reset")
+def reset_graph(graph_id):
+    restored, backup = graph_store().reset(graph_id)
+    return jsonify({"id": restored["id"], "backup": backup,
+                    "nodes": len(restored["nodes"]), "edges": len(restored["edges"])})
+
 
 @app.post("/api/add")
-def add_node():
-    body = request.get_json(force=True)
-    graph = load_graph()
-    label = body.get("label","").strip()
-    description = body.get("description","").strip()
-    parent = body.get("parent","").strip()
-    node_type = body.get("type","concept").strip() or "concept"
-    if not label:
-        return jsonify({"error":"label required"}), 400
+@app.post("/api/graphs/<graph_id>/nodes")
+def add_node(graph_id=None):
+    graph = load_graph(graph_id)
+    node = create_node_in_graph(graph, request_data())
+    save_graph(graph["id"], graph)
+    return jsonify({"ok": True, "id": node["id"]})
 
-    base_id = re.sub(r"[^a-z0-9]+","-",label.lower()).strip("-") or "node"
-    existing = {n["id"] for n in graph["nodes"]}
-    nid = base_id
-    i = 2
-    while nid in existing:
-        nid = f"{base_id}-{i}"
-        i += 1
 
-    graph["nodes"].append({
-        "id": nid, "label": label, "type": node_type,
-        "layer": "Custom", "description": description
-    })
-    if parent:
-        graph["edges"].append({"source": parent, "target": nid, "label":"contains"})
-    save_graph(graph)
-    return jsonify({"ok":True,"id":nid})
+@app.patch("/api/graphs/<graph_id>/nodes/<node_id>")
+def update_node(graph_id, node_id):
+    graph = load_graph(graph_id)
+    node = update_node_in_graph(graph, node_id, request_data())
+    save_graph(graph_id, graph)
+    return jsonify({"node": node})
+
+
+@app.delete("/api/graphs/<graph_id>/nodes/<node_id>")
+def delete_node(graph_id, node_id):
+    graph = load_graph(graph_id)
+    removed_edges = remove_node_from_graph(graph, node_id)
+    save_graph(graph_id, graph)
+    return jsonify({"ok": True, "removed_edges": removed_edges})
+
+
+@app.post("/api/graphs/<graph_id>/edges")
+def add_edge(graph_id):
+    graph = load_graph(graph_id)
+    edge = create_edge_in_graph(graph, request_data())
+    save_graph(graph_id, graph)
+    return jsonify({"edge": edge}), 201
+
+
+@app.patch("/api/graphs/<graph_id>/edges/<edge_id>")
+def update_edge(graph_id, edge_id):
+    graph = load_graph(graph_id)
+    edge = update_edge_in_graph(graph, edge_id, request_data())
+    save_graph(graph_id, graph)
+    return jsonify({"edge": edge})
+
+
+@app.delete("/api/graphs/<graph_id>/edges/<edge_id>")
+def delete_edge(graph_id, edge_id):
+    graph = load_graph(graph_id)
+    remove_edge_from_graph(graph, edge_id)
+    save_graph(graph_id, graph)
+    return jsonify({"ok": True})
 
 @app.post("/api/classify")
-def classify():
-    body = request.get_json(force=True)
-    term = body.get("term","").strip()
-    description = body.get("description","").strip()
+@app.post("/api/graphs/<graph_id>/classify")
+def classify(graph_id=None):
+    body = request_data()
+    if any(not isinstance(body.get(key, ""), str) for key in ("term", "description")):
+        raise GraphInputError("term and description must be strings")
+    term = body.get("term", "").strip()
+    description = body.get("description", "").strip()
     if not term:
-        return jsonify({"error":"term required"}), 400
-
-    api_key = os.environ.get("OPENAI_API_KEY")
-    graph = load_graph()
-
-    domains = [
-        {"id":n["id"],"label":n["label"],"description":n["description"]}
-        for n in graph["nodes"] if n["type"] == "domain"
-    ]
-
-    if not api_key:
-        # deterministic fallback so the app still works without an API key
-        text = (term + " " + description).lower()
-        rules = [
-            ("ai", ["llm","agent","mcp","embedding","vector","rag","prompt"]),
-            ("delivery", ["git","ci/cd","pipeline","deploy","docker","kubernetes","ansible","terraform","devops"]),
-            ("security", ["security","auth","identity","password","secret","rbac","mfa","zero trust","firewall"]),
-            ("data", ["data","mqtt","opc","sql","historian","etl","semantic","namespace","broker","kafka"]),
-            ("software", ["api","frontend","backend","middleware","react","service","repository","sdk"]),
-            ("mom", ["mes","oee","quality","maintenance","schedule","recipe","batch","trace"]),
-            ("supervisory", ["scada","hmi","alarm","supervisory"]),
-            ("control", ["plc","dcs","rtu","controller","io","drive"]),
-            ("physical", ["sensor","actuator","motor","valve","machine"]),
-            ("enterprise", ["erp","crm","warehouse","business","finance","supply chain"]),
-            ("cloudedge", ["cloud","edge","on-prem","hybrid"])
-        ]
-        for parent, words in rules:
-            if any(w in text for w in words):
-                return jsonify({"parent":parent,"reason":"Local fallback classifier matched keywords. Set OPENAI_API_KEY for AI classification."})
-        return jsonify({"parent":"data","reason":"Fallback classifier was uncertain; Data & Integration used as a neutral default."})
-
-    prompt = f"""You classify industrial/software terminology into a knowledge graph.
-Choose exactly one parent id from this list:
-{json.dumps(domains, ensure_ascii=False)}
-
-Term: {term}
-Description: {description}
-
-Return JSON only:
-{{"parent":"<id>","reason":"one short sentence","type":"concept|protocol|pattern|component|tool|platform|framework|risk"}}
-"""
-
-    req = Request(
-        "https://api.openai.com/v1/responses",
-        data=json.dumps({
-            "model":"gpt-5-mini",
-            "input": prompt
-        }).encode("utf-8"),
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type":"application/json"
-        },
-        method="POST"
-    )
-    try:
-        with urlopen(req, timeout=30) as r:
-            payload = json.loads(r.read().decode("utf-8"))
-        output_text = payload.get("output_text","")
-        match = re.search(r"\{.*\}", output_text, re.S)
-        if not match:
-            return jsonify({"error":"AI returned no parsable JSON","raw":output_text}), 500
-        return jsonify(json.loads(match.group(0)))
-    except Exception as ex:
-        return jsonify({"error":str(ex)}), 500
+        raise GraphInputError("term required")
+    graph = load_graph(graph_id)
+    return jsonify(suggest_placement(graph, term, description, os.environ.get("OPENAI_API_KEY")))
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5050, debug=True)
