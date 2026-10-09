@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Industrial Knowledge Graph</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <style>
+    body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#0d1117;color:#e6edf3}
+    #top{height:56px;display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid #30363d;background:#161b22}
+    input,textarea,select,button{background:#0d1117;color:#e6edf3;border:1px solid #30363d;border-radius:6px;padding:8px}
+    button{cursor:pointer;background:#68727e}
+    #main{display:grid;grid-template-columns:1fr 360px;height:calc(100vh - 56px)}
+    #cy{width:100%;height:100%}
+    #side{border-left:1px solid #30363d;padding:14px;overflow:auto;background:#0d1117}
+    .card{border:1px solid #30363d;border-radius:8px;padding:12px;margin-bottom:12px;background:#161b22}
+    .muted{color:#8b949e;font-size:13px}
+    .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:2px 8px;margin:2px;font-size:12px}
+    textarea{width:100%;min-height:72px;box-sizing:border-box}
+    input,select{box-sizing:border-box}
+    .full{width:100%}
+    h3{margin:0 0 8px}
+  </style>
+</head>
+<body>
+<div id="top">
+  <strong>Industrial Knowledge Graph</strong>
+  <input id="search" placeholder="Search concepts…" style="width:280px">
+  <select id="filter"><option value="">All domains</option></select>
+  <button onclick="fit()">Fit</button>
+  <span class="muted">Click a node for details</span>
+</div>
+<div id="main">
+  <div id="cy"></div>
+  <aside id="side">
+    <div class="card" id="details">
+      <h3>Knowledge Graph</h3>
+      <div class="muted">ISA-95 layers + DataOps + software architecture + DevOps + security + AI.</div>
+    </div>
+
+    <div class="card">
+      <h3>Add a concept</h3>
+      <input id="term" class="full" placeholder="e.g. Kafka"><br><br>
+      <textarea id="desc" placeholder="What is it?"></textarea><br>
+      <button onclick="classify()">Suggest placement</button>
+      <div id="suggestion" class="muted" style="margin:8px 0"></div>
+      <select id="parent" class="full"></select><br><br>
+      <select id="ctype" class="full">
+        <option>concept</option><option>protocol</option><option>pattern</option>
+        <option>component</option><option>tool</option><option>platform</option>
+        <option>framework</option><option>risk</option>
+      </select><br><br>
+      <button onclick="addNode()">Add to graph</button>
+    </div>
+
+    <div class="card">
+      <h3>How to read it</h3>
+      <div class="muted">
+        The graph deliberately separates <b>business/operational layers</b> (ISA-95) from
+        <b>cross-cutting technical disciplines</b>. A term can belong to one primary domain
+        but still have relationships across many layers.
+      </div>
+    </div>
+  </aside>
+</div>
+<script>
+let cy, graph, domains;
+async function load(){
+  graph = await (await fetch('/api/graph')).json();
+  domains = graph.nodes.filter(n=>n.type==='domain');
+  const elements = [
+    ...graph.nodes.map(n=>({data:n})),
+    ...graph.edges.map((e,i)=>({data:{id:'e'+i,...e}}))
+  ];
+  cy = cytoscape({
+    container: document.getElementById('cy'),
+    elements,
+    style:[
+      {selector:'node',style:{'label':'data(label)','background-color':'#388bfd','color':'#e6edf3','font-size':11,'text-valign':'center','text-halign':'center','width':34,'height':34}},
+      {selector:'node[type="domain"]',style:{'background-color':'#f0883e','width':70,'height':70,'font-size':13,'font-weight':'bold','text-wrap':'wrap','text-max-width':90}},
+      {selector:'edge',style:{'curve-style':'bezier','target-arrow-shape':'triangle','line-color':'#C7CBD4','target-arrow-color':'#30363d','width':1,'opacity':0.7}},
+      {selector:'.faded',style:{'opacity':0.08}},
+      {selector:':selected',style:{'border-width':3,'border-color':'#fff'}}
+    ],
+    layout:{name:'cose',animate:false,idealEdgeLength:90,nodeRepulsion:12000,gravity:0.8}
+  });
+  cy.on('tap','node',ev=>show(ev.target.data()));
+  populate();
+}
+function populate(){
+  const f=document.getElementById('filter'), p=document.getElementById('parent');
+  for(const d of domains){
+    f.insertAdjacentHTML('beforeend',`<option value="${d.id}">${d.label}</option>`);
+    p.insertAdjacentHTML('beforeend',`<option value="${d.id}">${d.label}</option>`);
+  }
+}
+function show(n){
+  document.getElementById('details').innerHTML = `<h3>${n.label}</h3>
+  <span class="pill">${n.type}</span><span class="pill">${n.layer||''}</span>
+  <p>${n.description||''}</p><div class="muted">id: ${n.id}</div>`;
+}
+function fit(){cy.fit(undefined,30)}
+document.getElementById('search').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase();
+  cy.elements().removeClass('faded');
+  if(!q) return;
+  cy.nodes().forEach(n=>{
+    const d=n.data();
+    if(!(d.label||'').toLowerCase().includes(q) && !(d.description||'').toLowerCase().includes(q)) n.addClass('faded');
+  });
+});
+document.getElementById('filter').addEventListener('change',e=>{
+  const id=e.target.value;
+  cy.elements().removeClass('faded');
+  if(!id) return;
+  const root=cy.getElementById(id);
+  const keep=root.union(root.successors());
+  cy.elements().difference(keep).addClass('faded');
+  cy.fit(keep,40);
+});
+async function classify(){
+  const term=document.getElementById('term').value;
+  const description=document.getElementById('desc').value;
+  const r=await fetch('/api/classify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({term,description})});
+  const x=await r.json();
+  if(x.parent){
+    document.getElementById('parent').value=x.parent;
+    if(x.type) document.getElementById('ctype').value=x.type;
+    document.getElementById('suggestion').innerText=x.reason||'Placement suggested.';
+  } else document.getElementById('suggestion').innerText=x.error||'Could not classify.';
+}
+async function addNode(){
+  const payload={
+    label:document.getElementById('term').value,
+    description:document.getElementById('desc').value,
+    parent:document.getElementById('parent').value,
+    type:document.getElementById('ctype').value
+  };
+  const r=await fetch('/api/add',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  const x=await r.json();
+  if(x.ok) location.reload(); else alert(x.error||'Error');
+}
+load();
+</script>
+</body>
+</html>
