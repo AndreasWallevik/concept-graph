@@ -1,9 +1,78 @@
 # Concept Graph
 
-A small local knowledge graph app. Its current graph is **Industrial & Digital Systems**,
-covering industrial automation, software engineering, data, security, and AI.
+A local Flask and Cytoscape app for exploring and editing independent knowledge
+graphs. It includes training graphs and an **Autic Product Graph** proof of concept
+built from public Autic website information. Graphs are stored as JSON files; no
+database or external business system is connected.
 
-## What it covers
+## Included graphs
+
+| Graph | Purpose |
+| --- | --- |
+| [Industrial & Digital Systems](graphs/industrial-digital-systems.json) | Broad map of industrial automation, software, data, security, and AI. This is the default graph. |
+| [Ignition Core Training](graphs/ignition-core.json) | Working class graph for Ignition 8.3, with placement hints for common course topics. |
+| [ISA-95 & Purdue Model](graphs/isa95-purdue.json) | Top-down teaching view of functional levels, network zones, and related concepts. |
+| [Security & Networking](graphs/security-networking.json) | Networking and security concepts organized into domains and prerequisites. |
+| [Autic Product Graph](graphs/autic-products.json) | Public-source portfolio sample connecting products, brands, protocols, applications, and industries. |
+
+`graphs/` holds the current, editable versions. `graph_starters/` holds the
+versions used by **Reset current graph**. Both directories are committed to Git;
+only reset backups in `graphs/.backups/` are ignored.
+
+## Run locally
+
+Create a Python virtual environment and install the Flask dependency:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python app.py
+```
+
+Open <http://127.0.0.1:5050>. The local development server listens only on
+`127.0.0.1`; `python app.py` is not a production hosting command. The page loads
+Cytoscape.js from a CDN, so the browser needs internet access for the graph to
+render.
+
+To keep working graph files in another existing directory, set `GRAPH_DATA_DIR`
+before starting the app:
+
+```powershell
+$env:GRAPH_DATA_DIR="C:\path\to\graphs"
+python app.py
+```
+
+Run the tests with `.venv\Scripts\python.exe -m unittest discover -s tests`.
+
+## Explore the graphs
+
+Use the **Graph** selector to switch graphs. The selected graph is reflected in
+the URL as `?graph=<id>`, so a view can be bookmarked. Search matches node names
+and descriptions. The **All domains** menu focuses a domain in graphs that have
+domain nodes; **All types** filters node types in the Autic discovery graph.
+Click a node or relationship to inspect it in the sidebar. **Reset view** clears
+search and focus, while **Fit** centers the graph.
+
+In the Autic graph, selecting a node highlights its direct relationships and
+shows related nodes and its original Autic URL, where available. Its initial
+product-category filter keeps the first view readable; choose **All types** or
+**Reset view** to see the full sample.
+
+## Current hosting status
+
+The app currently runs through Flask: `app.py` renders `templates/index.html`,
+serves graph JSON through `/api/graphs`, and handles editing, reset, and placement
+suggestions. The browser code in `static/app.js` handles graph rendering, search,
+filters, selection, and details. There is no static export or hosting configuration
+yet, so pushing this repository to GitHub Pages as-is would not run the app.
+
+Graph changes made in the local app are saved in `graphs/`, but they are not
+automatically committed or pushed to GitHub. A future static discovery demo could
+publish a graph JSON snapshot while keeping browser-side search and filtering.
+
+## Industrial & Digital Systems
+
 - ISA-95 / Purdue-style business & control layers
 - ERP, MES/MOM, SCADA/HMI, PLC/DCS/RTU, sensors/actuators
 - DataOps / Industrial DataOps, ETL, contextualization, UNS, MQTT, Sparkplug, OPC UA
@@ -13,30 +82,13 @@ covering industrial automation, software engineering, data, security, and AI.
 - LLMs, agents, MCP, RAG, embeddings, prompt injection and token/context concepts
 - Example platforms: Ignition, Perspective, HighByte, React, Kepware
 
-## Run
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python app.py
-```
+## Ignition Core Training
 
-Open http://127.0.0.1:5050
-
-By default the app reads and writes graph files in `graphs/`. To use another
-directory, set `GRAPH_DATA_DIR` before starting Flask:
-
-```powershell
-$env:GRAPH_DATA_DIR="C:\path\to\graphs"
-python app.py
-```
-
-`GRAPH_DATA_DIR` replaces the single-graph `GRAPH_DATA_PATH` setting from step 1.
-The directory must already exist. The current page opens
-`industrial-digital-systems` by default. Use the **Graph** selector to switch
-between Industrial & Digital Systems, Ignition Core Training, ISA-95 & Purdue
-Model, Security & Networking, and Autic Product Graph. The URL keeps
-the selected graph as `?graph=<id>`, so it can be bookmarked.
+The working graph in `graphs/ignition-core.json` contains the current class
+state. Its starter in `graph_starters/ignition-core.json` begins with Ignition
+alone. Placement hints cover major Ignition 8.3 Core topics, including Gateway,
+Designer, Perspective, tags, history, alarming, and security; see
+[Placement suggestions](#placement-suggestions) for how suggestions work.
 
 ## ISA-95 & Purdue Model
 
@@ -121,6 +173,8 @@ that need separate licences are noted in product descriptions. This is a
 portfolio sample, not a complete product catalogue. A future external source
 can output the same JSON schema without changing the Cytoscape UI.
 
+## Editing and reset
+
 The **Connect from** menu lists concepts in the selected graph. Adding a concept
 stores it in that graph; choose **Standalone** for a concept without a connection.
 Choose the directed relationship from the selected concept to the new concept.
@@ -128,11 +182,12 @@ Choose the directed relationship from the selected concept to the new concept.
 them before clicking **Add to graph**. Suggestions never save anything on their own.
 If the concept already exists without its suggested relationship, use
 **Connect existing concept** to add that relationship without duplicating the node.
-The **Theme or group** field sets a concept's color. The theme legend shows the
-colors in the selected graph; arrows use the destination concept's color.
-Suggestions inherit the connected concept's theme unless a placement hint names
-a different one. Ignition and Gateway use the Platform theme; Designer uses
-Design tools.
+The **Theme or group** field sets a concept's color in graphs colored by theme.
+The Autic graph instead colors nodes by type. The legend shows the colors in the
+selected graph; arrows use the destination concept's color. Suggestions inherit
+the connected concept's theme unless a placement hint names a different one.
+In Ignition Core Training, Ignition and Gateway use the Platform theme; Designer
+uses Design tools.
 
 **Reset current graph** asks for confirmation, saves the current version in
 `graphs/.backups/`, then restores a built-in graph from `graph_starters/`.
@@ -145,6 +200,8 @@ unless you supply one. Click a concept to edit or delete it; deleting a concept
 also removes its connected relationships. Add a directed relationship by
 choosing its source, relation, and target. Click a relationship to edit or delete
 it. Relationship names appear on the graph.
+
+## API
 
 `GET /api/graphs` lists available
 graphs; `GET /api/graphs/<id>` returns one graph; and
@@ -162,9 +219,8 @@ Node and edge IDs must be unique within each graph, and every edge must refer
 to nodes in that same graph. Saves write a temporary file beside the graph and
 replace the old file once the new JSON is complete.
 
-Run the baseline checks with `.venv\Scripts\python.exe -m unittest discover -s tests`.
-
 ## Placement suggestions
+
 Without an API key, the app suggests connections using labels, descriptions,
 and relationships in the selected graph. If there is no clear match, it suggests
 adding a standalone concept. It also flags an exact match with an existing label.
@@ -190,7 +246,8 @@ the official [Ignition module overview](https://www.docs.inductiveautomation.com
 and [Perspective/Vision guide](https://docs.inductiveautomation.com/docs/8.3/getting-started/perspective-and-vision).
 A hint suggests a connection; it never creates one on its own.
 
-For AI classification:
+To enable optional AI classification locally:
+
 ```powershell
 $env:OPENAI_API_KEY="your-key"
 python app.py
@@ -203,20 +260,20 @@ does not reference this graph, the app uses the local suggestion. The API key
 stays server-side in the environment and is never placed in browser JavaScript.
 
 ## Data model
+
 Each graph is one JSON file in `graphs/`, named after its stable ID. The file
 contains `schema_version`, `id`, `title`, `description`, `nodes`, and `edges`.
-Edges have stable IDs and a free-text `relation`, such as `contains`, `runs on`,
-or `configured by`. The title may change without changing the ID or filename.
+Nodes have stable IDs, labels, and types, plus optional descriptions, themes
+(`layer`), and source URLs. Edges have stable IDs, a source, a target, and a
+free-text `relation`, such as `contains`, `SUPPORTS_PROTOCOL`, or `USED_FOR`.
+The title may change without changing the ID or filename. Optional graph fields
+include `display_layout`, `color_by`, `discovery_mode`, `initial_type_filter`,
+and placement hints. A graph can use `display_layout: "hierarchical"` for a
+top-down view; otherwise it uses the force layout.
 
-The existing graph is `graphs/industrial-digital-systems.json`.
-`graphs/ignition-core.json` contains the current class state. Its starter file
-contains only Ignition, ready to grow during training. Other graphs can be added
-as separate JSON files with the same fields and independent node IDs.
-`graphs/isa95-purdue.json` is the working ISA-95/Purdue graph; its starter is in
-`graph_starters/isa95-purdue.json`. Graphs may set `display_layout` to
-`hierarchical` for a top-down view or omit it to use the force layout.
-`graphs/security-networking.json` is the working security graph; its starter is
-`graph_starters/security-networking.json`.
+Adding a JSON file with a unique graph ID to `graphs/` makes it available in the
+selector. A matching file in `graph_starters/` provides its reset state. New
+graphs made through the UI instead reset to an empty graph.
 
 This is intentionally a graph rather than a strict tree: industrial terms overlap. For example,
 Ignition can participate in SCADA, historian, MES integration and DataOps, while MQTT is both an
