@@ -12,6 +12,7 @@ from graph_store import GraphValidationError, load_graph, validate_graph
 ROOT = Path(__file__).resolve().parents[1]
 GRAPH = ROOT / "graphs" / "autic-products.json"
 STARTER = ROOT / "graph_starters" / "autic-products.json"
+DEMO = ROOT / "demo"
 
 
 class AuticGraphTests(unittest.TestCase):
@@ -78,6 +79,16 @@ class AuticGraphTests(unittest.TestCase):
         self.assertEqual(graph.json["id"], "autic-products")
         self.assertIn(b'id="typeFilter"', page.data)
         self.assertIn(b'id="resetViewButton"', page.data)
+
+    def test_static_demo_snapshot_matches_current_sources(self):
+        self.assertEqual((DEMO / "graph.json").read_bytes(), GRAPH.read_bytes())
+        self.assertEqual((DEMO / "app.js").read_bytes(),
+                         (ROOT / "static" / "app.js").read_bytes())
+        html = (DEMO / "index.html").read_text(encoding="utf-8")
+        self.assertIn('data-demo-mode="true"', html)
+        self.assertIn('<script src="./app.js"></script>', html)
+        self.assertNotIn("{{", html)
+        self.assertNotIn("{%", html)
 
 
 if __name__ == "__main__":

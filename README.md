@@ -57,19 +57,39 @@ search and focus, while **Fit** centers the graph.
 In the Autic graph, selecting a node highlights its direct relationships and
 shows related nodes and its original Autic URL, where available. Its initial
 product-category filter keeps the first view readable; choose **All types** or
-**Reset view** to see the full sample.
+**Reset view** to see the full sample. Typing a search clears this automatic
+starting filter; a node type you select yourself can still narrow the search.
 
-## Current hosting status
+## Static Autic demo
 
-The app currently runs through Flask: `app.py` renders `templates/index.html`,
+`demo/` is a static, read-only Autic Product Graph demo. It retains search,
+node-type filtering, direct-relationship focus, details, legend, **Fit**, and
+**Reset view**. Editing, graph reset, and placement suggestions remain in the
+local Flask app. The demo needs no Flask server at runtime.
+
+Regenerate `demo/index.html`, `demo/app.js`, and `demo/graph.json` from the current
+template, browser code, and `graphs/autic-products.json`:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\build_demo.py
+```
+
+Preview it through a local static server (direct `file://` opening cannot fetch
+the JSON reliably):
+
+```powershell
+.\.venv\Scripts\python.exe -m http.server 8000 --directory demo
+```
+
+Then open <http://127.0.0.1:8000>. The browser still loads Cytoscape.js from a
+CDN. Only the three files in `demo/` need to be published; `demo/graph.json` is
+public to anyone who can access the deployed demo. The demo has not been hosted
+yet, and automatic rebuilds on GitHub pushes are not configured yet.
+
+The full app still runs through Flask: `app.py` renders `templates/index.html`,
 serves graph JSON through `/api/graphs`, and handles editing, reset, and placement
-suggestions. The browser code in `static/app.js` handles graph rendering, search,
-filters, selection, and details. There is no static export or hosting configuration
-yet, so pushing this repository to GitHub Pages as-is would not run the app.
-
-Graph changes made in the local app are saved in `graphs/`, but they are not
-automatically committed or pushed to GitHub. A future static discovery demo could
-publish a graph JSON snapshot while keeping browser-side search and filtering.
+suggestions. Changes made in the local app are saved in `graphs/`; they are not
+automatically committed, pushed, or reflected in `demo/` until the build runs.
 
 ## Industrial & Digital Systems
 

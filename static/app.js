@@ -2,7 +2,10 @@
 
 const byId = id => document.getElementById(id);
 const defaultGraphId = document.body.dataset.defaultGraphId;
+const demoMode = document.body.dataset.demoMode === 'true';
+const demoGraphUrl = './graph.json';
 let availableGraphs = [];
+let demoGraph = null;
 let activeGraphId = null;
 let graph = null;
 let domains = [];
@@ -14,6 +17,7 @@ let selectedEdgeId = null;
 let suggestedExistingNodeId = null;
 let suggestedDuplicateNodeId = null;
 let focusedNodeId = null;
+let initialTypeFilterActive = false;
 
 const themeColors = {
   'manufacturer': '#b45309',
@@ -96,6 +100,9 @@ function jsonOptions(method, payload) {
 }
 
 async function fetchJson(url, options) {
+  if (demoMode && (url.startsWith('/api/') || options?.method && options.method !== 'GET')) {
+    throw new Error('Editing is unavailable in this demo.');
+  }
   const response = await fetch(url, options);
   let data;
   try {
@@ -183,6 +190,7 @@ function showNode(node) {
     focusedNodeId = node.id;
     applyDiscoveryFilters();
   }
+  if (demoMode) return;
   byId('edgeEditor').hidden = true;
   byId('nodeEditor').hidden = false;
   byId('nodeIdText').textContent = `id: ${node.id}`;
@@ -208,6 +216,7 @@ function showEdge(edge) {
     textElement('p', description),
     textElement('div', `id: ${edge.id}`, 'muted')
   );
+  if (demoMode) return;
   byId('nodeEditor').hidden = true;
   byId('edgeEditor').hidden = false;
   byId('edgeIdText').textContent = `id: ${edge.id}`;
@@ -350,7 +359,7 @@ async function showGraph(graphId, historyMode = 'none') {
   byId('classifyButton').disabled = true;
   byId('resetGraphButton').disabled = true;
   try {
-    const next = await fetchJson(`/api/graphs/${encodeURIComponent(graphId)}`);
+    const next = demoMode ? demoGraph : await fetchJson(`/api/graphs/${encodeURIComponent(graphId)}`);
     if (version !== loadVersion) return;
     graph = next;
     domains = graph.nodes.filter(node => node.type === 'domain');
@@ -385,8 +394,9 @@ async function showGraph(graphId, historyMode = 'none') {
     showMessage(graph.title, introduction);
     renderGraph();
     byId('typeFilter').value = graph.initial_type_filter || '';
+    initialTypeFilterActive = !!graph.initial_type_filter;
     if (graph.discovery_mode) applyDiscoveryFilters();
-    if (historyMode !== 'none') {
+    if (!demoMode && historyMode !== 'none') {
       const url = new URL(window.location.href);
       url.searchParams.set('graph', graph.id);
       window.history[`${historyMode}State`]({}, '', url);
@@ -415,6 +425,10 @@ function fitGraph() {
 function searchGraph() {
   if (!cy) return;
   if (graph.discovery_mode) {
+    if (initialTypeFilterActive && byId('search').value.trim()) {
+      byId('typeFilter').value = '';
+      initialTypeFilterActive = false;
+    }
     focusedNodeId = null;
     applyDiscoveryFilters();
     return;
@@ -478,6 +492,7 @@ function applyDiscoveryFilters() {
 function resetView() {
   byId('search').value = '';
   byId('typeFilter').value = '';
+  initialTypeFilterActive = false;
   byId('filter').value = '';
   focusedNodeId = null;
   cy?.elements().removeClass('faded in-focus');
@@ -587,7 +602,14 @@ async function addNode() {
 }
 
 async function refreshGraphList() {
-  const result = await fetchJson('/api/graphs');
+  let result;
+  if (demoMode) {
+    demoGraph = await fetchJson(demoGraphUrl);
+    result = {graphs: [{id: demoGraph.id, title: demoGraph.title,
+      description: demoGraph.description}]};
+  } else {
+    result = await fetchJson('/api/graphs');
+  }
   if (!Array.isArray(result.graphs) || result.graphs.length === 0) {
     throw new Error('No graphs are available.');
   }
@@ -740,6 +762,7 @@ async function initialize() {
   byId('search').addEventListener('input', searchGraph);
   byId('filter').addEventListener('change', filterGraph);
   byId('typeFilter').addEventListener('change', () => {
+    initialTypeFilterActive = false;
     focusedNodeId = null;
     if (graph?.discovery_mode) applyDiscoveryFilters();
     else {

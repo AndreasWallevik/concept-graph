@@ -38,6 +38,16 @@
     input,select{box-sizing:border-box}
     .full{width:100%}
     h3{margin:0 0 8px}
+    body[data-demo-mode="true"] label[for="graphSelect"],
+    body[data-demo-mode="true"] #graphSelect,
+    body[data-demo-mode="true"] #newGraphButton,
+    body[data-demo-mode="true"] #filter,
+    body[data-demo-mode="true"] #newGraphPanel,
+    body[data-demo-mode="true"] #nodeEditor,
+    body[data-demo-mode="true"] #edgeEditor,
+    body[data-demo-mode="true"] #conceptAddCard,
+    body[data-demo-mode="true"] #edgeAddCard,
+    body[data-demo-mode="true"] #resetGraphCard{display:none!important}
     @media(max-width:800px){ #main{grid-template-columns:1fr;grid-template-rows:minmax(300px,55vh) minmax(0,1fr)} #side{border-left:0;border-top:1px solid #30363d}}
   </style>
 </head>
@@ -99,7 +109,7 @@
       <div id="legendNote" class="muted">Concept colors show themes; arrows use the destination concept's color.</div>
     </div>
 
-    <div class="card">
+    <div class="card" id="conceptAddCard">
       <h3>Add a concept</h3>
       <input id="term" class="full" placeholder="e.g. Kafka"><br><br>
       <textarea id="desc" placeholder="What is it?"></textarea><br>
@@ -118,7 +128,7 @@
       <button id="addButton" type="button">Add to graph</button>
     </div>
 
-    <div class="card">
+    <div class="card" id="edgeAddCard">
       <h3>Add a relationship</h3>
       <div class="field"><label for="edgeSource">From</label><select id="edgeSource"></select></div>
       <div class="field"><label for="edgeRelation">Relationship</label><input id="edgeRelation" list="relationTypes" placeholder="e.g. runs on"></div>
@@ -127,7 +137,7 @@
       <div id="edgeAddStatus" class="muted"></div>
     </div>
 
-    <div class="card">
+    <div class="card" id="resetGraphCard">
       <h3>Start a new class</h3>
       <button id="resetGraphButton" class="danger" type="button">Reset current graph</button>
       <div class="muted">Restores the starter graph, or clears a custom graph. A backup is saved first.</div>

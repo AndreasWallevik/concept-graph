@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Concept Graph</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <style>
+    body{margin:0;height:100vh;display:flex;flex-direction:column;font-family:Inter,Segoe UI,Arial,sans-serif;background:#0d1117;color:#e6edf3}
+    #top{min-height:56px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid #30363d;background:#161b22}
+    #graphTitle{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    #graphSelect{max-width:240px}
+    #search{width:240px}
+    #typeFilter{max-width:155px}
+    input,textarea,select,button{background:#0d1117;color:#e6edf3;border:1px solid #30363d;border-radius:6px;padding:8px}
+    button{cursor:pointer;background:#68727e}
+    button:disabled{cursor:not-allowed;opacity:0.5}
+    [hidden]{display:none!important}
+    .danger{background:#8b3030}
+    .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .field{margin:10px 0}
+    .field label{display:block;margin-bottom:4px}
+    .field input,.field select,.field textarea{width:100%}
+    #main{display:grid;grid-template-columns:minmax(0,1fr) 360px;flex:1;min-height:0}
+    #cy{width:100%;height:100%}
+    #side{border-left:1px solid #30363d;padding:14px;overflow:auto;background:#0d1117}
+    .card{border:1px solid #30363d;border-radius:8px;padding:12px;margin-bottom:12px;background:#161b22}
+    .muted{color:#8b949e;font-size:13px}
+    .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:2px 8px;margin:2px;font-size:12px}
+    .theme-row{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px}
+    .theme-swatch{width:14px;height:14px;border-radius:4px;border:1px solid #8b949e;flex:none}
+    .theme-legend{max-height:150px;overflow:auto}
+    .related-list{list-style:none;padding:0;margin:6px 0 12px;max-height:220px;overflow:auto}
+    .related-list li{margin:5px 0}
+    .related-link{padding:0;background:none;border:0;color:#79c0ff;text-align:left}
+    #details a{color:#79c0ff}
+    textarea{width:100%;min-height:72px;box-sizing:border-box}
+    input,select{box-sizing:border-box}
+    .full{width:100%}
+    h3{margin:0 0 8px}
+    body[data-demo-mode="true"] label[for="graphSelect"],
+    body[data-demo-mode="true"] #graphSelect,
+    body[data-demo-mode="true"] #newGraphButton,
+    body[data-demo-mode="true"] #filter,
+    body[data-demo-mode="true"] #newGraphPanel,
+    body[data-demo-mode="true"] #nodeEditor,
+    body[data-demo-mode="true"] #edgeEditor,
+    body[data-demo-mode="true"] #conceptAddCard,
+    body[data-demo-mode="true"] #edgeAddCard,
+    body[data-demo-mode="true"] #resetGraphCard{display:none!important}
+    @media(max-width:800px){ #main{grid-template-columns:1fr;grid-template-rows:minmax(300px,55vh) minmax(0,1fr)} #side{border-left:0;border-top:1px solid #30363d}}
+  </style>
+</head>
+<body data-default-graph-id="autic-products" data-demo-mode="true">
+<div id="top">
+  <strong id="graphTitle">Concept Graph</strong>
+  <label for="graphSelect" class="muted">Graph</label>
+  <select id="graphSelect" aria-label="Choose graph"></select>
+  <button id="newGraphButton" type="button">New graph</button>
+  <input id="search" aria-label="Search concepts" placeholder="Search concepts…">
+  <select id="filter"><option value="">All domains</option></select>
+  <select id="typeFilter" aria-label="Filter by node type"><option value="">All types</option></select>
+  <button id="resetViewButton" type="button">Reset view</button>
+  <button id="fitButton" type="button">Fit</button>
+  <span id="graphHint" class="muted">Click a concept or relationship to edit it</span>
+</div>
+<div id="main">
+  <div id="cy"></div>
+  <aside id="side">
+    <div class="card" id="details">
+      <h3>Concept Graph</h3>
+      <div class="muted">Loading graphs…</div>
+    </div>
+
+    <div class="card" id="newGraphPanel" hidden>
+      <h3>Create a graph</h3>
+      <div class="field"><label for="newGraphTitle">Name</label><input id="newGraphTitle" placeholder="e.g. Autic Company"></div>
+      <div class="field"><label for="newGraphId">ID (optional)</label><input id="newGraphId" placeholder="Generated from name"></div>
+      <div class="field"><label for="newGraphDescription">Description</label><textarea id="newGraphDescription"></textarea></div>
+      <div class="muted">The ID becomes the graph filename and stays stable if the name changes.</div>
+      <div class="actions"><button id="createGraphButton" type="button">Create graph</button><button id="cancelGraphButton" type="button">Cancel</button></div>
+      <div id="newGraphStatus" class="muted"></div>
+    </div>
+
+    <div class="card" id="nodeEditor" hidden>
+      <h3>Edit concept</h3>
+      <div id="nodeIdText" class="muted"></div>
+      <div class="field"><label for="editNodeLabel">Label</label><input id="editNodeLabel"></div>
+      <div class="field"><label for="editNodeType">Type</label><input id="editNodeType" list="nodeTypes"></div>
+      <div class="field"><label for="editNodeLayer">Theme or group</label><input id="editNodeLayer" list="themeTypes"></div>
+      <div class="field"><label for="editNodeDescription">Description</label><textarea id="editNodeDescription"></textarea></div>
+      <div class="actions"><button id="saveNodeButton" type="button">Save changes</button><button id="deleteNodeButton" class="danger" type="button">Delete concept</button><button id="closeNodeButton" type="button">Close</button></div>
+      <div id="nodeEditStatus" class="muted"></div>
+    </div>
+
+    <div class="card" id="edgeEditor" hidden>
+      <h3>Edit relationship</h3>
+      <div id="edgeIdText" class="muted"></div>
+      <div class="field"><label for="editEdgeSource">From</label><select id="editEdgeSource"></select></div>
+      <div class="field"><label for="editEdgeRelation">Relationship</label><input id="editEdgeRelation" list="relationTypes"></div>
+      <div class="field"><label for="editEdgeTarget">To</label><select id="editEdgeTarget"></select></div>
+      <div class="actions"><button id="saveEdgeButton" type="button">Save changes</button><button id="deleteEdgeButton" class="danger" type="button">Delete relationship</button><button id="closeEdgeButton" type="button">Close</button></div>
+      <div id="edgeEditStatus" class="muted"></div>
+    </div>
+
+    <div class="card">
+      <h3 id="legendTitle">Themes</h3>
+      <div id="themeLegend" class="theme-legend muted"></div>
+      <div id="legendNote" class="muted">Concept colors show themes; arrows use the destination concept's color.</div>
+    </div>
+
+    <div class="card" id="conceptAddCard">
+      <h3>Add a concept</h3>
+      <input id="term" class="full" placeholder="e.g. Kafka"><br><br>
+      <textarea id="desc" placeholder="What is it?"></textarea><br>
+      <button id="classifyButton" type="button">Suggest placement</button>
+      <div id="suggestion" class="muted" style="margin:8px 0"></div>
+      <button id="connectSuggestionButton" type="button" hidden>Connect existing concept</button>
+      <div class="muted">For a new concept, use Add to graph. For a saved concept, apply its suggested connection here or use Add a relationship below.</div><br>
+      <label for="parent" class="muted">Connect from (optional)</label><br>
+      <select id="parent" class="full"></select><br><br>
+      <label for="parentRelation" class="muted">Relationship to new concept</label><br>
+      <input id="parentRelation" class="full" list="relationTypes" value="contains"><br><br>
+      <label for="ctype" class="muted">Type</label><br>
+      <input id="ctype" class="full" list="nodeTypes" value="concept"><br><br>
+      <label for="layer" class="muted">Theme or group (optional)</label><br>
+      <input id="layer" class="full" list="themeTypes"><br><br>
+      <button id="addButton" type="button">Add to graph</button>
+    </div>
+
+    <div class="card" id="edgeAddCard">
+      <h3>Add a relationship</h3>
+      <div class="field"><label for="edgeSource">From</label><select id="edgeSource"></select></div>
+      <div class="field"><label for="edgeRelation">Relationship</label><input id="edgeRelation" list="relationTypes" placeholder="e.g. runs on"></div>
+      <div class="field"><label for="edgeTarget">To</label><select id="edgeTarget"></select></div>
+      <button id="addEdgeButton" type="button">Add relationship</button>
+      <div id="edgeAddStatus" class="muted"></div>
+    </div>
+
+    <div class="card" id="resetGraphCard">
+      <h3>Start a new class</h3>
+      <button id="resetGraphButton" class="danger" type="button">Reset current graph</button>
+      <div class="muted">Restores the starter graph, or clears a custom graph. A backup is saved first.</div>
+      <div id="resetStatus" class="muted"></div>
+    </div>
+
+    <datalist id="nodeTypes">
+      <option value="concept"><option value="domain"><option value="component">
+      <option value="platform"><option value="protocol"><option value="pattern">
+      <option value="tool"><option value="framework"><option value="product">
+      <option value="customer"><option value="organization"><option value="risk">
+      <option value="manufacturer"><option value="product family"><option value="product category">
+      <option value="application"><option value="industry"><option value="technology">
+    </datalist>
+    <datalist id="relationTypes"></datalist>
+    <datalist id="themeTypes"></datalist>
+
+    <div class="card">
+      <h3>How to read it</h3>
+      <div class="muted">
+        Arrows connect concepts in the direction of their relationship.
+        A concept can be contained by one area and still connect to concepts elsewhere.
+      </div>
+    </div>
+  </aside>
+</div>
+<script src="./app.js"></script>
+</body>
+</html>
