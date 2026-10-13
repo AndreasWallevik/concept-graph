@@ -83,8 +83,14 @@ the JSON reliably):
 
 Then open <http://127.0.0.1:8000>. The browser still loads Cytoscape.js from a
 CDN. Only the three files in `demo/` need to be published; `demo/graph.json` is
-public to anyone who can access the deployed demo. The demo has not been hosted
-yet, and automatic rebuilds on GitHub pushes are not configured yet.
+public to anyone who can access the deployed demo.
+
+For GitHub Pages, set **Settings → Pages → Build and deployment → Source** to
+**GitHub Actions**. The workflow in `.github/workflows/pages.yml` rebuilds the
+demo from the current Autic graph on each push to `main` and publishes only
+`demo/`. GitHub Pages on GitHub Free requires a public repository. Selecting
+`main` and `/(root)` under **Deploy from a branch** would publish the repository
+root instead of this demo. No Pages site is enabled by the workflow file alone.
 
 The full app still runs through Flask: `app.py` renders `templates/index.html`,
 serves graph JSON through `/api/graphs`, and handles editing, reset, and placement
