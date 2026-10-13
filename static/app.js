@@ -13,8 +13,17 @@ let selectedNodeId = null;
 let selectedEdgeId = null;
 let suggestedExistingNodeId = null;
 let suggestedDuplicateNodeId = null;
+let focusedNodeId = null;
 
 const themeColors = {
+  'manufacturer': '#b45309',
+  'product family': '#7c3aed',
+  'product': '#2563eb',
+  'technology': '#0891b2',
+  'protocol': '#0f766e',
+  'product category': '#475569',
+  'application': '#be185d',
+  'industry': '#a16207',
   'Platform': '#2563eb',
   'Design tools': '#7c3aed',
   'Data': '#0f766e',
@@ -26,11 +35,33 @@ const themeColors = {
   'Delivery': '#9a3412',
   'AI': '#6d28d9',
   'Business': '#166534',
+  'Overview': '#1d4ed8',
+  'ISA-95 levels': '#2563eb',
+  'Purdue zones': '#6d28d9',
+  'Equipment hierarchy': '#0f766e',
+  'Resource models': '#0e7490',
+  'MOM activities': '#b45309',
+  'Information exchange': '#be185d',
+  'OT security': '#b91c1c',
+  'Example systems': '#475569',
+  'Networking Fundamentals': '#2563eb',
+  'Network Services & Protocols': '#0891b2',
+  'Identity & Access Management': '#7c3aed',
+  'Authentication & Authorization': '#a21caf',
+  'Cryptography & PKI': '#b45309',
+  'Application & API Security': '#db2777',
+  'Network Security': '#dc2626',
+  'Infrastructure & Endpoint Security': '#475569',
+  'Resilience & Availability': '#15803d',
+  'Security Operations': '#0f766e',
+  'OT & ICS Security': '#ea580c',
+  'Governance, Risk & Compliance': '#4d7c0f',
+  'Threats & Attack Techniques': '#be123c',
   'Ungrouped': '#475569'
 };
 
 function themeFor(node) {
-  const theme = node.layer?.trim();
+  const theme = (graph?.color_by === 'type' ? node.type : node.layer)?.trim();
   if (!theme) return 'Ungrouped';
   return Object.keys(themeColors).find(name => name.toLowerCase() === theme.toLowerCase()) || theme;
 }
@@ -112,7 +143,46 @@ function showNode(node) {
   details.append(textElement('span', node.type, 'pill'));
   if (node.layer) details.append(textElement('span', node.layer, 'pill'));
   if (node.description) details.append(textElement('p', node.description));
+  if (node.url) {
+    try {
+      const url = new URL(node.url);
+      if (url.protocol === 'https:' && url.hostname === 'www.autic.no') {
+        const link = textElement('a', 'View on Autic website');
+        link.href = url.href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        details.append(link);
+      }
+    } catch { /* Invalid imported URLs are not rendered as links. */ }
+  }
+  const related = graph.edges.filter(edge => edge.source === node.id || edge.target === node.id);
+  if (related.length) {
+    details.append(textElement('h4', `Related (${related.length})`));
+    const list = document.createElement('ul');
+    list.className = 'related-list';
+    for (const edge of related.sort((a, b) => a.relation.localeCompare(b.relation))) {
+      const otherId = edge.source === node.id ? edge.target : edge.source;
+      const other = graph.nodes.find(item => item.id === otherId);
+      if (!other) continue;
+      const item = document.createElement('li');
+      const direction = edge.source === node.id ? '→' : '←';
+      item.append(textElement('span', `${direction} ${edge.relation} · `, 'muted'));
+      const button = textElement('button', other.label, 'related-link');
+      button.type = 'button';
+      button.addEventListener('click', () => {
+        cy.getElementById(other.id).select();
+        showNode(other);
+      });
+      item.append(button);
+      list.append(item);
+    }
+    details.append(list);
+  }
   details.append(textElement('div', `id: ${node.id}`, 'muted'));
+  if (graph.discovery_mode) {
+    focusedNodeId = node.id;
+    applyDiscoveryFilters();
+  }
   byId('edgeEditor').hidden = true;
   byId('nodeEditor').hidden = false;
   byId('nodeIdText').textContent = `id: ${node.id}`;
@@ -155,6 +225,10 @@ function chooseGraphId() {
 }
 
 function populateControls() {
+  const typeFilter = byId('typeFilter');
+  const types = [...new Set(graph.nodes.map(node => node.type))].sort();
+  typeFilter.replaceChildren(new Option('All types', ''));
+  for (const type of types) typeFilter.add(new Option(type, type));
   const filter = byId('filter');
   filter.replaceChildren(new Option(domains.length ? 'All domains' : 'No domains', ''));
   for (const domain of domains) filter.add(new Option(domain.label, domain.id));
@@ -200,6 +274,8 @@ function populateControls() {
 
 function renderGraph() {
   if (cy) cy.destroy();
+  const hierarchical = graph.display_layout === 'hierarchical';
+  const discovery = !!graph.discovery_mode;
   const nodeColors = new Map(graph.nodes.map(node => [
     node.id, colorForTheme(themeFor(node))
   ]));
@@ -211,20 +287,59 @@ function renderGraph() {
   ];
   cy = cytoscape({
     container: byId('cy'),
+    wheelSensitivity: 0.2,
     elements,
     style: [
       {selector: 'node', style: {'label': 'data(label)', 'background-color': 'data(themeColor)', 'color': '#fff', 'font-size': 11, 'text-valign': 'center', 'text-halign': 'center', 'width': 34, 'height': 34}},
       {selector: 'node[type="domain"]', style: {'width': 70, 'height': 70, 'font-size': 13, 'font-weight': 'bold', 'text-wrap': 'wrap', 'text-max-width': 90}},
+      ...(discovery ? [
+        {selector: 'node', style: {'shape': 'round-rectangle', 'width': 104, 'height': 42,
+          'text-wrap': 'wrap', 'text-max-width': 96, 'font-size': 10}},
+        {selector: 'node[type="product category"], node[type="application"]', style: {
+          'width': 118, 'height': 48, 'font-weight': 'bold'}},
+        {selector: 'node[type="protocol"]', style: {'shape': 'ellipse', 'width': 72, 'height': 46}},
+        {selector: 'node[type="manufacturer"]', style: {'shape': 'hexagon', 'width': 118,
+          'height': 58, 'text-max-width': 90}}
+      ] : []),
+      ...(hierarchical ? [
+        {selector: 'node', style: {'shape': 'round-rectangle', 'width': 116, 'height': 48,
+          'text-wrap': 'wrap', 'text-max-width': 104, 'font-size': 11}},
+        {selector: 'node[type="domain"], node[type="level"]', style: {
+          'width': 138, 'height': 60, 'font-size': 12, 'font-weight': 'bold',
+          'text-max-width': 126}}
+      ] : []),
       {selector: 'edge', style: {'label': 'data(relation)', 'font-size': 9, 'color': '#b8c0cc', 'text-background-color': '#0d1117', 'text-background-opacity': 0.85, 'text-background-padding': 2, 'curve-style': 'bezier', 'target-arrow-shape': 'triangle', 'line-color': 'data(themeColor)', 'target-arrow-color': 'data(themeColor)', 'width': 2, 'opacity': 0.8}},
+      {selector: 'edge[relation="covers"]', style: {'label': '', 'width': 1, 'opacity': 0.3}},
+      {selector: 'edge[relation="understand before"]', style: {'line-style': 'dashed', 'width': 3}},
+      ...(discovery ? [
+        {selector: 'edge', style: {'label': '', 'opacity': 0.8, 'width': 2.4,
+          'arrow-scale': 1.4}},
+        {selector: 'edge.in-focus', style: {'label': 'data(relation)', 'opacity': 1,
+          'width': 3.2, 'arrow-scale': 1.6, 'font-size': 9}}
+      ] : []),
       {selector: 'edge:selected', style: {'line-color': '#f0883e', 'target-arrow-color': '#f0883e', 'width': 3}},
       {selector: '.faded', style: {'opacity': 0.08}},
       {selector: ':selected', style: {'border-width': 3, 'border-color': '#fff'}}
     ],
-    layout: {name: 'cose', animate: false, idealEdgeLength: 90, nodeRepulsion: 12000, gravity: 0.8}
+    layout: hierarchical
+      ? {name: 'breadthfirst', directed: true, circle: false, spacingFactor: 1.3,
+        padding: 40, animate: false}
+      : {name: 'cose', animate: false, idealEdgeLength: 90, nodeRepulsion: 12000,
+        gravity: 0.8}
   });
   cy.on('tap', 'node', event => showNode(event.target.data()));
   cy.on('tap', 'edge', event => showEdge(event.target.data()));
+  if (discovery) cy.on('tap', event => {
+    if (event.target === cy) {
+      focusedNodeId = null;
+      applyDiscoveryFilters();
+    }
+  });
   renderThemeLegend();
+  byId('legendTitle').textContent = graph.color_by === 'type' ? 'Node types' : 'Themes';
+  byId('legendNote').textContent = graph.color_by === 'type'
+    ? 'Colors and shapes distinguish node types. Select a node to see its direct links.'
+    : "Concept colors show themes; arrows use the destination concept's color.";
 }
 
 async function showGraph(graphId, historyMode = 'none') {
@@ -242,6 +357,9 @@ async function showGraph(graphId, historyMode = 'none') {
     activeGraphId = graph.id;
     byId('graphSelect').value = graph.id;
     byId('graphTitle').textContent = graph.title;
+    byId('graphHint').textContent = graph.discovery_mode
+      ? 'Select a node to explore its direct links'
+      : 'Click a concept or relationship to edit it';
     document.title = `Concept Graph — ${graph.title}`;
     byId('search').value = '';
     byId('term').value = '';
@@ -256,6 +374,7 @@ async function showGraph(graphId, historyMode = 'none') {
     byId('edgeEditor').hidden = true;
     selectedNodeId = null;
     selectedEdgeId = null;
+    focusedNodeId = null;
     suggestedExistingNodeId = null;
     suggestedDuplicateNodeId = null;
     refreshConnectButton();
@@ -265,6 +384,8 @@ async function showGraph(graphId, historyMode = 'none') {
       : `${graph.description} Add your first concept to begin.`.trim();
     showMessage(graph.title, introduction);
     renderGraph();
+    byId('typeFilter').value = graph.initial_type_filter || '';
+    if (graph.discovery_mode) applyDiscoveryFilters();
     if (historyMode !== 'none') {
       const url = new URL(window.location.href);
       url.searchParams.set('graph', graph.id);
@@ -293,6 +414,11 @@ function fitGraph() {
 
 function searchGraph() {
   if (!cy) return;
+  if (graph.discovery_mode) {
+    focusedNodeId = null;
+    applyDiscoveryFilters();
+    return;
+  }
   const query = byId('search').value.toLowerCase();
   cy.elements().removeClass('faded');
   if (!query) return;
@@ -307,13 +433,55 @@ function searchGraph() {
 
 function filterGraph() {
   if (!cy) return;
+  if (graph.discovery_mode) {
+    focusedNodeId = null;
+    applyDiscoveryFilters();
+    return;
+  }
   const id = byId('filter').value;
   cy.elements().removeClass('faded');
   if (!id) return;
   const root = cy.getElementById(id);
-  const keep = root.union(root.successors());
+  const covers = root.outgoers('edge').filter(edge => edge.data('relation') === 'covers');
+  let keep;
+  if (covers.length) {
+    const sameLayer = cy.nodes().filter(node => node.data('layer') === root.data('layer'));
+    const members = root.union(covers.targets()).union(sameLayer);
+    keep = members.union(cy.edges().filter(edge =>
+      members.contains(edge.source()) && members.contains(edge.target())));
+  } else {
+    keep = root.union(root.successors());
+  }
   cy.elements().difference(keep).addClass('faded');
   cy.fit(keep, 40);
+}
+
+function applyDiscoveryFilters() {
+  if (!cy || !graph?.discovery_mode) return;
+  cy.elements().removeClass('faded in-focus');
+  const query = byId('search').value.trim().toLowerCase();
+  const type = byId('typeFilter').value;
+  if (!focusedNodeId && !query && !type) return;
+  const seeds = focusedNodeId
+    ? cy.getElementById(focusedNodeId)
+    : cy.nodes().filter(node =>
+      (!type || node.data('type') === type) &&
+      (!query || (node.data('label') || '').toLowerCase().includes(query)
+        || (node.data('description') || '').toLowerCase().includes(query)));
+  const connected = seeds.connectedEdges();
+  const keep = seeds.union(connected).union(connected.sources()).union(connected.targets());
+  cy.elements().difference(keep).addClass('faded');
+  if (focusedNodeId) connected.addClass('in-focus');
+  if (keep.length) cy.fit(keep, 50);
+}
+
+function resetView() {
+  byId('search').value = '';
+  byId('typeFilter').value = '';
+  byId('filter').value = '';
+  focusedNodeId = null;
+  cy?.elements().removeClass('faded in-focus');
+  fitGraph();
 }
 
 async function classify() {
@@ -571,7 +739,17 @@ async function initialize() {
   byId('createGraphButton').addEventListener('click', createGraph);
   byId('search').addEventListener('input', searchGraph);
   byId('filter').addEventListener('change', filterGraph);
+  byId('typeFilter').addEventListener('change', () => {
+    focusedNodeId = null;
+    if (graph?.discovery_mode) applyDiscoveryFilters();
+    else {
+      cy?.elements().removeClass('faded');
+      const type = byId('typeFilter').value;
+      if (type) cy.nodes().filter(node => node.data('type') !== type).addClass('faded');
+    }
+  });
   byId('fitButton').addEventListener('click', fitGraph);
+  byId('resetViewButton').addEventListener('click', resetView);
   byId('classifyButton').addEventListener('click', classify);
   byId('connectSuggestionButton').addEventListener('click', connectSuggestedExisting);
   byId('resetGraphButton').addEventListener('click', resetGraph);

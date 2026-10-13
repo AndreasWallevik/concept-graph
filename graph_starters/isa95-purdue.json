@@ -1,0 +1,648 @@
+{
+  "schema_version": 1,
+  "id": "isa95-purdue",
+  "title": "ISA-95 & Purdue Model",
+  "description": "Explore ISA-95 functions, equipment and resource models, manufacturing operations, information exchange, and the related Purdue network view. Levels describe activities or zones; products can serve more than one role.",
+  "display_layout": "hierarchical",
+  "nodes": [
+    {
+      "id": "model",
+      "label": "ISA-95 & Purdue",
+      "type": "domain",
+      "layer": "Overview",
+      "description": "Two related views: ISA-95 models manufacturing functions and information exchange; Purdue is also used to discuss OT network zones. These are guides, not fixed product placements."
+    },
+    {
+      "id": "isa95",
+      "label": "ISA-95 / IEC 62264",
+      "type": "domain",
+      "layer": "Overview",
+      "description": "Enterprise-control integration standard with functional levels, equipment and resource models, MOM activities, and information exchange."
+    },
+    {
+      "id": "isa-l4",
+      "label": "ISA Level 4: Business planning & logistics",
+      "type": "level",
+      "layer": "ISA-95 levels",
+      "description": "Business planning, logistics, and enterprise coordination. The level describes activities rather than a mandatory system location."
+    },
+    {
+      "id": "isa-l3",
+      "label": "ISA Level 3: Manufacturing operations",
+      "type": "level",
+      "layer": "ISA-95 levels",
+      "description": "Manufacturing operations management coordinates production and supporting resources."
+    },
+    {
+      "id": "isa-l2",
+      "label": "ISA Level 2: Monitoring & control",
+      "type": "level",
+      "layer": "ISA-95 levels",
+      "description": "Monitoring, supervising, and controlling the production process."
+    },
+    {
+      "id": "isa-l1",
+      "label": "ISA Level 1: Sensing & manipulating",
+      "type": "level",
+      "layer": "ISA-95 levels",
+      "description": "Activities that sense or manipulate the production process."
+    },
+    {
+      "id": "isa-l0",
+      "label": "ISA Level 0: Physical process",
+      "type": "level",
+      "layer": "ISA-95 levels",
+      "description": "The actual physical production process."
+    },
+    {
+      "id": "equipment-hierarchy",
+      "label": "Equipment hierarchy",
+      "type": "domain",
+      "layer": "Equipment hierarchy",
+      "description": "A separate ISA-95 view of where manufacturing work is performed."
+    },
+    {
+      "id": "enterprise",
+      "label": "Enterprise",
+      "type": "concept",
+      "layer": "Equipment hierarchy",
+      "description": "The organization at the top of the equipment hierarchy; it may contain multiple sites."
+    },
+    {
+      "id": "site",
+      "label": "Site",
+      "type": "concept",
+      "layer": "Equipment hierarchy",
+      "description": "A plant or other manufacturing location within an enterprise."
+    },
+    {
+      "id": "area",
+      "label": "Area",
+      "type": "concept",
+      "layer": "Equipment hierarchy",
+      "description": "A subdivision of a site for organizing production."
+    },
+    {
+      "id": "work-center",
+      "label": "Work center",
+      "type": "concept",
+      "layer": "Equipment hierarchy",
+      "description": "A grouping below an area, such as a process cell, production line, production unit, or storage zone."
+    },
+    {
+      "id": "work-unit",
+      "label": "Work unit",
+      "type": "concept",
+      "layer": "Equipment hierarchy",
+      "description": "A unit within a work center, such as a unit, work cell, or storage unit."
+    },
+    {
+      "id": "resources",
+      "label": "Resource models",
+      "type": "domain",
+      "layer": "Resource models",
+      "description": "ISA-95 describes personnel, equipment, material, and physical assets as distinct resource concepts."
+    },
+    {
+      "id": "personnel",
+      "label": "Personnel",
+      "type": "concept",
+      "layer": "Resource models",
+      "description": "People and their capabilities or qualifications used in operations."
+    },
+    {
+      "id": "equipment",
+      "label": "Equipment",
+      "type": "concept",
+      "layer": "Resource models",
+      "description": "Equipment roles and capabilities used to carry out operations."
+    },
+    {
+      "id": "material",
+      "label": "Material",
+      "type": "concept",
+      "layer": "Resource models",
+      "description": "Material definitions, lots, and quantities used or produced by operations."
+    },
+    {
+      "id": "physical-asset",
+      "label": "Physical asset",
+      "type": "concept",
+      "layer": "Resource models",
+      "description": "The tangible asset itself, distinct from the operational role modeled as equipment."
+    },
+    {
+      "id": "process-segment",
+      "label": "Process segment",
+      "type": "concept",
+      "layer": "Resource models",
+      "description": "A logical description of a manufacturing activity and its resource needs."
+    },
+    {
+      "id": "mom",
+      "label": "Manufacturing operations management",
+      "type": "domain",
+      "layer": "MOM activities",
+      "description": "Level 3 activities for production, quality, maintenance, and inventory operations."
+    },
+    {
+      "id": "production-ops",
+      "label": "Production operations",
+      "type": "concept",
+      "layer": "MOM activities",
+      "description": "Execution and coordination of production work."
+    },
+    {
+      "id": "quality-ops",
+      "label": "Quality operations",
+      "type": "concept",
+      "layer": "MOM activities",
+      "description": "Quality testing, evaluation, and related operational decisions."
+    },
+    {
+      "id": "maintenance-ops",
+      "label": "Maintenance operations",
+      "type": "concept",
+      "layer": "MOM activities",
+      "description": "Maintenance work that supports production resources."
+    },
+    {
+      "id": "inventory-ops",
+      "label": "Inventory operations",
+      "type": "concept",
+      "layer": "MOM activities",
+      "description": "Movement and management of material within manufacturing operations."
+    },
+    {
+      "id": "information-exchange",
+      "label": "Business–manufacturing information",
+      "type": "domain",
+      "layer": "Information exchange",
+      "description": "Models the data exchanged between Level 4 business activities and Level 3 manufacturing operations."
+    },
+    {
+      "id": "operations-definition",
+      "label": "Operations definition",
+      "type": "concept",
+      "layer": "Information exchange",
+      "description": "Describes how operations are intended to be performed, including resource context."
+    },
+    {
+      "id": "operations-schedule",
+      "label": "Operations schedule",
+      "type": "concept",
+      "layer": "Information exchange",
+      "description": "Communicates planned operations and requested work."
+    },
+    {
+      "id": "operations-performance",
+      "label": "Operations performance",
+      "type": "concept",
+      "layer": "Information exchange",
+      "description": "Communicates actual execution and results back to planning and analysis."
+    },
+    {
+      "id": "purdue",
+      "label": "Purdue network view",
+      "type": "domain",
+      "layer": "Overview",
+      "description": "A common way to discuss OT network segmentation by zones and levels; its technology examples do not redefine ISA-95 functions."
+    },
+    {
+      "id": "purdue-l5",
+      "label": "Purdue L5: Enterprise network (variant)",
+      "type": "level",
+      "layer": "Purdue zones",
+      "description": "Some Purdue diagrams add Level 5 for enterprise network or external connectivity. ISA-95's functional model stops at Level 4."
+    },
+    {
+      "id": "purdue-l4",
+      "label": "Purdue L4: Business network",
+      "type": "level",
+      "layer": "Purdue zones",
+      "description": "Business IT systems and enterprise services in a common Purdue security depiction."
+    },
+    {
+      "id": "purdue-l3",
+      "label": "Purdue L3: Operations network",
+      "type": "level",
+      "layer": "Purdue zones",
+      "description": "Site operations systems supporting plant-wide management and coordination."
+    },
+    {
+      "id": "purdue-l2",
+      "label": "Purdue L2: Supervisory network",
+      "type": "level",
+      "layer": "Purdue zones",
+      "description": "Area supervision, operator interfaces, and control-system visibility."
+    },
+    {
+      "id": "purdue-l1",
+      "label": "Purdue L1: Controller network",
+      "type": "level",
+      "layer": "Purdue zones",
+      "description": "Controllers and control networks close to the physical process."
+    },
+    {
+      "id": "purdue-l0",
+      "label": "Purdue L0: Field I/O",
+      "type": "level",
+      "layer": "Purdue zones",
+      "description": "Field sensors and actuators in a common Purdue security depiction."
+    },
+    {
+      "id": "network-segmentation",
+      "label": "Network segmentation",
+      "type": "domain",
+      "layer": "OT security",
+      "description": "Separates networks or zones according to trust, function, and operational needs."
+    },
+    {
+      "id": "industrial-dmz",
+      "label": "Industrial DMZ",
+      "type": "concept",
+      "layer": "OT security",
+      "description": "Controlled boundary between enterprise and operations networks; often called Level 3.5, but not an ISA-95 functional level."
+    },
+    {
+      "id": "firewall",
+      "label": "Firewall / boundary control",
+      "type": "concept",
+      "layer": "OT security",
+      "description": "Controls and monitors permitted traffic between network zones."
+    },
+    {
+      "id": "erp",
+      "label": "ERP",
+      "type": "example",
+      "layer": "Example systems",
+      "description": "Enterprise planning software commonly associated with business activities and networks."
+    },
+    {
+      "id": "mes",
+      "label": "MES",
+      "type": "example",
+      "layer": "Example systems",
+      "description": "Manufacturing execution software commonly supporting Level 3 production operations."
+    },
+    {
+      "id": "scada-hmi",
+      "label": "SCADA / HMI",
+      "type": "example",
+      "layer": "Example systems",
+      "description": "Supervisory and operator-interface technology; placement depends on architecture and function."
+    },
+    {
+      "id": "plc-dcs",
+      "label": "PLC / DCS controller",
+      "type": "example",
+      "layer": "Example systems",
+      "description": "Control technology often placed in Purdue Level 1, while its functions can implement ISA-95 Level 2 control activities."
+    },
+    {
+      "id": "field-devices",
+      "label": "Sensors / actuators",
+      "type": "example",
+      "layer": "Example systems",
+      "description": "Field devices used for sensing and manipulating the physical process."
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-001",
+      "source": "model",
+      "target": "isa95",
+      "relation": "has functional view"
+    },
+    {
+      "id": "edge-002",
+      "source": "model",
+      "target": "purdue",
+      "relation": "has network view"
+    },
+    {
+      "id": "edge-003",
+      "source": "isa95",
+      "target": "isa-l4",
+      "relation": "defines"
+    },
+    {
+      "id": "edge-004",
+      "source": "isa-l4",
+      "target": "isa-l3",
+      "relation": "interfaces with"
+    },
+    {
+      "id": "edge-005",
+      "source": "isa-l3",
+      "target": "isa-l2",
+      "relation": "coordinates"
+    },
+    {
+      "id": "edge-006",
+      "source": "isa-l2",
+      "target": "isa-l1",
+      "relation": "directs"
+    },
+    {
+      "id": "edge-007",
+      "source": "isa-l1",
+      "target": "isa-l0",
+      "relation": "acts on"
+    },
+    {
+      "id": "edge-008",
+      "source": "isa95",
+      "target": "equipment-hierarchy",
+      "relation": "also defines"
+    },
+    {
+      "id": "edge-009",
+      "source": "equipment-hierarchy",
+      "target": "enterprise",
+      "relation": "starts with"
+    },
+    {
+      "id": "edge-010",
+      "source": "enterprise",
+      "target": "site",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-011",
+      "source": "site",
+      "target": "area",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-012",
+      "source": "area",
+      "target": "work-center",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-013",
+      "source": "work-center",
+      "target": "work-unit",
+      "relation": "contains"
+    },
+    {
+      "id": "edge-014",
+      "source": "isa95",
+      "target": "resources",
+      "relation": "models"
+    },
+    {
+      "id": "edge-015",
+      "source": "resources",
+      "target": "personnel",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-016",
+      "source": "resources",
+      "target": "equipment",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-017",
+      "source": "resources",
+      "target": "material",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-018",
+      "source": "resources",
+      "target": "physical-asset",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-019",
+      "source": "isa95",
+      "target": "process-segment",
+      "relation": "defines"
+    },
+    {
+      "id": "edge-020",
+      "source": "process-segment",
+      "target": "personnel",
+      "relation": "may require"
+    },
+    {
+      "id": "edge-021",
+      "source": "process-segment",
+      "target": "equipment",
+      "relation": "may require"
+    },
+    {
+      "id": "edge-022",
+      "source": "process-segment",
+      "target": "material",
+      "relation": "may require"
+    },
+    {
+      "id": "edge-023",
+      "source": "isa-l3",
+      "target": "mom",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-024",
+      "source": "mom",
+      "target": "production-ops",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-025",
+      "source": "mom",
+      "target": "quality-ops",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-026",
+      "source": "mom",
+      "target": "maintenance-ops",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-027",
+      "source": "mom",
+      "target": "inventory-ops",
+      "relation": "includes"
+    },
+    {
+      "id": "edge-028",
+      "source": "isa95",
+      "target": "information-exchange",
+      "relation": "specifies"
+    },
+    {
+      "id": "edge-029",
+      "source": "isa-l4",
+      "target": "information-exchange",
+      "relation": "participates in"
+    },
+    {
+      "id": "edge-030",
+      "source": "isa-l3",
+      "target": "information-exchange",
+      "relation": "participates in"
+    },
+    {
+      "id": "edge-031",
+      "source": "information-exchange",
+      "target": "operations-definition",
+      "relation": "models"
+    },
+    {
+      "id": "edge-032",
+      "source": "information-exchange",
+      "target": "operations-schedule",
+      "relation": "models"
+    },
+    {
+      "id": "edge-033",
+      "source": "information-exchange",
+      "target": "operations-performance",
+      "relation": "models"
+    },
+    {
+      "id": "edge-034",
+      "source": "operations-definition",
+      "target": "operations-schedule",
+      "relation": "informs"
+    },
+    {
+      "id": "edge-035",
+      "source": "operations-schedule",
+      "target": "operations-performance",
+      "relation": "compared with"
+    },
+    {
+      "id": "edge-036",
+      "source": "purdue",
+      "target": "purdue-l5",
+      "relation": "may include"
+    },
+    {
+      "id": "edge-037",
+      "source": "purdue-l5",
+      "target": "purdue-l4",
+      "relation": "connects toward"
+    },
+    {
+      "id": "edge-038",
+      "source": "purdue-l4",
+      "target": "purdue-l3",
+      "relation": "segmented from"
+    },
+    {
+      "id": "edge-039",
+      "source": "purdue-l3",
+      "target": "purdue-l2",
+      "relation": "coordinates"
+    },
+    {
+      "id": "edge-040",
+      "source": "purdue-l2",
+      "target": "purdue-l1",
+      "relation": "supervises"
+    },
+    {
+      "id": "edge-041",
+      "source": "purdue-l1",
+      "target": "purdue-l0",
+      "relation": "interfaces with"
+    },
+    {
+      "id": "edge-042",
+      "source": "purdue",
+      "target": "network-segmentation",
+      "relation": "guides"
+    },
+    {
+      "id": "edge-043",
+      "source": "network-segmentation",
+      "target": "industrial-dmz",
+      "relation": "may use"
+    },
+    {
+      "id": "edge-044",
+      "source": "network-segmentation",
+      "target": "firewall",
+      "relation": "enforces with"
+    },
+    {
+      "id": "edge-045",
+      "source": "purdue-l4",
+      "target": "industrial-dmz",
+      "relation": "may be separated from OT by"
+    },
+    {
+      "id": "edge-046",
+      "source": "industrial-dmz",
+      "target": "purdue-l3",
+      "relation": "can mediate access to"
+    },
+    {
+      "id": "edge-047",
+      "source": "isa-l4",
+      "target": "erp",
+      "relation": "often supported by"
+    },
+    {
+      "id": "edge-048",
+      "source": "purdue-l4",
+      "target": "erp",
+      "relation": "often hosts"
+    },
+    {
+      "id": "edge-049",
+      "source": "isa-l3",
+      "target": "mes",
+      "relation": "often supported by"
+    },
+    {
+      "id": "edge-050",
+      "source": "purdue-l3",
+      "target": "mes",
+      "relation": "often hosts"
+    },
+    {
+      "id": "edge-051",
+      "source": "purdue-l2",
+      "target": "scada-hmi",
+      "relation": "often hosts"
+    },
+    {
+      "id": "edge-052",
+      "source": "isa-l2",
+      "target": "plc-dcs",
+      "relation": "can be implemented by"
+    },
+    {
+      "id": "edge-053",
+      "source": "purdue-l1",
+      "target": "plc-dcs",
+      "relation": "often contains"
+    },
+    {
+      "id": "edge-054",
+      "source": "isa-l1",
+      "target": "field-devices",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-055",
+      "source": "purdue-l0",
+      "target": "field-devices",
+      "relation": "often contains"
+    },
+    {
+      "id": "edge-056",
+      "source": "production-ops",
+      "target": "mes",
+      "relation": "often supported by"
+    }
+  ]
+}

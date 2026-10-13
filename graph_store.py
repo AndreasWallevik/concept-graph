@@ -7,6 +7,7 @@ import re
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
 
 
 SCHEMA_VERSION = 1
@@ -49,25 +50,51 @@ def validate_graph(graph):
         raise GraphValidationError(f"graph.schema_version must be {SCHEMA_VERSION}")
     if "starter_kind" in graph and graph["starter_kind"] != "empty":
         raise GraphValidationError("graph.starter_kind must be empty")
+    if "display_layout" in graph and (
+        not isinstance(graph["display_layout"], str)
+        or graph["display_layout"] not in {"force", "hierarchical"}
+    ):
+        raise GraphValidationError("graph.display_layout must be force or hierarchical")
+    if "color_by" in graph and (
+        not isinstance(graph["color_by"], str)
+        or graph["color_by"] not in {"type", "layer"}
+    ):
+        raise GraphValidationError("graph.color_by must be type or layer")
+    if "discovery_mode" in graph and type(graph["discovery_mode"]) is not bool:
+        raise GraphValidationError("graph.discovery_mode must be a boolean")
     if not isinstance(graph.get("nodes"), list):
         raise GraphValidationError("graph.nodes must be a list")
     if not isinstance(graph.get("edges"), list):
         raise GraphValidationError("graph.edges must be a list")
 
     node_ids = set()
+    node_types = set()
     for index, node in enumerate(graph["nodes"]):
         context = f"nodes[{index}]"
         if not isinstance(node, dict):
             raise GraphValidationError(f"{context} must be an object")
         node_id = _required_text(node, "id", context)
         _required_text(node, "label", context)
-        _required_text(node, "type", context)
+        node_types.add(_required_text(node, "type", context))
         for key in ("layer", "description"):
             if key in node and not isinstance(node[key], str):
                 raise GraphValidationError(f"{context}.{key} must be a string")
+        if "url" in node:
+            url = node["url"]
+            if not isinstance(url, str) or not url.strip():
+                raise GraphValidationError(f"{context}.url must be a non-empty HTTPS URL")
+            parsed = urlparse(url)
+            if parsed.scheme != "https" or not parsed.netloc:
+                raise GraphValidationError(f"{context}.url must be a non-empty HTTPS URL")
         if node_id in node_ids:
             raise GraphValidationError(f"duplicate node id: {node_id}")
         node_ids.add(node_id)
+
+    if "initial_type_filter" in graph and (
+        not isinstance(graph["initial_type_filter"], str)
+        or graph["initial_type_filter"] not in node_types
+    ):
+        raise GraphValidationError("graph.initial_type_filter must name a node type")
 
     edge_ids = set()
     for index, edge in enumerate(graph["edges"]):

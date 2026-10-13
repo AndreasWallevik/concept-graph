@@ -1,0 +1,2668 @@
+{
+  "schema_version": 1,
+  "id": "security-networking",
+  "title": "Security & Networking",
+  "description": "A learning path from network basics and communication through identity, cryptography, system security, OT security, and governance. Use the domain filter to focus a topic and follow 'understand before' edges to find prerequisites.",
+  "nodes": [
+    {
+      "id": "networking",
+      "label": "Networking Fundamentals",
+      "type": "domain",
+      "layer": "Networking Fundamentals",
+      "description": "How devices identify each other and move data across local and distant networks. Start here before protocols, access controls, or OT segmentation."
+    },
+    {
+      "id": "protocols",
+      "label": "Network Services & Protocols",
+      "type": "domain",
+      "layer": "Network Services & Protocols",
+      "description": "Rules and services that let applications find peers, establish connections, and exchange data."
+    },
+    {
+      "id": "identity-domain",
+      "label": "Identity & Access Management",
+      "type": "domain",
+      "layer": "Identity & Access Management",
+      "description": "How people and services are represented and managed across systems."
+    },
+    {
+      "id": "access-domain",
+      "label": "Authentication & Authorization",
+      "type": "domain",
+      "layer": "Authentication & Authorization",
+      "description": "How a system verifies who is calling, decides what they may do, and delegates access."
+    },
+    {
+      "id": "crypto-domain",
+      "label": "Cryptography & PKI",
+      "type": "domain",
+      "layer": "Cryptography & PKI",
+      "description": "Keys, encryption, hashes, signatures, and certificates used to protect data and establish trust."
+    },
+    {
+      "id": "app-domain",
+      "label": "Application & API Security",
+      "type": "domain",
+      "layer": "Application & API Security",
+      "description": "Controls that protect web applications and APIs from unsafe input, browser attacks, and exposed secrets."
+    },
+    {
+      "id": "network-security-domain",
+      "label": "Network Security",
+      "type": "domain",
+      "layer": "Network Security",
+      "description": "Controls for limiting, inspecting, and securing communication between network zones."
+    },
+    {
+      "id": "infrastructure-domain",
+      "label": "Infrastructure & Endpoint Security",
+      "type": "domain",
+      "layer": "Infrastructure & Endpoint Security",
+      "description": "Protecting operating systems and hosts through maintenance, configuration, and vulnerability reduction."
+    },
+    {
+      "id": "resilience-domain",
+      "label": "Resilience & Availability",
+      "type": "domain",
+      "layer": "Resilience & Availability",
+      "description": "Engineering systems to keep working or recover after faults and incidents. These are reliability concepts as well as security concerns."
+    },
+    {
+      "id": "operations-domain",
+      "label": "Security Operations",
+      "type": "domain",
+      "layer": "Security Operations",
+      "description": "Collecting evidence, finding problems, responding to incidents, and reducing known weaknesses."
+    },
+    {
+      "id": "ot-domain",
+      "label": "OT & ICS Security",
+      "type": "domain",
+      "layer": "OT & ICS Security",
+      "description": "Applying security to industrial control while accounting for process safety, availability, and long equipment lifecycles."
+    },
+    {
+      "id": "governance-domain",
+      "label": "Governance, Risk & Compliance",
+      "type": "domain",
+      "layer": "Governance, Risk & Compliance",
+      "description": "How organizations decide what to protect, evaluate risk, and meet policy, standard, and legal duties."
+    },
+    {
+      "id": "threats-domain",
+      "label": "Threats & Attack Techniques",
+      "type": "domain",
+      "layer": "Threats & Attack Techniques",
+      "description": "Potential harmful actions and the ways attackers try to reach systems and data."
+    },
+    {
+      "id": "network",
+      "label": "Network",
+      "type": "concept",
+      "layer": "Networking Fundamentals",
+      "description": "Connected devices that can exchange data over a shared medium or routed links. Boundaries and paths determine which devices can communicate."
+    },
+    {
+      "id": "lan",
+      "label": "LAN",
+      "type": "concept",
+      "layer": "Networking Fundamentals",
+      "description": "Local area network within a limited site, such as a plant or office. A LAN can contain multiple IP subnets and VLANs."
+    },
+    {
+      "id": "wan",
+      "label": "WAN",
+      "type": "concept",
+      "layer": "Networking Fundamentals",
+      "description": "Wide area network linking separate sites or regions. WAN links commonly carry traffic between LANs through routers."
+    },
+    {
+      "id": "ethernet",
+      "label": "Ethernet",
+      "type": "protocol",
+      "layer": "Networking Fundamentals",
+      "description": "Common local network technology that carries frames using MAC addresses. IP traffic often runs over Ethernet, but Ethernet itself is not IP."
+    },
+    {
+      "id": "mac-address",
+      "label": "MAC Address",
+      "type": "identifier",
+      "layer": "Networking Fundamentals",
+      "description": "Link-layer address used to deliver Ethernet frames on a local network. Switches learn MAC locations; routers use IP addresses to route between networks."
+    },
+    {
+      "id": "ip-address",
+      "label": "IP Address",
+      "type": "identifier",
+      "layer": "Networking Fundamentals",
+      "description": "Logical address identifying a network interface for IP communication. Its network portion and route determine where packets can be delivered."
+    },
+    {
+      "id": "ipv4",
+      "label": "IPv4",
+      "type": "protocol",
+      "layer": "Networking Fundamentals",
+      "description": "Version of IP with 32-bit addresses, often written as four decimal numbers. Private IPv4 addresses commonly need NAT for internet access."
+    },
+    {
+      "id": "ipv6",
+      "label": "IPv6",
+      "type": "protocol",
+      "layer": "Networking Fundamentals",
+      "description": "Version of IP with 128-bit addresses and a much larger address space. IPv6 routing still depends on prefixes and gateways."
+    },
+    {
+      "id": "subnet",
+      "label": "Subnet",
+      "type": "concept",
+      "layer": "Networking Fundamentals",
+      "description": "A range of IP addresses sharing a network prefix. A subnet defines which destinations are local; a VLAN instead separates link-layer traffic."
+    },
+    {
+      "id": "cidr",
+      "label": "CIDR",
+      "type": "notation",
+      "layer": "Networking Fundamentals",
+      "description": "Prefix notation such as 192.0.2.0/24 that states how many leading address bits identify a network. It describes subnet size and routing prefixes."
+    },
+    {
+      "id": "default-gateway",
+      "label": "Default Gateway",
+      "type": "configuration",
+      "layer": "Networking Fundamentals",
+      "description": "Router address a host sends packets to when the destination is outside its local subnet. It is not the Ignition Gateway service."
+    },
+    {
+      "id": "routing",
+      "label": "Routing",
+      "type": "process",
+      "layer": "Networking Fundamentals",
+      "description": "Choosing a next hop for IP packets between networks. Routers use routes and destination prefixes rather than Ethernet MAC addresses alone."
+    },
+    {
+      "id": "router",
+      "label": "Router",
+      "type": "device",
+      "layer": "Networking Fundamentals",
+      "description": "Device that forwards IP packets between networks using routing decisions. A switch normally forwards local frames using MAC addresses."
+    },
+    {
+      "id": "switch",
+      "label": "Switch",
+      "type": "device",
+      "layer": "Networking Fundamentals",
+      "description": "Device that forwards Ethernet frames within a link-layer network using learned MAC addresses. Some switches also provide Layer 3 routing."
+    },
+    {
+      "id": "osi-model",
+      "label": "OSI Model",
+      "type": "model",
+      "layer": "Networking Fundamentals",
+      "description": "Seven-layer reference model for reasoning about communication problems. Ethernet, IP, and TCP are often explained using its link, network, and transport layers."
+    },
+    {
+      "id": "arp",
+      "label": "ARP",
+      "type": "protocol",
+      "layer": "Networking Fundamentals",
+      "description": "On IPv4 local networks, resolves a neighbor's IP address to its MAC address so an Ethernet frame can reach it. IPv6 uses Neighbor Discovery instead."
+    },
+    {
+      "id": "vlan",
+      "label": "VLAN",
+      "type": "configuration",
+      "layer": "Networking Fundamentals",
+      "description": "Logical separation of Ethernet traffic into Layer 2 broadcast domains. A VLAN often maps to an IP subnet but does not itself define one or enforce a firewall policy."
+    },
+    {
+      "id": "nat",
+      "label": "NAT",
+      "type": "network function",
+      "layer": "Networking Fundamentals",
+      "description": "Translates IP addresses at a network boundary; common internet access also translates ports (PAT). Translation alone is not a security policy."
+    },
+    {
+      "id": "private-ip",
+      "label": "Private IP Address",
+      "type": "identifier",
+      "layer": "Networking Fundamentals",
+      "description": "Address from ranges reserved for private IPv4 networks and not globally routed on the internet. It can reach external services through NAT or a proxy."
+    },
+    {
+      "id": "public-ip",
+      "label": "Public IP Address",
+      "type": "identifier",
+      "layer": "Networking Fundamentals",
+      "description": "Globally routable IP address used for internet reachability, subject to routing and firewall policy. Having one does not mean every port is reachable."
+    },
+    {
+      "id": "domain-name",
+      "label": "Domain Name",
+      "type": "identifier",
+      "layer": "Network Services & Protocols",
+      "description": "Human-readable name such as example.com. DNS records can map it to addresses and other service information."
+    },
+    {
+      "id": "dns",
+      "label": "DNS",
+      "type": "service",
+      "layer": "Network Services & Protocols",
+      "description": "Distributed naming service that resolves domain names to IP addresses and other records. It helps clients find servers without hard-coding addresses."
+    },
+    {
+      "id": "dhcp",
+      "label": "DHCP",
+      "type": "protocol",
+      "layer": "Network Services & Protocols",
+      "description": "Automatically leases IP configuration such as address, subnet prefix, gateway, and DNS server to a host. It does not resolve names; DNS does that."
+    },
+    {
+      "id": "tcp",
+      "label": "TCP",
+      "type": "protocol",
+      "layer": "Network Services & Protocols",
+      "description": "Connection-oriented transport with ordered, reliable byte delivery. Its handshake establishes a connection before application data is exchanged."
+    },
+    {
+      "id": "udp",
+      "label": "UDP",
+      "type": "protocol",
+      "layer": "Network Services & Protocols",
+      "description": "Connectionless transport that sends datagrams without TCP's built-in delivery or ordering guarantees. Applications may add reliability when needed."
+    },
+    {
+      "id": "port",
+      "label": "Port",
+      "type": "identifier",
+      "layer": "Network Services & Protocols",
+      "description": "Number that identifies a transport endpoint on a host, interpreted with IP address and protocol. Firewalls commonly filter by ports, but a port is not a service identity."
+    },
+    {
+      "id": "socket",
+      "label": "Socket",
+      "type": "endpoint",
+      "layer": "Network Services & Protocols",
+      "description": "Operating-system endpoint an application uses for network communication. A TCP connection identifies both ends by address and port."
+    },
+    {
+      "id": "http",
+      "label": "HTTP",
+      "type": "protocol",
+      "layer": "Network Services & Protocols",
+      "description": "Application protocol for requests and responses used by web pages and APIs. Plain HTTP provides no transport encryption by itself."
+    },
+    {
+      "id": "https",
+      "label": "HTTPS",
+      "type": "protocol",
+      "layer": "Network Services & Protocols",
+      "description": "HTTP carried over TLS to protect traffic and authenticate the server when certificates are validated. It does not make unsafe application logic safe."
+    },
+    {
+      "id": "tls",
+      "label": "TLS",
+      "type": "protocol",
+      "layer": "Network Services & Protocols",
+      "description": "Protocol that negotiates encrypted, integrity-protected communication and usually authenticates the server using certificates. A certificate supplies identity and key material; it is not TLS itself."
+    },
+    {
+      "id": "ssh",
+      "label": "SSH",
+      "type": "protocol",
+      "layer": "Network Services & Protocols",
+      "description": "Encrypted protocol for remote shell access and related services. It authenticates the remote host and can authenticate users with keys or passwords."
+    },
+    {
+      "id": "mqtt",
+      "label": "MQTT",
+      "type": "protocol",
+      "layer": "Network Services & Protocols",
+      "description": "Publish/subscribe messaging protocol often used for telemetry. Use TLS, client authentication, and broker permissions when crossing trust boundaries."
+    },
+    {
+      "id": "opc-ua",
+      "label": "OPC UA",
+      "type": "protocol",
+      "layer": "Network Services & Protocols",
+      "description": "Industrial interoperability protocol and information model used by SCADA and devices. Its security modes can authenticate peers and protect messages."
+    },
+    {
+      "id": "rest-api",
+      "label": "REST API",
+      "type": "interface style",
+      "layer": "Network Services & Protocols",
+      "description": "HTTP API organized around resources and standard request methods. Authentication, authorization, validation, and TLS still have to be designed."
+    },
+    {
+      "id": "proxy",
+      "label": "Proxy",
+      "type": "network service",
+      "layer": "Network Services & Protocols",
+      "description": "Forward proxy makes requests on behalf of clients, often controlling outbound access. A reverse proxy instead accepts inbound requests on behalf of servers."
+    },
+    {
+      "id": "reverse-proxy",
+      "label": "Reverse Proxy",
+      "type": "network service",
+      "layer": "Network Services & Protocols",
+      "description": "Front end for one or more servers that receives client requests and routes them to backends. It can terminate TLS, but backend access control still matters."
+    },
+    {
+      "id": "identity",
+      "label": "Identity",
+      "type": "concept",
+      "layer": "Identity & Access Management",
+      "description": "Representation of a person, device, or service recognized by a system. An identity answers who or what an entity is; permissions are separate."
+    },
+    {
+      "id": "user",
+      "label": "User",
+      "type": "principal",
+      "layer": "Identity & Access Management",
+      "description": "Human principal with an account or federated identity. Applications link actions and permissions to the user identity."
+    },
+    {
+      "id": "service-account",
+      "label": "Service Account",
+      "type": "principal",
+      "layer": "Identity & Access Management",
+      "description": "Non-human account used by software to call another service. It needs scoped permissions and managed credentials rather than a shared human login."
+    },
+    {
+      "id": "iam",
+      "label": "IAM",
+      "type": "practice",
+      "layer": "Identity & Access Management",
+      "description": "Identity and access management: lifecycle, authentication, roles, and permissions for users and services. It makes access decisions manageable across systems."
+    },
+    {
+      "id": "idp",
+      "label": "Identity Provider (IdP)",
+      "type": "service",
+      "layer": "Identity & Access Management",
+      "description": "Service that authenticates users and provides identity assertions or tokens to applications. The relying application still decides what the user may do."
+    },
+    {
+      "id": "directory-service",
+      "label": "Directory Service",
+      "type": "service",
+      "layer": "Identity & Access Management",
+      "description": "Stores and organizes identities, groups, and related attributes for lookup and administration. It is not automatically the same thing as an IdP."
+    },
+    {
+      "id": "active-directory",
+      "label": "Active Directory",
+      "type": "directory service",
+      "layer": "Identity & Access Management",
+      "description": "Microsoft on-premises directory and domain services for users, computers, and policies. It often backs enterprise authentication and authorization."
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication",
+      "type": "process",
+      "layer": "Authentication & Authorization",
+      "description": "Verifies a claimed identity using a credential or other evidence. It answers who is calling; authorization decides what that identity may do."
+    },
+    {
+      "id": "authorization",
+      "label": "Authorization",
+      "type": "process",
+      "layer": "Authentication & Authorization",
+      "description": "Checks whether an authenticated principal may perform a specific action on a resource. It must be enforced even when login succeeded."
+    },
+    {
+      "id": "mfa",
+      "label": "MFA",
+      "type": "control",
+      "layer": "Authentication & Authorization",
+      "description": "Requires evidence from more than one factor to strengthen authentication. It reduces harm from a stolen password but does not replace authorization."
+    },
+    {
+      "id": "role",
+      "label": "Role",
+      "type": "permission grouping",
+      "layer": "Authentication & Authorization",
+      "description": "Named grouping of permissions assigned to principals. Roles simplify access reviews when they reflect actual job needs."
+    },
+    {
+      "id": "rbac",
+      "label": "RBAC",
+      "type": "access model",
+      "layer": "Authentication & Authorization",
+      "description": "Role-based access control grants permissions through assigned roles. It differs from attribute-based rules that evaluate context and properties."
+    },
+    {
+      "id": "least-privilege",
+      "label": "Least Privilege",
+      "type": "principle",
+      "layer": "Authentication & Authorization",
+      "description": "Grant only the access needed for a task and remove it when no longer needed. This limits damage from mistakes or compromised accounts."
+    },
+    {
+      "id": "sso",
+      "label": "SSO",
+      "type": "login pattern",
+      "layer": "Authentication & Authorization",
+      "description": "Single sign-on lets a user access multiple applications through one authentication relationship. Each application must still enforce its own permissions."
+    },
+    {
+      "id": "credentials",
+      "label": "Credentials",
+      "type": "evidence",
+      "layer": "Authentication & Authorization",
+      "description": "Secrets or other proof used to authenticate a principal, such as passwords or private-key possession. Tokens usually represent granted access after authentication, not the user's password."
+    },
+    {
+      "id": "api-key",
+      "label": "API Key",
+      "type": "credential",
+      "layer": "Authentication & Authorization",
+      "description": "Application-issued string identifying or authenticating a calling client. Treat it as a secret and scope, rotate, and monitor it where supported."
+    },
+    {
+      "id": "access-token",
+      "label": "Access Token",
+      "type": "token",
+      "layer": "Authentication & Authorization",
+      "description": "Credential a client presents to a resource server for scoped access. It may be opaque or use JWT format; possession alone is not proof of a human login."
+    },
+    {
+      "id": "refresh-token",
+      "label": "Refresh Token",
+      "type": "token",
+      "layer": "Authentication & Authorization",
+      "description": "Credential used with an authorization server to request new access tokens. It is not sent to the resource API and needs especially careful storage."
+    },
+    {
+      "id": "oauth",
+      "label": "OAuth 2.0",
+      "type": "authorization framework",
+      "layer": "Authentication & Authorization",
+      "description": "Framework for delegated access to resources using scoped tokens. OAuth alone does not define a standard user-authentication protocol; OIDC adds that layer."
+    },
+    {
+      "id": "oidc",
+      "label": "OpenID Connect (OIDC)",
+      "type": "identity protocol",
+      "layer": "Authentication & Authorization",
+      "description": "Identity layer built on OAuth 2.0 that lets clients verify a user's authentication and obtain identity claims. Its ID token is commonly a JWT."
+    },
+    {
+      "id": "jwt",
+      "label": "JWT",
+      "type": "token format",
+      "layer": "Authentication & Authorization",
+      "description": "Compact format for carrying claims, often signed. A JWT is a format, not an authentication mechanism or proof that a token is trustworthy without validation."
+    },
+    {
+      "id": "encryption",
+      "label": "Encryption",
+      "type": "process",
+      "layer": "Cryptography & PKI",
+      "description": "Transforms plaintext into ciphertext using a key so unauthorized readers cannot recover it. Unlike hashing, authorized holders can decrypt it."
+    },
+    {
+      "id": "symmetric-encryption",
+      "label": "Symmetric Encryption",
+      "type": "method",
+      "layer": "Cryptography & PKI",
+      "description": "Encryption in which both sides use the same shared secret key. It is efficient for bulk data, but the key must be exchanged safely."
+    },
+    {
+      "id": "asymmetric-encryption",
+      "label": "Asymmetric Cryptography",
+      "type": "method",
+      "layer": "Cryptography & PKI",
+      "description": "Cryptography using a related public and private key pair. It supports key exchange and signatures; bulk traffic is usually protected with symmetric keys."
+    },
+    {
+      "id": "public-key",
+      "label": "Public Key",
+      "type": "key",
+      "layer": "Cryptography & PKI",
+      "description": "Shareable half of a key pair, used for tasks such as verifying signatures or establishing encrypted channels. It should be bound to the right identity."
+    },
+    {
+      "id": "private-key",
+      "label": "Private Key",
+      "type": "secret key",
+      "layer": "Cryptography & PKI",
+      "description": "Secret half of an asymmetric key pair, used for signing or key agreement. Exposure can let an attacker impersonate its holder."
+    },
+    {
+      "id": "cryptographic-key",
+      "label": "Cryptographic Key",
+      "type": "key",
+      "layer": "Cryptography & PKI",
+      "description": "Value controlling a cryptographic operation. A key may be symmetric, public, or private; it is not the same as a hash digest."
+    },
+    {
+      "id": "secret",
+      "label": "Secret",
+      "type": "sensitive value",
+      "layer": "Cryptography & PKI",
+      "description": "Value that must be kept confidential, such as a password, API key, or symmetric key. A public key and an ordinary hash digest are not secrets."
+    },
+    {
+      "id": "cryptographic-hash",
+      "label": "Cryptographic Hash",
+      "type": "function",
+      "layer": "Cryptography & PKI",
+      "description": "One-way function producing a fixed-size digest of data, used for integrity checks and as a building block in password storage and signatures. A hash does not encrypt data or require a secret key."
+    },
+    {
+      "id": "salt",
+      "label": "Salt",
+      "type": "random value",
+      "layer": "Cryptography & PKI",
+      "description": "Unique, non-secret value mixed into each password before a password-hashing function. It prevents identical passwords from producing identical stored hashes."
+    },
+    {
+      "id": "hmac",
+      "label": "HMAC",
+      "type": "message authentication code",
+      "layer": "Cryptography & PKI",
+      "description": "Combines a cryptographic hash with a secret key to authenticate message integrity. Unlike a plain hash, verification requires knowledge of the shared secret."
+    },
+    {
+      "id": "digital-signature",
+      "label": "Digital Signature",
+      "type": "proof",
+      "layer": "Cryptography & PKI",
+      "description": "Cryptographic proof made with a private key and checked with the corresponding public key. It supports integrity and signer authentication, not secrecy."
+    },
+    {
+      "id": "certificate",
+      "label": "Certificate",
+      "type": "credential",
+      "layer": "Cryptography & PKI",
+      "description": "Usually an X.509 document binding a subject identity to a public key, signed by an issuer. Validation includes the name, validity, and trust chain."
+    },
+    {
+      "id": "ca",
+      "label": "Certificate Authority (CA)",
+      "type": "trust service",
+      "layer": "Cryptography & PKI",
+      "description": "Issuer that signs certificates after applying identity and issuance checks. Trust depends on the CA chain and how it is configured on the client."
+    },
+    {
+      "id": "pki",
+      "label": "PKI",
+      "type": "trust system",
+      "layer": "Cryptography & PKI",
+      "description": "Public key infrastructure: policies, CAs, certificates, trust stores, and lifecycle processes for public-key trust. A certificate alone is only one part."
+    },
+    {
+      "id": "input-validation",
+      "label": "Input Validation",
+      "type": "control",
+      "layer": "Application & API Security",
+      "description": "Checks incoming data against expected format and meaning before use. It reduces injection and logic errors, alongside safe APIs and output encoding."
+    },
+    {
+      "id": "cors",
+      "label": "CORS",
+      "type": "browser policy",
+      "layer": "Application & API Security",
+      "description": "Browser mechanism by which a server permits selected cross-origin script requests. It is not authentication and does not restrict non-browser clients or iframe embedding."
+    },
+    {
+      "id": "csrf",
+      "label": "CSRF",
+      "type": "attack",
+      "layer": "Application & API Security",
+      "description": "Cross-site request forgery tricks a signed-in browser into sending an unwanted action. Anti-CSRF tokens and suitable cookie settings help defend against it."
+    },
+    {
+      "id": "xss",
+      "label": "XSS",
+      "type": "attack",
+      "layer": "Application & API Security",
+      "description": "Cross-site scripting makes untrusted content run as script in a user's browser. Context-aware output encoding and safe DOM APIs reduce the risk."
+    },
+    {
+      "id": "sql-injection",
+      "label": "SQL Injection",
+      "type": "attack",
+      "layer": "Application & API Security",
+      "description": "Untrusted input changes a database query's structure. Parameterized queries keep input as data instead of SQL instructions."
+    },
+    {
+      "id": "uuid-guid",
+      "label": "UUID / GUID",
+      "type": "identifier",
+      "layer": "Application & API Security",
+      "description": "Identifier format for objects such as users or database records; GUID is a common Microsoft term. Uniqueness is not secrecy, authentication, or an access-control boundary."
+    },
+    {
+      "id": "firewall",
+      "label": "Firewall",
+      "type": "control",
+      "layer": "Network Security",
+      "description": "Enforces traffic rules between hosts or networks using attributes such as addresses, ports, and state. An ACL is a rule list often used by a firewall or router."
+    },
+    {
+      "id": "acl",
+      "label": "ACL",
+      "type": "rule set",
+      "layer": "Network Security",
+      "description": "Access control list of permit or deny rules applied to a resource or network traffic. Its effectiveness depends on where and how the rules are enforced."
+    },
+    {
+      "id": "network-segmentation",
+      "label": "Network Segmentation",
+      "type": "architecture",
+      "layer": "Network Security",
+      "description": "Divides a network into zones and controls paths between them. VLANs create logical separation; firewalls or equivalent controls enforce policy between zones."
+    },
+    {
+      "id": "dmz",
+      "label": "DMZ",
+      "type": "network zone",
+      "layer": "Network Security",
+      "description": "Intermediate network zone for systems exposed to less trusted networks. Controlled flows reduce direct access to protected internal networks."
+    },
+    {
+      "id": "industrial-dmz",
+      "label": "Industrial DMZ",
+      "type": "network zone",
+      "layer": "Network Security",
+      "description": "Controlled boundary between enterprise IT and OT networks for mediated data exchange and remote access. It is a design pattern, not an ISA-95 functional level."
+    },
+    {
+      "id": "ids",
+      "label": "IDS",
+      "type": "detection control",
+      "layer": "Network Security",
+      "description": "Intrusion detection system that observes traffic or hosts and raises alerts about suspicious activity. Detection differs from an IPS that can actively block traffic."
+    },
+    {
+      "id": "vpn",
+      "label": "VPN",
+      "type": "secure tunnel",
+      "layer": "Network Security",
+      "description": "Encrypts traffic between endpoints across another network. A VPN secures the path but does not by itself decide what a connected user may access."
+    },
+    {
+      "id": "secure-remote-access",
+      "label": "Secure Remote Access",
+      "type": "access pattern",
+      "layer": "Network Security",
+      "description": "Controlled access to remote systems using identity checks, limited permissions, monitoring, and often a VPN or jump host. OT access should also respect operations and safety."
+    },
+    {
+      "id": "zero-trust",
+      "label": "Zero Trust",
+      "type": "security approach",
+      "layer": "Network Security",
+      "description": "Approach that verifies each access request using identity, device, and context rather than trusting location alone. It does not mean removing all network boundaries."
+    },
+    {
+      "id": "operating-system",
+      "label": "Operating System",
+      "type": "platform",
+      "layer": "Infrastructure & Endpoint Security",
+      "description": "Software managing a host's processes, files, accounts, and network interfaces. Windows and Linux servers need secure configuration and updates."
+    },
+    {
+      "id": "patch-management",
+      "label": "Patch Management",
+      "type": "process",
+      "layer": "Infrastructure & Endpoint Security",
+      "description": "Tests and applies updates that fix defects and vulnerabilities. OT schedules may require compensating controls when equipment cannot be patched quickly."
+    },
+    {
+      "id": "hardening",
+      "label": "Hardening",
+      "type": "practice",
+      "layer": "Infrastructure & Endpoint Security",
+      "description": "Reduces unnecessary services, privileges, and unsafe defaults on a host. It narrows the attack surface alongside patching and monitoring."
+    },
+    {
+      "id": "vulnerability",
+      "label": "Vulnerability",
+      "type": "weakness",
+      "layer": "Infrastructure & Endpoint Security",
+      "description": "Weakness that could be exploited under the right conditions. A published CVE identifies a known vulnerability but does not by itself quantify local risk."
+    },
+    {
+      "id": "availability",
+      "label": "Availability",
+      "type": "property",
+      "layer": "Resilience & Availability",
+      "description": "Ability of a system or service to be usable when needed. It is part of the CIA triad and particularly important in production control and safety contexts."
+    },
+    {
+      "id": "failover",
+      "label": "Failover",
+      "type": "recovery mechanism",
+      "layer": "Resilience & Availability",
+      "description": "Switches service to a standby component after a failure. It uses redundancy, but the switch may still take time or lose in-flight work."
+    },
+    {
+      "id": "redundancy",
+      "label": "Redundancy",
+      "type": "design",
+      "layer": "Resilience & Availability",
+      "description": "Extra components or paths that reduce single points of failure. It enables failover but does not guarantee seamless high availability."
+    },
+    {
+      "id": "high-availability",
+      "label": "High Availability",
+      "type": "design goal",
+      "layer": "Resilience & Availability",
+      "description": "Design goal of keeping service interruptions short through redundancy, monitoring, and failover. A backup supports later recovery but is not live availability."
+    },
+    {
+      "id": "backup",
+      "label": "Backup",
+      "type": "recovery copy",
+      "layer": "Resilience & Availability",
+      "description": "Separate copy of data or configuration that can be restored after loss or corruption. Test restoration; backups do not keep a running service online."
+    },
+    {
+      "id": "rpo",
+      "label": "RPO",
+      "type": "recovery objective",
+      "layer": "Resilience & Availability",
+      "description": "Recovery point objective: maximum acceptable amount of data loss measured as time since the last recoverable point. It guides backup frequency."
+    },
+    {
+      "id": "rto",
+      "label": "RTO",
+      "type": "recovery objective",
+      "layer": "Resilience & Availability",
+      "description": "Recovery time objective: target time to restore service after an outage. It guides recovery procedures and capacity planning."
+    },
+    {
+      "id": "logging",
+      "label": "Logging",
+      "type": "telemetry",
+      "layer": "Security Operations",
+      "description": "Records events that explain what a system did and who acted. Useful security logs need reliable timestamps, retention, and protection from tampering."
+    },
+    {
+      "id": "siem",
+      "label": "SIEM",
+      "type": "analysis platform",
+      "layer": "Security Operations",
+      "description": "Security information and event management collects and correlates logs for detection and investigation. It needs useful sources and response processes."
+    },
+    {
+      "id": "incident-response",
+      "label": "Incident Response",
+      "type": "process",
+      "layer": "Security Operations",
+      "description": "Coordinated detection, containment, analysis, recovery, and learning after a suspected security incident. Plans matter before an event occurs."
+    },
+    {
+      "id": "vulnerability-management",
+      "label": "Vulnerability Management",
+      "type": "process",
+      "layer": "Security Operations",
+      "description": "Continuously identifies, prioritizes, and addresses weaknesses based on exposure and impact. It includes patching and compensating controls."
+    },
+    {
+      "id": "ot",
+      "label": "OT",
+      "type": "environment",
+      "layer": "OT & ICS Security",
+      "description": "Operational technology monitors or controls physical processes. Safety and availability constraints often change how security controls are deployed."
+    },
+    {
+      "id": "ics",
+      "label": "ICS",
+      "type": "system class",
+      "layer": "OT & ICS Security",
+      "description": "Industrial control systems combine control devices, networks, and supervision to run physical processes. They are a major part of OT."
+    },
+    {
+      "id": "scada",
+      "label": "SCADA",
+      "type": "system class",
+      "layer": "OT & ICS Security",
+      "description": "Supervisory control and data acquisition systems collect process data and provide operator supervision. They often communicate with PLCs and remote devices."
+    },
+    {
+      "id": "plc",
+      "label": "PLC",
+      "type": "controller",
+      "layer": "OT & ICS Security",
+      "description": "Programmable logic controller executes control logic close to equipment. Its communications and engineering access need protection without disrupting the process."
+    },
+    {
+      "id": "purdue-model",
+      "label": "Purdue Model",
+      "type": "reference model",
+      "layer": "OT & ICS Security",
+      "description": "Layered reference view of industrial system and network zones, often used in segmentation discussions. It is not itself a cybersecurity standard or a mandatory placement rule."
+    },
+    {
+      "id": "isa95",
+      "label": "ISA-95",
+      "type": "integration standard",
+      "layer": "OT & ICS Security",
+      "description": "Standard for enterprise-to-control integration, manufacturing functions, and information exchange. Its levels help discuss OT architecture but are not security requirements."
+    },
+    {
+      "id": "iec62443",
+      "label": "ISA/IEC 62443",
+      "type": "security standard series",
+      "layer": "OT & ICS Security",
+      "description": "Industrial automation and control systems security standards covering lifecycle, organizational, system, and component requirements. Unlike ISA-95, this series is specifically about security."
+    },
+    {
+      "id": "zones-conduits",
+      "label": "Zones and Conduits",
+      "type": "security model",
+      "layer": "OT & ICS Security",
+      "description": "ISA/IEC 62443 approach grouping assets with similar security needs into zones and controlling communication through conduits. It makes trust boundaries explicit."
+    },
+    {
+      "id": "governance",
+      "label": "Governance",
+      "type": "practice",
+      "layer": "Governance, Risk & Compliance",
+      "description": "Defines accountability, policy, and oversight for security decisions. It helps turn technical controls into a managed program."
+    },
+    {
+      "id": "risk",
+      "label": "Risk",
+      "type": "assessment concept",
+      "layer": "Governance, Risk & Compliance",
+      "description": "Potential loss when a threat can exploit a vulnerability and cause impact. Likelihood and impact inform prioritization; a vulnerability alone is not a risk score."
+    },
+    {
+      "id": "cia-triad",
+      "label": "CIA Triad",
+      "type": "model",
+      "layer": "Governance, Risk & Compliance",
+      "description": "Confidentiality, integrity, and availability are three common security objectives. OT designs often give availability and process safety particular weight."
+    },
+    {
+      "id": "nis2",
+      "label": "NIS2",
+      "type": "EU directive",
+      "layer": "Governance, Risk & Compliance",
+      "description": "EU directive requiring covered sectors to manage cybersecurity risk and report significant incidents through national implementing law. Applicability depends on organization and jurisdiction."
+    },
+    {
+      "id": "gdpr",
+      "label": "GDPR",
+      "type": "EU regulation",
+      "layer": "Governance, Risk & Compliance",
+      "description": "EU framework for processing and protecting personal data. It addresses privacy and data protection, not all aspects of cybersecurity."
+    },
+    {
+      "id": "iso27001",
+      "label": "ISO/IEC 27001",
+      "type": "management standard",
+      "layer": "Governance, Risk & Compliance",
+      "description": "Requirements for an information security management system that manages risk and continual improvement. Certification evaluates the management system, not immunity from attacks."
+    },
+    {
+      "id": "nist-csf",
+      "label": "NIST Cybersecurity Framework",
+      "type": "risk framework",
+      "layer": "Governance, Risk & Compliance",
+      "description": "Outcome-based framework for managing cybersecurity risk through Govern, Identify, Protect, Detect, Respond, and Recover functions. It is guidance, not a product checklist."
+    },
+    {
+      "id": "threat",
+      "label": "Threat",
+      "type": "risk factor",
+      "layer": "Threats & Attack Techniques",
+      "description": "Potential cause of harm, including malicious actors, mistakes, or environmental events. Risk depends on what it could exploit and the resulting impact."
+    },
+    {
+      "id": "phishing",
+      "label": "Phishing",
+      "type": "attack technique",
+      "layer": "Threats & Attack Techniques",
+      "description": "Deceptive message or page intended to steal credentials or induce unsafe action. MFA helps, but users and systems still need other checks."
+    },
+    {
+      "id": "ransomware",
+      "label": "Ransomware",
+      "type": "malware",
+      "layer": "Threats & Attack Techniques",
+      "description": "Malware that disrupts access to data or systems, often by encryption and extortion. Segmentation, limited privileges, and tested backups reduce impact."
+    }
+  ],
+  "edges": [
+    {
+      "source": "networking",
+      "target": "network",
+      "relation": "covers",
+      "id": "edge-001"
+    },
+    {
+      "source": "networking",
+      "target": "lan",
+      "relation": "covers",
+      "id": "edge-002"
+    },
+    {
+      "source": "networking",
+      "target": "wan",
+      "relation": "covers",
+      "id": "edge-003"
+    },
+    {
+      "source": "networking",
+      "target": "ethernet",
+      "relation": "covers",
+      "id": "edge-004"
+    },
+    {
+      "source": "networking",
+      "target": "mac-address",
+      "relation": "covers",
+      "id": "edge-005"
+    },
+    {
+      "source": "networking",
+      "target": "ip-address",
+      "relation": "covers",
+      "id": "edge-006"
+    },
+    {
+      "source": "networking",
+      "target": "ipv4",
+      "relation": "covers",
+      "id": "edge-007"
+    },
+    {
+      "source": "networking",
+      "target": "ipv6",
+      "relation": "covers",
+      "id": "edge-008"
+    },
+    {
+      "source": "networking",
+      "target": "subnet",
+      "relation": "covers",
+      "id": "edge-009"
+    },
+    {
+      "source": "networking",
+      "target": "cidr",
+      "relation": "covers",
+      "id": "edge-010"
+    },
+    {
+      "source": "networking",
+      "target": "default-gateway",
+      "relation": "covers",
+      "id": "edge-011"
+    },
+    {
+      "source": "networking",
+      "target": "routing",
+      "relation": "covers",
+      "id": "edge-012"
+    },
+    {
+      "source": "networking",
+      "target": "router",
+      "relation": "covers",
+      "id": "edge-013"
+    },
+    {
+      "source": "networking",
+      "target": "switch",
+      "relation": "covers",
+      "id": "edge-014"
+    },
+    {
+      "source": "networking",
+      "target": "osi-model",
+      "relation": "covers",
+      "id": "edge-015"
+    },
+    {
+      "source": "networking",
+      "target": "arp",
+      "relation": "covers",
+      "id": "edge-016"
+    },
+    {
+      "source": "networking",
+      "target": "vlan",
+      "relation": "covers",
+      "id": "edge-017"
+    },
+    {
+      "source": "networking",
+      "target": "nat",
+      "relation": "covers",
+      "id": "edge-018"
+    },
+    {
+      "source": "networking",
+      "target": "private-ip",
+      "relation": "covers",
+      "id": "edge-019"
+    },
+    {
+      "source": "networking",
+      "target": "public-ip",
+      "relation": "covers",
+      "id": "edge-020"
+    },
+    {
+      "source": "protocols",
+      "target": "domain-name",
+      "relation": "covers",
+      "id": "edge-021"
+    },
+    {
+      "source": "protocols",
+      "target": "dns",
+      "relation": "covers",
+      "id": "edge-022"
+    },
+    {
+      "source": "protocols",
+      "target": "dhcp",
+      "relation": "covers",
+      "id": "edge-023"
+    },
+    {
+      "source": "protocols",
+      "target": "tcp",
+      "relation": "covers",
+      "id": "edge-024"
+    },
+    {
+      "source": "protocols",
+      "target": "udp",
+      "relation": "covers",
+      "id": "edge-025"
+    },
+    {
+      "source": "protocols",
+      "target": "port",
+      "relation": "covers",
+      "id": "edge-026"
+    },
+    {
+      "source": "protocols",
+      "target": "socket",
+      "relation": "covers",
+      "id": "edge-027"
+    },
+    {
+      "source": "protocols",
+      "target": "http",
+      "relation": "covers",
+      "id": "edge-028"
+    },
+    {
+      "source": "protocols",
+      "target": "https",
+      "relation": "covers",
+      "id": "edge-029"
+    },
+    {
+      "source": "protocols",
+      "target": "tls",
+      "relation": "covers",
+      "id": "edge-030"
+    },
+    {
+      "source": "protocols",
+      "target": "ssh",
+      "relation": "covers",
+      "id": "edge-031"
+    },
+    {
+      "source": "protocols",
+      "target": "mqtt",
+      "relation": "covers",
+      "id": "edge-032"
+    },
+    {
+      "source": "protocols",
+      "target": "opc-ua",
+      "relation": "covers",
+      "id": "edge-033"
+    },
+    {
+      "source": "protocols",
+      "target": "rest-api",
+      "relation": "covers",
+      "id": "edge-034"
+    },
+    {
+      "source": "identity-domain",
+      "target": "identity",
+      "relation": "covers",
+      "id": "edge-035"
+    },
+    {
+      "source": "identity-domain",
+      "target": "user",
+      "relation": "covers",
+      "id": "edge-036"
+    },
+    {
+      "source": "identity-domain",
+      "target": "service-account",
+      "relation": "covers",
+      "id": "edge-037"
+    },
+    {
+      "source": "identity-domain",
+      "target": "iam",
+      "relation": "covers",
+      "id": "edge-038"
+    },
+    {
+      "source": "identity-domain",
+      "target": "idp",
+      "relation": "covers",
+      "id": "edge-039"
+    },
+    {
+      "source": "identity-domain",
+      "target": "directory-service",
+      "relation": "covers",
+      "id": "edge-040"
+    },
+    {
+      "source": "identity-domain",
+      "target": "active-directory",
+      "relation": "covers",
+      "id": "edge-041"
+    },
+    {
+      "source": "access-domain",
+      "target": "authentication",
+      "relation": "covers",
+      "id": "edge-042"
+    },
+    {
+      "source": "access-domain",
+      "target": "authorization",
+      "relation": "covers",
+      "id": "edge-043"
+    },
+    {
+      "source": "access-domain",
+      "target": "mfa",
+      "relation": "covers",
+      "id": "edge-044"
+    },
+    {
+      "source": "access-domain",
+      "target": "role",
+      "relation": "covers",
+      "id": "edge-045"
+    },
+    {
+      "source": "access-domain",
+      "target": "rbac",
+      "relation": "covers",
+      "id": "edge-046"
+    },
+    {
+      "source": "access-domain",
+      "target": "least-privilege",
+      "relation": "covers",
+      "id": "edge-047"
+    },
+    {
+      "source": "access-domain",
+      "target": "sso",
+      "relation": "covers",
+      "id": "edge-048"
+    },
+    {
+      "source": "access-domain",
+      "target": "credentials",
+      "relation": "covers",
+      "id": "edge-049"
+    },
+    {
+      "source": "access-domain",
+      "target": "api-key",
+      "relation": "covers",
+      "id": "edge-050"
+    },
+    {
+      "source": "access-domain",
+      "target": "access-token",
+      "relation": "covers",
+      "id": "edge-051"
+    },
+    {
+      "source": "access-domain",
+      "target": "refresh-token",
+      "relation": "covers",
+      "id": "edge-052"
+    },
+    {
+      "source": "access-domain",
+      "target": "oauth",
+      "relation": "covers",
+      "id": "edge-053"
+    },
+    {
+      "source": "access-domain",
+      "target": "oidc",
+      "relation": "covers",
+      "id": "edge-054"
+    },
+    {
+      "source": "access-domain",
+      "target": "jwt",
+      "relation": "covers",
+      "id": "edge-055"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "encryption",
+      "relation": "covers",
+      "id": "edge-056"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "symmetric-encryption",
+      "relation": "covers",
+      "id": "edge-057"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "asymmetric-encryption",
+      "relation": "covers",
+      "id": "edge-058"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "public-key",
+      "relation": "covers",
+      "id": "edge-059"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "private-key",
+      "relation": "covers",
+      "id": "edge-060"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "cryptographic-key",
+      "relation": "covers",
+      "id": "edge-061"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "secret",
+      "relation": "covers",
+      "id": "edge-062"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "cryptographic-hash",
+      "relation": "covers",
+      "id": "edge-063"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "salt",
+      "relation": "covers",
+      "id": "edge-064"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "hmac",
+      "relation": "covers",
+      "id": "edge-065"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "digital-signature",
+      "relation": "covers",
+      "id": "edge-066"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "certificate",
+      "relation": "covers",
+      "id": "edge-067"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "ca",
+      "relation": "covers",
+      "id": "edge-068"
+    },
+    {
+      "source": "crypto-domain",
+      "target": "pki",
+      "relation": "covers",
+      "id": "edge-069"
+    },
+    {
+      "source": "app-domain",
+      "target": "input-validation",
+      "relation": "covers",
+      "id": "edge-070"
+    },
+    {
+      "source": "app-domain",
+      "target": "cors",
+      "relation": "covers",
+      "id": "edge-071"
+    },
+    {
+      "source": "app-domain",
+      "target": "csrf",
+      "relation": "covers",
+      "id": "edge-072"
+    },
+    {
+      "source": "app-domain",
+      "target": "xss",
+      "relation": "covers",
+      "id": "edge-073"
+    },
+    {
+      "source": "app-domain",
+      "target": "sql-injection",
+      "relation": "covers",
+      "id": "edge-074"
+    },
+    {
+      "source": "app-domain",
+      "target": "uuid-guid",
+      "relation": "covers",
+      "id": "edge-075"
+    },
+    {
+      "source": "network-security-domain",
+      "target": "firewall",
+      "relation": "covers",
+      "id": "edge-076"
+    },
+    {
+      "source": "network-security-domain",
+      "target": "acl",
+      "relation": "covers",
+      "id": "edge-077"
+    },
+    {
+      "source": "network-security-domain",
+      "target": "network-segmentation",
+      "relation": "covers",
+      "id": "edge-078"
+    },
+    {
+      "source": "network-security-domain",
+      "target": "dmz",
+      "relation": "covers",
+      "id": "edge-079"
+    },
+    {
+      "source": "network-security-domain",
+      "target": "industrial-dmz",
+      "relation": "covers",
+      "id": "edge-080"
+    },
+    {
+      "source": "network-security-domain",
+      "target": "ids",
+      "relation": "covers",
+      "id": "edge-081"
+    },
+    {
+      "source": "network-security-domain",
+      "target": "vpn",
+      "relation": "covers",
+      "id": "edge-082"
+    },
+    {
+      "source": "network-security-domain",
+      "target": "secure-remote-access",
+      "relation": "covers",
+      "id": "edge-083"
+    },
+    {
+      "source": "network-security-domain",
+      "target": "zero-trust",
+      "relation": "covers",
+      "id": "edge-084"
+    },
+    {
+      "source": "infrastructure-domain",
+      "target": "operating-system",
+      "relation": "covers",
+      "id": "edge-085"
+    },
+    {
+      "source": "infrastructure-domain",
+      "target": "patch-management",
+      "relation": "covers",
+      "id": "edge-086"
+    },
+    {
+      "source": "infrastructure-domain",
+      "target": "hardening",
+      "relation": "covers",
+      "id": "edge-087"
+    },
+    {
+      "source": "infrastructure-domain",
+      "target": "vulnerability",
+      "relation": "covers",
+      "id": "edge-088"
+    },
+    {
+      "source": "resilience-domain",
+      "target": "availability",
+      "relation": "covers",
+      "id": "edge-089"
+    },
+    {
+      "source": "resilience-domain",
+      "target": "failover",
+      "relation": "covers",
+      "id": "edge-090"
+    },
+    {
+      "source": "resilience-domain",
+      "target": "redundancy",
+      "relation": "covers",
+      "id": "edge-091"
+    },
+    {
+      "source": "resilience-domain",
+      "target": "high-availability",
+      "relation": "covers",
+      "id": "edge-092"
+    },
+    {
+      "source": "resilience-domain",
+      "target": "backup",
+      "relation": "covers",
+      "id": "edge-093"
+    },
+    {
+      "source": "resilience-domain",
+      "target": "rpo",
+      "relation": "covers",
+      "id": "edge-094"
+    },
+    {
+      "source": "resilience-domain",
+      "target": "rto",
+      "relation": "covers",
+      "id": "edge-095"
+    },
+    {
+      "source": "operations-domain",
+      "target": "logging",
+      "relation": "covers",
+      "id": "edge-096"
+    },
+    {
+      "source": "operations-domain",
+      "target": "siem",
+      "relation": "covers",
+      "id": "edge-097"
+    },
+    {
+      "source": "operations-domain",
+      "target": "incident-response",
+      "relation": "covers",
+      "id": "edge-098"
+    },
+    {
+      "source": "operations-domain",
+      "target": "vulnerability-management",
+      "relation": "covers",
+      "id": "edge-099"
+    },
+    {
+      "source": "ot-domain",
+      "target": "ot",
+      "relation": "covers",
+      "id": "edge-100"
+    },
+    {
+      "source": "ot-domain",
+      "target": "ics",
+      "relation": "covers",
+      "id": "edge-101"
+    },
+    {
+      "source": "ot-domain",
+      "target": "scada",
+      "relation": "covers",
+      "id": "edge-102"
+    },
+    {
+      "source": "ot-domain",
+      "target": "plc",
+      "relation": "covers",
+      "id": "edge-103"
+    },
+    {
+      "source": "ot-domain",
+      "target": "purdue-model",
+      "relation": "covers",
+      "id": "edge-104"
+    },
+    {
+      "source": "ot-domain",
+      "target": "isa95",
+      "relation": "covers",
+      "id": "edge-105"
+    },
+    {
+      "source": "ot-domain",
+      "target": "iec62443",
+      "relation": "covers",
+      "id": "edge-106"
+    },
+    {
+      "source": "ot-domain",
+      "target": "zones-conduits",
+      "relation": "covers",
+      "id": "edge-107"
+    },
+    {
+      "source": "governance-domain",
+      "target": "governance",
+      "relation": "covers",
+      "id": "edge-108"
+    },
+    {
+      "source": "governance-domain",
+      "target": "risk",
+      "relation": "covers",
+      "id": "edge-109"
+    },
+    {
+      "source": "governance-domain",
+      "target": "cia-triad",
+      "relation": "covers",
+      "id": "edge-110"
+    },
+    {
+      "source": "governance-domain",
+      "target": "nis2",
+      "relation": "covers",
+      "id": "edge-111"
+    },
+    {
+      "source": "governance-domain",
+      "target": "gdpr",
+      "relation": "covers",
+      "id": "edge-112"
+    },
+    {
+      "source": "governance-domain",
+      "target": "iso27001",
+      "relation": "covers",
+      "id": "edge-113"
+    },
+    {
+      "source": "governance-domain",
+      "target": "nist-csf",
+      "relation": "covers",
+      "id": "edge-114"
+    },
+    {
+      "source": "threats-domain",
+      "target": "threat",
+      "relation": "covers",
+      "id": "edge-115"
+    },
+    {
+      "source": "threats-domain",
+      "target": "phishing",
+      "relation": "covers",
+      "id": "edge-116"
+    },
+    {
+      "source": "threats-domain",
+      "target": "ransomware",
+      "relation": "covers",
+      "id": "edge-117"
+    },
+    {
+      "source": "networking",
+      "relation": "understand before",
+      "target": "protocols",
+      "id": "edge-118"
+    },
+    {
+      "source": "protocols",
+      "relation": "understand before",
+      "target": "identity-domain",
+      "id": "edge-119"
+    },
+    {
+      "source": "identity-domain",
+      "relation": "understand before",
+      "target": "access-domain",
+      "id": "edge-120"
+    },
+    {
+      "source": "access-domain",
+      "relation": "understand before",
+      "target": "crypto-domain",
+      "id": "edge-121"
+    },
+    {
+      "source": "crypto-domain",
+      "relation": "understand before",
+      "target": "app-domain",
+      "id": "edge-122"
+    },
+    {
+      "source": "crypto-domain",
+      "relation": "understand before",
+      "target": "network-security-domain",
+      "id": "edge-123"
+    },
+    {
+      "source": "network-security-domain",
+      "relation": "understand before",
+      "target": "infrastructure-domain",
+      "id": "edge-124"
+    },
+    {
+      "source": "infrastructure-domain",
+      "relation": "understand before",
+      "target": "resilience-domain",
+      "id": "edge-125"
+    },
+    {
+      "source": "network-security-domain",
+      "relation": "understand before",
+      "target": "operations-domain",
+      "id": "edge-126"
+    },
+    {
+      "source": "network-security-domain",
+      "relation": "understand before",
+      "target": "ot-domain",
+      "id": "edge-127"
+    },
+    {
+      "source": "ot-domain",
+      "relation": "understand before",
+      "target": "governance-domain",
+      "id": "edge-128"
+    },
+    {
+      "source": "infrastructure-domain",
+      "relation": "understand before",
+      "target": "threats-domain",
+      "id": "edge-129"
+    },
+    {
+      "source": "network",
+      "relation": "can be local as",
+      "target": "lan",
+      "id": "edge-130"
+    },
+    {
+      "source": "network",
+      "relation": "can span sites as",
+      "target": "wan",
+      "id": "edge-131"
+    },
+    {
+      "source": "ethernet",
+      "relation": "uses",
+      "target": "mac-address",
+      "id": "edge-132"
+    },
+    {
+      "source": "switch",
+      "relation": "forwards frames using",
+      "target": "mac-address",
+      "id": "edge-133"
+    },
+    {
+      "source": "switch",
+      "relation": "forwards frames on",
+      "target": "ethernet",
+      "id": "edge-134"
+    },
+    {
+      "source": "router",
+      "relation": "routes between",
+      "target": "network",
+      "id": "edge-135"
+    },
+    {
+      "source": "default-gateway",
+      "relation": "is a local next-hop",
+      "target": "router",
+      "id": "edge-136"
+    },
+    {
+      "source": "routing",
+      "relation": "uses network prefixes from",
+      "target": "ip-address",
+      "id": "edge-137"
+    },
+    {
+      "source": "ip-address",
+      "relation": "has version",
+      "target": "ipv4",
+      "id": "edge-138"
+    },
+    {
+      "source": "ip-address",
+      "relation": "has version",
+      "target": "ipv6",
+      "id": "edge-139"
+    },
+    {
+      "source": "ip-address",
+      "relation": "can be",
+      "target": "private-ip",
+      "id": "edge-140"
+    },
+    {
+      "source": "ip-address",
+      "relation": "can be",
+      "target": "public-ip",
+      "id": "edge-141"
+    },
+    {
+      "source": "subnet",
+      "relation": "expressed using",
+      "target": "cidr",
+      "id": "edge-142"
+    },
+    {
+      "source": "arp",
+      "relation": "maps local IPv4 destination to",
+      "target": "mac-address",
+      "id": "edge-143"
+    },
+    {
+      "source": "vlan",
+      "relation": "segments Layer 2 traffic on",
+      "target": "lan",
+      "id": "edge-144"
+    },
+    {
+      "source": "nat",
+      "relation": "often translates",
+      "target": "private-ip",
+      "id": "edge-145"
+    },
+    {
+      "source": "nat",
+      "relation": "often presents",
+      "target": "public-ip",
+      "id": "edge-146"
+    },
+    {
+      "source": "osi-model",
+      "relation": "helps explain",
+      "target": "ethernet",
+      "id": "edge-147"
+    },
+    {
+      "source": "osi-model",
+      "relation": "helps explain",
+      "target": "tcp",
+      "id": "edge-148"
+    },
+    {
+      "source": "dns",
+      "relation": "resolves",
+      "target": "domain-name",
+      "id": "edge-149"
+    },
+    {
+      "source": "dns",
+      "relation": "returns records for",
+      "target": "ip-address",
+      "id": "edge-150"
+    },
+    {
+      "source": "dhcp",
+      "relation": "leases",
+      "target": "ip-address",
+      "id": "edge-151"
+    },
+    {
+      "source": "dhcp",
+      "relation": "may configure",
+      "target": "default-gateway",
+      "id": "edge-152"
+    },
+    {
+      "source": "tcp",
+      "relation": "uses",
+      "target": "port",
+      "id": "edge-153"
+    },
+    {
+      "source": "udp",
+      "relation": "uses",
+      "target": "port",
+      "id": "edge-154"
+    },
+    {
+      "source": "socket",
+      "relation": "binds to",
+      "target": "ip-address",
+      "id": "edge-155"
+    },
+    {
+      "source": "socket",
+      "relation": "binds to",
+      "target": "port",
+      "id": "edge-156"
+    },
+    {
+      "source": "http",
+      "relation": "usually runs over",
+      "target": "tcp",
+      "id": "edge-157"
+    },
+    {
+      "source": "https",
+      "relation": "protects",
+      "target": "http",
+      "id": "edge-158"
+    },
+    {
+      "source": "https",
+      "relation": "uses",
+      "target": "tls",
+      "id": "edge-159"
+    },
+    {
+      "source": "tls",
+      "relation": "usually validates",
+      "target": "certificate",
+      "id": "edge-160"
+    },
+    {
+      "source": "ssh",
+      "relation": "runs over",
+      "target": "tcp",
+      "id": "edge-161"
+    },
+    {
+      "source": "mqtt",
+      "relation": "usually runs over",
+      "target": "tcp",
+      "id": "edge-162"
+    },
+    {
+      "source": "opc-ua",
+      "relation": "can authenticate peers with",
+      "target": "certificate",
+      "id": "edge-163"
+    },
+    {
+      "source": "rest-api",
+      "relation": "commonly uses",
+      "target": "http",
+      "id": "edge-164"
+    },
+    {
+      "source": "iam",
+      "relation": "manages",
+      "target": "identity",
+      "id": "edge-165"
+    },
+    {
+      "source": "user",
+      "relation": "has",
+      "target": "identity",
+      "id": "edge-166"
+    },
+    {
+      "source": "service-account",
+      "relation": "has",
+      "target": "identity",
+      "id": "edge-167"
+    },
+    {
+      "source": "directory-service",
+      "relation": "stores",
+      "target": "identity",
+      "id": "edge-168"
+    },
+    {
+      "source": "active-directory",
+      "relation": "implements",
+      "target": "directory-service",
+      "id": "edge-169"
+    },
+    {
+      "source": "idp",
+      "relation": "authenticates",
+      "target": "user",
+      "id": "edge-170"
+    },
+    {
+      "source": "idp",
+      "relation": "can issue",
+      "target": "access-token",
+      "id": "edge-171"
+    },
+    {
+      "source": "idp",
+      "relation": "supports",
+      "target": "sso",
+      "id": "edge-172"
+    },
+    {
+      "source": "authentication",
+      "relation": "can use",
+      "target": "credentials",
+      "id": "edge-173"
+    },
+    {
+      "source": "authorization",
+      "relation": "checks permissions of",
+      "target": "identity",
+      "id": "edge-174"
+    },
+    {
+      "source": "mfa",
+      "relation": "strengthens",
+      "target": "authentication",
+      "id": "edge-175"
+    },
+    {
+      "source": "rbac",
+      "relation": "grants permissions through",
+      "target": "role",
+      "id": "edge-176"
+    },
+    {
+      "source": "role",
+      "relation": "groups permissions for",
+      "target": "authorization",
+      "id": "edge-177"
+    },
+    {
+      "source": "least-privilege",
+      "relation": "constrains",
+      "target": "authorization",
+      "id": "edge-178"
+    },
+    {
+      "source": "sso",
+      "relation": "commonly relies on",
+      "target": "idp",
+      "id": "edge-179"
+    },
+    {
+      "source": "api-key",
+      "relation": "is a kind of",
+      "target": "credentials",
+      "id": "edge-180"
+    },
+    {
+      "source": "access-token",
+      "relation": "conveys granted access for",
+      "target": "authorization",
+      "id": "edge-181"
+    },
+    {
+      "source": "refresh-token",
+      "relation": "can renew",
+      "target": "access-token",
+      "id": "edge-182"
+    },
+    {
+      "source": "oauth",
+      "relation": "defines delegated use of",
+      "target": "access-token",
+      "id": "edge-183"
+    },
+    {
+      "source": "oidc",
+      "relation": "extends",
+      "target": "oauth",
+      "id": "edge-184"
+    },
+    {
+      "source": "oidc",
+      "relation": "standardizes user",
+      "target": "authentication",
+      "id": "edge-185"
+    },
+    {
+      "source": "oidc",
+      "relation": "commonly uses for ID tokens",
+      "target": "jwt",
+      "id": "edge-186"
+    },
+    {
+      "source": "jwt",
+      "relation": "can format",
+      "target": "access-token",
+      "id": "edge-187"
+    },
+    {
+      "source": "encryption",
+      "relation": "controlled by",
+      "target": "cryptographic-key",
+      "id": "edge-188"
+    },
+    {
+      "source": "symmetric-encryption",
+      "relation": "is a form of",
+      "target": "encryption",
+      "id": "edge-189"
+    },
+    {
+      "source": "asymmetric-encryption",
+      "relation": "is a form of",
+      "target": "encryption",
+      "id": "edge-190"
+    },
+    {
+      "source": "asymmetric-encryption",
+      "relation": "uses",
+      "target": "public-key",
+      "id": "edge-191"
+    },
+    {
+      "source": "asymmetric-encryption",
+      "relation": "uses",
+      "target": "private-key",
+      "id": "edge-192"
+    },
+    {
+      "source": "symmetric-encryption",
+      "relation": "uses shared",
+      "target": "cryptographic-key",
+      "id": "edge-193"
+    },
+    {
+      "source": "cryptographic-key",
+      "relation": "can be a",
+      "target": "secret",
+      "id": "edge-194"
+    },
+    {
+      "source": "salt",
+      "relation": "is used with password functions built on",
+      "target": "cryptographic-hash",
+      "id": "edge-195"
+    },
+    {
+      "source": "hmac",
+      "relation": "combines",
+      "target": "cryptographic-hash",
+      "id": "edge-196"
+    },
+    {
+      "source": "hmac",
+      "relation": "requires",
+      "target": "secret",
+      "id": "edge-197"
+    },
+    {
+      "source": "digital-signature",
+      "relation": "created with",
+      "target": "private-key",
+      "id": "edge-198"
+    },
+    {
+      "source": "digital-signature",
+      "relation": "verified with",
+      "target": "public-key",
+      "id": "edge-199"
+    },
+    {
+      "source": "certificate",
+      "relation": "binds an",
+      "target": "identity",
+      "id": "edge-200"
+    },
+    {
+      "source": "certificate",
+      "relation": "to a",
+      "target": "public-key",
+      "id": "edge-201"
+    },
+    {
+      "source": "ca",
+      "relation": "issues",
+      "target": "certificate",
+      "id": "edge-202"
+    },
+    {
+      "source": "pki",
+      "relation": "manages trust through",
+      "target": "ca",
+      "id": "edge-203"
+    },
+    {
+      "source": "pki",
+      "relation": "manages lifecycle of",
+      "target": "certificate",
+      "id": "edge-204"
+    },
+    {
+      "source": "cryptographic-hash",
+      "relation": "differs from reversible",
+      "target": "encryption",
+      "id": "edge-205"
+    },
+    {
+      "source": "input-validation",
+      "relation": "reduces risk of",
+      "target": "sql-injection",
+      "id": "edge-206"
+    },
+    {
+      "source": "cors",
+      "relation": "governs browser script access to",
+      "target": "rest-api",
+      "id": "edge-207"
+    },
+    {
+      "source": "csrf",
+      "relation": "abuses browser-held",
+      "target": "credentials",
+      "id": "edge-208"
+    },
+    {
+      "source": "xss",
+      "relation": "exploits unsafe rendering of",
+      "target": "http",
+      "id": "edge-209"
+    },
+    {
+      "source": "uuid-guid",
+      "relation": "can identify",
+      "target": "user",
+      "id": "edge-210"
+    },
+    {
+      "source": "uuid-guid",
+      "relation": "does not replace",
+      "target": "authorization",
+      "id": "edge-211"
+    },
+    {
+      "source": "firewall",
+      "relation": "enforces",
+      "target": "acl",
+      "id": "edge-212"
+    },
+    {
+      "source": "firewall",
+      "relation": "can filter by",
+      "target": "port",
+      "id": "edge-213"
+    },
+    {
+      "source": "network-segmentation",
+      "relation": "can use",
+      "target": "vlan",
+      "id": "edge-214"
+    },
+    {
+      "source": "network-segmentation",
+      "relation": "enforces boundaries with",
+      "target": "firewall",
+      "id": "edge-215"
+    },
+    {
+      "source": "dmz",
+      "relation": "is a pattern of",
+      "target": "network-segmentation",
+      "id": "edge-216"
+    },
+    {
+      "source": "industrial-dmz",
+      "relation": "specializes for OT",
+      "target": "dmz",
+      "id": "edge-217"
+    },
+    {
+      "source": "industrial-dmz",
+      "relation": "mediates access to",
+      "target": "ot",
+      "id": "edge-218"
+    },
+    {
+      "source": "ids",
+      "relation": "produces security",
+      "target": "logging",
+      "id": "edge-219"
+    },
+    {
+      "source": "vpn",
+      "relation": "can support",
+      "target": "secure-remote-access",
+      "id": "edge-220"
+    },
+    {
+      "source": "secure-remote-access",
+      "relation": "should use",
+      "target": "mfa",
+      "id": "edge-221"
+    },
+    {
+      "source": "zero-trust",
+      "relation": "requires explicit",
+      "target": "authentication",
+      "id": "edge-222"
+    },
+    {
+      "source": "zero-trust",
+      "relation": "requires explicit",
+      "target": "authorization",
+      "id": "edge-223"
+    },
+    {
+      "source": "hardening",
+      "relation": "reduces exposure of",
+      "target": "operating-system",
+      "id": "edge-224"
+    },
+    {
+      "source": "patch-management",
+      "relation": "addresses known",
+      "target": "vulnerability",
+      "id": "edge-225"
+    },
+    {
+      "source": "vulnerability",
+      "relation": "contributes to",
+      "target": "risk",
+      "id": "edge-226"
+    },
+    {
+      "source": "failover",
+      "relation": "improves",
+      "target": "availability",
+      "id": "edge-227"
+    },
+    {
+      "source": "redundancy",
+      "relation": "enables",
+      "target": "failover",
+      "id": "edge-228"
+    },
+    {
+      "source": "redundancy",
+      "relation": "supports",
+      "target": "high-availability",
+      "id": "edge-229"
+    },
+    {
+      "source": "high-availability",
+      "relation": "aims to preserve",
+      "target": "availability",
+      "id": "edge-230"
+    },
+    {
+      "source": "backup",
+      "relation": "helps meet",
+      "target": "rpo",
+      "id": "edge-231"
+    },
+    {
+      "source": "rto",
+      "relation": "sets recovery target for",
+      "target": "availability",
+      "id": "edge-232"
+    },
+    {
+      "source": "backup",
+      "relation": "supports recovery after loss of",
+      "target": "availability",
+      "id": "edge-233"
+    },
+    {
+      "source": "logging",
+      "relation": "feeds",
+      "target": "siem",
+      "id": "edge-234"
+    },
+    {
+      "source": "siem",
+      "relation": "supports detection for",
+      "target": "incident-response",
+      "id": "edge-235"
+    },
+    {
+      "source": "vulnerability-management",
+      "relation": "prioritizes",
+      "target": "patch-management",
+      "id": "edge-236"
+    },
+    {
+      "source": "incident-response",
+      "relation": "may restore from",
+      "target": "backup",
+      "id": "edge-237"
+    },
+    {
+      "source": "ics",
+      "relation": "is part of",
+      "target": "ot",
+      "id": "edge-238"
+    },
+    {
+      "source": "scada",
+      "relation": "is a type of",
+      "target": "ics",
+      "id": "edge-239"
+    },
+    {
+      "source": "plc",
+      "relation": "controls processes in",
+      "target": "ics",
+      "id": "edge-240"
+    },
+    {
+      "source": "scada",
+      "relation": "often supervises",
+      "target": "plc",
+      "id": "edge-241"
+    },
+    {
+      "source": "opc-ua",
+      "relation": "supports interoperability in",
+      "target": "ics",
+      "id": "edge-242"
+    },
+    {
+      "source": "purdue-model",
+      "relation": "describes layered architecture of",
+      "target": "ot",
+      "id": "edge-243"
+    },
+    {
+      "source": "purdue-model",
+      "relation": "informs discussions of",
+      "target": "network-segmentation",
+      "id": "edge-244"
+    },
+    {
+      "source": "isa95",
+      "relation": "models integration of",
+      "target": "ics",
+      "id": "edge-245"
+    },
+    {
+      "source": "isa95",
+      "relation": "draws on layering from",
+      "target": "purdue-model",
+      "id": "edge-246"
+    },
+    {
+      "source": "iec62443",
+      "relation": "defines security requirements for",
+      "target": "ics",
+      "id": "edge-247"
+    },
+    {
+      "source": "iec62443",
+      "relation": "uses",
+      "target": "zones-conduits",
+      "id": "edge-248"
+    },
+    {
+      "source": "zones-conduits",
+      "relation": "guides",
+      "target": "network-segmentation",
+      "id": "edge-249"
+    },
+    {
+      "source": "ot",
+      "relation": "strongly depends on",
+      "target": "availability",
+      "id": "edge-250"
+    },
+    {
+      "source": "governance",
+      "relation": "directs management of",
+      "target": "risk",
+      "id": "edge-251"
+    },
+    {
+      "source": "risk",
+      "relation": "considers",
+      "target": "threat",
+      "id": "edge-252"
+    },
+    {
+      "source": "risk",
+      "relation": "considers",
+      "target": "vulnerability",
+      "id": "edge-253"
+    },
+    {
+      "source": "cia-triad",
+      "relation": "includes",
+      "target": "availability",
+      "id": "edge-254"
+    },
+    {
+      "source": "nis2",
+      "relation": "drives cybersecurity",
+      "target": "governance",
+      "id": "edge-255"
+    },
+    {
+      "source": "gdpr",
+      "relation": "protects personal data relating to",
+      "target": "user",
+      "id": "edge-256"
+    },
+    {
+      "source": "iso27001",
+      "relation": "requires managed",
+      "target": "governance",
+      "id": "edge-257"
+    },
+    {
+      "source": "nist-csf",
+      "relation": "provides outcomes for",
+      "target": "risk",
+      "id": "edge-258"
+    },
+    {
+      "source": "threat",
+      "relation": "may exploit",
+      "target": "vulnerability",
+      "id": "edge-259"
+    },
+    {
+      "source": "phishing",
+      "relation": "often targets",
+      "target": "credentials",
+      "id": "edge-260"
+    },
+    {
+      "source": "ransomware",
+      "relation": "disrupts",
+      "target": "availability",
+      "id": "edge-261"
+    },
+    {
+      "source": "backup",
+      "relation": "can limit impact of",
+      "target": "ransomware",
+      "id": "edge-262"
+    },
+    {
+      "source": "ip-address",
+      "relation": "understand before",
+      "target": "subnet",
+      "id": "edge-263"
+    },
+    {
+      "source": "subnet",
+      "relation": "understand before",
+      "target": "routing",
+      "id": "edge-264"
+    },
+    {
+      "source": "mac-address",
+      "relation": "understand before",
+      "target": "arp",
+      "id": "edge-265"
+    },
+    {
+      "source": "ipv4",
+      "relation": "understand before",
+      "target": "arp",
+      "id": "edge-266"
+    },
+    {
+      "source": "ethernet",
+      "relation": "understand before",
+      "target": "vlan",
+      "id": "edge-267"
+    },
+    {
+      "source": "tcp",
+      "relation": "understand before",
+      "target": "firewall",
+      "id": "edge-268"
+    },
+    {
+      "source": "udp",
+      "relation": "understand before",
+      "target": "firewall",
+      "id": "edge-269"
+    },
+    {
+      "source": "port",
+      "relation": "understand before",
+      "target": "firewall",
+      "id": "edge-270"
+    },
+    {
+      "source": "authentication",
+      "relation": "understand before",
+      "target": "mfa",
+      "id": "edge-271"
+    },
+    {
+      "source": "authentication",
+      "relation": "understand before",
+      "target": "sso",
+      "id": "edge-272"
+    },
+    {
+      "source": "authentication",
+      "relation": "understand before",
+      "target": "oidc",
+      "id": "edge-273"
+    },
+    {
+      "source": "authorization",
+      "relation": "understand before",
+      "target": "rbac",
+      "id": "edge-274"
+    },
+    {
+      "source": "oauth",
+      "relation": "understand before",
+      "target": "oidc",
+      "id": "edge-275"
+    },
+    {
+      "source": "public-key",
+      "relation": "understand before",
+      "target": "certificate",
+      "id": "edge-276"
+    },
+    {
+      "source": "private-key",
+      "relation": "understand before",
+      "target": "certificate",
+      "id": "edge-277"
+    },
+    {
+      "source": "certificate",
+      "relation": "understand before",
+      "target": "tls",
+      "id": "edge-278"
+    },
+    {
+      "source": "certificate",
+      "relation": "understand before",
+      "target": "pki",
+      "id": "edge-279"
+    },
+    {
+      "source": "network-segmentation",
+      "relation": "understand before",
+      "target": "industrial-dmz",
+      "id": "edge-280"
+    },
+    {
+      "source": "network-segmentation",
+      "relation": "understand before",
+      "target": "zones-conduits",
+      "id": "edge-281"
+    },
+    {
+      "source": "ot",
+      "relation": "understand before",
+      "target": "scada",
+      "id": "edge-282"
+    },
+    {
+      "source": "risk",
+      "relation": "understand before",
+      "target": "nis2",
+      "id": "edge-283"
+    },
+    {
+      "source": "protocols",
+      "target": "proxy",
+      "relation": "covers",
+      "id": "edge-284"
+    },
+    {
+      "source": "protocols",
+      "target": "reverse-proxy",
+      "relation": "covers",
+      "id": "edge-285"
+    },
+    {
+      "source": "proxy",
+      "relation": "can relay outbound",
+      "target": "http",
+      "id": "edge-286"
+    },
+    {
+      "source": "reverse-proxy",
+      "relation": "can route inbound",
+      "target": "http",
+      "id": "edge-287"
+    },
+    {
+      "source": "reverse-proxy",
+      "relation": "can terminate",
+      "target": "tls",
+      "id": "edge-288"
+    },
+    {
+      "source": "proxy",
+      "relation": "contrasts with",
+      "target": "reverse-proxy",
+      "id": "edge-289"
+    }
+  ]
+}

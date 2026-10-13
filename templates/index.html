@@ -11,6 +11,7 @@
     #graphTitle{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     #graphSelect{max-width:240px}
     #search{width:240px}
+    #typeFilter{max-width:155px}
     input,textarea,select,button{background:#0d1117;color:#e6edf3;border:1px solid #30363d;border-radius:6px;padding:8px}
     button{cursor:pointer;background:#68727e}
     button:disabled{cursor:not-allowed;opacity:0.5}
@@ -29,6 +30,10 @@
     .theme-row{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px}
     .theme-swatch{width:14px;height:14px;border-radius:4px;border:1px solid #8b949e;flex:none}
     .theme-legend{max-height:150px;overflow:auto}
+    .related-list{list-style:none;padding:0;margin:6px 0 12px;max-height:220px;overflow:auto}
+    .related-list li{margin:5px 0}
+    .related-link{padding:0;background:none;border:0;color:#79c0ff;text-align:left}
+    #details a{color:#79c0ff}
     textarea{width:100%;min-height:72px;box-sizing:border-box}
     input,select{box-sizing:border-box}
     .full{width:100%}
@@ -44,8 +49,10 @@
   <button id="newGraphButton" type="button">New graph</button>
   <input id="search" aria-label="Search concepts" placeholder="Search concepts…">
   <select id="filter"><option value="">All domains</option></select>
+  <select id="typeFilter" aria-label="Filter by node type"><option value="">All types</option></select>
+  <button id="resetViewButton" type="button">Reset view</button>
   <button id="fitButton" type="button">Fit</button>
-  <span class="muted">Click a concept or relationship to edit it</span>
+  <span id="graphHint" class="muted">Click a concept or relationship to edit it</span>
 </div>
 <div id="main">
   <div id="cy"></div>
@@ -87,9 +94,9 @@
     </div>
 
     <div class="card">
-      <h3>Themes</h3>
+      <h3 id="legendTitle">Themes</h3>
       <div id="themeLegend" class="theme-legend muted"></div>
-      <div class="muted">Concept colors show themes; arrows use the destination concept's color.</div>
+      <div id="legendNote" class="muted">Concept colors show themes; arrows use the destination concept's color.</div>
     </div>
 
     <div class="card">
@@ -132,6 +139,8 @@
       <option value="platform"><option value="protocol"><option value="pattern">
       <option value="tool"><option value="framework"><option value="product">
       <option value="customer"><option value="organization"><option value="risk">
+      <option value="manufacturer"><option value="product family"><option value="product category">
+      <option value="application"><option value="industry"><option value="technology">
     </datalist>
     <datalist id="relationTypes"></datalist>
     <datalist id="themeTypes"></datalist>
