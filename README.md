@@ -14,10 +14,20 @@ database or external business system is connected.
 | [ISA-95 & Purdue Model](graphs/isa95-purdue.json) | Top-down teaching view of functional levels, network zones, and related concepts. |
 | [Security & Networking](graphs/security-networking.json) | Networking and security concepts organized into domains and prerequisites. |
 | [Autic Product Graph](graphs/autic-products.json) | Public-source portfolio sample connecting products, brands, protocols, applications, and industries. |
+| [Application Architecture](graphs/application-architecture.json) | Current app components and a proposed UniMicro V3 product-data flow. |
 
 `graphs/` holds the current, editable versions. `graph_starters/` holds the
 versions used by **Reset current graph**. Both directories are committed to Git;
 only reset backups in `graphs/.backups/` are ignored.
+
+The proposed UniMicro V3/MSSQL integration is documented in
+[docs/unimicro-integration.md](docs/unimicro-integration.md), with an
+[SVG architecture diagram](docs/architecture-data-flow.svg). This is a design
+proposal; the app does not connect to UniMicro. In the local Flask app, select
+**Applikasjon og foreslått UniMicro-integrasjon** or open
+`http://127.0.0.1:5050/?graph=application-architecture` to explore the same
+components and relationships as a graph. The static `demo/` still contains
+only the Autic product graph.
 
 ## Run locally
 
