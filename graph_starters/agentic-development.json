@@ -1,0 +1,1549 @@
+{
+  "schema_version": 1,
+  "id": "agentic-development",
+  "title": "AI, MCP, and Agentic Development",
+  "description": "From LLMs and built-in tools to MCP, live systems, Jev, and secure agentic development. Select a domain to explore relationships between concepts, risks, and controls. Jev means the TypeSafe AI model here.",
+  "color_by": "layer",
+  "nodes": [
+    {
+      "id": "domain-models",
+      "label": "AI and Models",
+      "type": "domain",
+      "layer": "AI and Models",
+      "description": "How models use context, generate outputs, and retrieve knowledge.",
+      "url": "https://developers.openai.com/api/docs/guides/agents"
+    },
+    {
+      "id": "domain-agents",
+      "label": "Agents and Tools",
+      "type": "domain",
+      "layer": "Agents and Tools",
+      "description": "How an agent receives goals, chooses tools, and acts through an execution loop.",
+      "url": "https://developers.openai.com/api/docs/guides/agents"
+    },
+    {
+      "id": "domain-mcp",
+      "label": "MCP and Integration",
+      "type": "domain",
+      "layer": "MCP and Integration",
+      "description": "A shared protocol and other ways to connect agents to data and live systems.",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture"
+    },
+    {
+      "id": "domain-development",
+      "label": "Agentic Development",
+      "type": "domain",
+      "layer": "Agentic Development",
+      "description": "The path from task and plan to code, tests, review, and delivery."
+    },
+    {
+      "id": "domain-security",
+      "label": "Security and Trust",
+      "type": "domain",
+      "layer": "Security and Trust",
+      "description": "Threats, trust boundaries, and technical controls around agent actions.",
+      "url": "https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/"
+    },
+    {
+      "id": "domain-jev",
+      "label": "Jev and Decisions",
+      "type": "domain",
+      "layer": "Jev and Decisions",
+      "description": "Jev as a product-specific model for typed judgments and controlled routing.",
+      "url": "https://docs.typesafe.ai/introduction"
+    },
+    {
+      "id": "domain-quality",
+      "label": "Quality and Operations",
+      "type": "domain",
+      "layer": "Quality and Operations",
+      "description": "Measurement, evaluation, traceability, and reliable execution.",
+      "url": "https://developers.openai.com/api/docs/guides/agent-evals"
+    },
+    {
+      "id": "llm",
+      "label": "Large Language Model (LLM)",
+      "type": "model",
+      "layer": "AI and Models",
+      "description": "Generates text, code, or tool-call proposals from context. Tools and the runtime determine what it can actually do.",
+      "url": "https://developers.openai.com/api/docs/guides/agents"
+    },
+    {
+      "id": "tokens",
+      "label": "Tokens",
+      "type": "concept",
+      "layer": "AI and Models",
+      "description": "Units that a model reads and produces. Token use affects cost and how much fits in context."
+    },
+    {
+      "id": "context",
+      "label": "Context Window",
+      "type": "concept",
+      "layer": "AI and Models",
+      "description": "The messages, instructions, and retrieved material visible to a model in one run. A larger window is not reliable memory."
+    },
+    {
+      "id": "prompt",
+      "label": "Instructions and Prompts",
+      "type": "concept",
+      "layer": "AI and Models",
+      "description": "Tasks, rules, and examples that guide the model. External text must not gain the authority of trusted instructions."
+    },
+    {
+      "id": "function-calling",
+      "label": "Tool Calling / Function Calling",
+      "type": "mechanism",
+      "layer": "AI and Models",
+      "description": "The model proposes a named call with arguments; the host validates and executes it, then returns the result.",
+      "url": "https://developers.openai.com/api/docs/guides/tools"
+    },
+    {
+      "id": "structured-output",
+      "label": "Structured Output",
+      "type": "mechanism",
+      "layer": "AI and Models",
+      "description": "A response in an agreed schema is easier for software to process, but a valid format does not guarantee a correct answer."
+    },
+    {
+      "id": "embeddings",
+      "label": "Embeddings",
+      "type": "technique",
+      "layer": "AI and Models",
+      "description": "Vector representations that can support semantic retrieval of relevant material."
+    },
+    {
+      "id": "rag",
+      "label": "RAG / Retrieval",
+      "type": "technique",
+      "layer": "AI and Models",
+      "description": "Retrieves relevant material into context before the model answers. Source text can be wrong or malicious."
+    },
+    {
+      "id": "hallucination",
+      "label": "False Claim / Hallucination",
+      "type": "risk",
+      "layer": "AI and Models",
+      "description": "A model can produce a convincing but incorrect answer. Source checks and tests must be independent of the model."
+    },
+    {
+      "id": "agent",
+      "label": "AI Agent",
+      "type": "concept",
+      "layer": "Agents and Tools",
+      "description": "A model operating in a loop with a goal, context, and available tools. The host determines its authority.",
+      "url": "https://developers.openai.com/api/docs/guides/agents"
+    },
+    {
+      "id": "agent-loop",
+      "label": "Agent Loop",
+      "type": "mechanism",
+      "layer": "Agents and Tools",
+      "description": "Repeats assessment, tool calls, observation, and next steps until the task finishes or the run stops."
+    },
+    {
+      "id": "harness",
+      "label": "Harness / Agent Runtime",
+      "type": "component",
+      "layer": "Agents and Tools",
+      "description": "The program around the model that exposes tools, executes calls, and manages state, limits, and approvals."
+    },
+    {
+      "id": "builtin-tools",
+      "label": "Built-in File and Shell Tools",
+      "type": "tool",
+      "layer": "Agents and Tools",
+      "description": "The host product's own read, search, edit, and command functions. Local coding tasks often need no MCP connection."
+    },
+    {
+      "id": "shell-cli",
+      "label": "Shell and CLI",
+      "type": "tool",
+      "layer": "Agents and Tools",
+      "description": "Can edit files or call APIs through scripts and command-line tools. Its reach equals the environment's permissions."
+    },
+    {
+      "id": "artifact",
+      "label": "Artifact on Disk",
+      "type": "concept",
+      "layer": "Agents and Tools",
+      "description": "Code, configuration, or JSON that takes effect when another process builds, loads, or publishes it."
+    },
+    {
+      "id": "live-system",
+      "label": "Live System",
+      "type": "concept",
+      "layer": "Agents and Tools",
+      "description": "A database, SaaS service, sensor, or CI system with current state and actions exposed through an API or protocol."
+    },
+    {
+      "id": "multi-agent",
+      "label": "Multiple Specialist Agents",
+      "type": "pattern",
+      "layer": "Agents and Tools",
+      "description": "Work can be delegated between agents, but handoffs, shared state, and permissions must be managed."
+    },
+    {
+      "id": "memory",
+      "label": "Memory and State",
+      "type": "concept",
+      "layer": "Agents and Tools",
+      "description": "Conversation history or persistent data reused later. Persistent memory needs protection against errors and poisoning."
+    },
+    {
+      "id": "autonomy",
+      "label": "Autonomy Boundary",
+      "type": "control",
+      "layer": "Agents and Tools",
+      "description": "Defines which steps an agent may take alone, how long it may run, and when it must stop or request review."
+    },
+    {
+      "id": "mcp",
+      "label": "Model Context Protocol (MCP)",
+      "type": "protocol",
+      "layer": "MCP and Integration",
+      "description": "An open protocol for exchanging context and tools between an AI host and servers. MCP alone is not a security guarantee.",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture"
+    },
+    {
+      "id": "mcp-host",
+      "label": "MCP Host",
+      "type": "component",
+      "layer": "MCP and Integration",
+      "description": "The AI application that coordinates the model and creates client connections to MCP servers.",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture"
+    },
+    {
+      "id": "mcp-client",
+      "label": "MCP Client",
+      "type": "component",
+      "layer": "MCP and Integration",
+      "description": "A host component that establishes and maintains a connection to one MCP server."
+    },
+    {
+      "id": "mcp-server",
+      "label": "MCP Server",
+      "type": "component",
+      "layer": "MCP and Integration",
+      "description": "Exposes tools, resources, and/or prompts. Its implementation must validate arguments and enforce access."
+    },
+    {
+      "id": "mcp-tool",
+      "label": "MCP Tool",
+      "type": "tool",
+      "layer": "MCP and Integration",
+      "description": "A named function that retrieves data or takes action. The server implementation determines its actual effect.",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/index"
+    },
+    {
+      "id": "mcp-resource",
+      "label": "MCP Resource",
+      "type": "concept",
+      "layer": "MCP and Integration",
+      "description": "Content or structured data that the host can make available as context.",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/index"
+    },
+    {
+      "id": "mcp-prompt",
+      "label": "MCP Prompt",
+      "type": "concept",
+      "layer": "MCP and Integration",
+      "description": "A reusable prompt template. Server-provided text has its own trust level and should be reviewed accordingly.",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/index"
+    },
+    {
+      "id": "tool-schema",
+      "label": "Tool Schema",
+      "type": "concept",
+      "layer": "MCP and Integration",
+      "description": "A name, description, and argument format make capabilities discoverable and calls validatable. A schema alone does not restrict access."
+    },
+    {
+      "id": "task-shaped-tool",
+      "label": "Task-shaped Tool",
+      "type": "pattern",
+      "layer": "MCP and Integration",
+      "description": "Offers a narrow action such as 'get alarm history for this area' instead of exposing a general API pass-through."
+    },
+    {
+      "id": "rest-api",
+      "label": "REST API",
+      "type": "interface",
+      "layer": "MCP and Integration",
+      "description": "An integration route beneath an MCP tool or directly through code and a CLI. MCP does not require one-to-one REST parity."
+    },
+    {
+      "id": "crm-read",
+      "label": "CRM: Read Product Data",
+      "type": "example",
+      "layer": "MCP and Integration",
+      "description": "Can be exposed as a narrow read operation. The SQL or API identity should reach only approved data."
+    },
+    {
+      "id": "tag-read",
+      "label": "OT: Read Tag Value",
+      "type": "example",
+      "layer": "MCP and Integration",
+      "description": "Reading a live value requires access to an OT system and a clear boundary between observation and control."
+    },
+    {
+      "id": "alarm-ack",
+      "label": "OT: Acknowledge Alarm",
+      "type": "example",
+      "layer": "MCP and Integration",
+      "description": "Changes state in an operations system. Requires specific authorization, traceability, and usually human control."
+    },
+    {
+      "id": "agentic-development",
+      "label": "Agentic Development",
+      "type": "method",
+      "layer": "Agentic Development",
+      "description": "Software development in which an agent can plan, edit code, run tests, and propose next steps under human direction."
+    },
+    {
+      "id": "repository",
+      "label": "Codebase / Repository",
+      "type": "artifact",
+      "layer": "Agentic Development",
+      "description": "Source code and documentation the agent reads and edits. Repository content can also be untrusted input."
+    },
+    {
+      "id": "plan",
+      "label": "Planning and Task Breakdown",
+      "type": "stage",
+      "layer": "Agentic Development",
+      "description": "Clarifies goals, acceptance criteria, constraints, and dependencies before larger changes."
+    },
+    {
+      "id": "implementation",
+      "label": "Implementation",
+      "type": "stage",
+      "layer": "Agentic Development",
+      "description": "The agent changes files or calls APIs to complete scoped work."
+    },
+    {
+      "id": "tests",
+      "label": "Automated Tests",
+      "type": "control",
+      "layer": "Agentic Development",
+      "description": "Check expected behavior and catch regressions. Useful tests need expectations independent of the implementation."
+    },
+    {
+      "id": "code-review",
+      "label": "Code Review",
+      "type": "control",
+      "layer": "Agentic Development",
+      "description": "A person examines changes, assumptions, and side effects before adoption."
+    },
+    {
+      "id": "ci-cd",
+      "label": "CI/CD",
+      "type": "system",
+      "layer": "Agentic Development",
+      "description": "Builds, tests, and deployment can turn file changes into a running system. Repository access may therefore have an indirect production effect."
+    },
+    {
+      "id": "skills",
+      "label": "Skills / Workflow Instructions",
+      "type": "concept",
+      "layer": "Agentic Development",
+      "description": "Reusable instructions that tell an agent how to use existing tools. A skill alone does not grant new permissions.",
+      "url": "https://developers.openai.com/api/docs/guides/agents"
+    },
+    {
+      "id": "git-diff",
+      "label": "Diff and Reviewable Change",
+      "type": "artifact",
+      "layer": "Agentic Development",
+      "description": "A visible change in code or data that can be reviewed, tested, and reverted."
+    },
+    {
+      "id": "trust-boundary",
+      "label": "Trust Boundary",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "Separates trusted user and system instructions from external documents, tool results, and other lower-trust data."
+    },
+    {
+      "id": "prompt-injection",
+      "label": "Prompt Injection",
+      "type": "risk",
+      "layer": "Security and Trust",
+      "description": "Instructions hidden in lower-trust content try to redirect the model toward another goal or tool action.",
+      "url": "https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/"
+    },
+    {
+      "id": "untrusted-output",
+      "label": "Untrusted Tool Result",
+      "type": "risk",
+      "layer": "Security and Trust",
+      "description": "Web pages, documents, and API responses may contain data plus instruction-like text. A result must not gain higher authority."
+    },
+    {
+      "id": "least-privilege",
+      "label": "Least Privilege",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "Give each identity and tool only the data and actions required, ideally scoped per resource and operation."
+    },
+    {
+      "id": "authorization",
+      "label": "Authentication and Authorization",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "The executing system must check identity and permission on each relevant call; a model prompt is not access control."
+    },
+    {
+      "id": "secrets",
+      "label": "Secret Management",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "Keep credentials in a trusted runtime or service, never in prompts, repositories, or logs. Local shell access may still expose environment secrets."
+    },
+    {
+      "id": "sandbox",
+      "label": "Sandbox",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "Isolates code execution, files, and processes for the task. Network access and mounted secrets must also be limited.",
+      "url": "https://developers.openai.com/api/docs/guides/agents-api/environments/security"
+    },
+    {
+      "id": "approval",
+      "label": "Human Approval",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "Pause before sensitive writes or other side effects. Review is a policy choice, not an automatic MCP property.",
+      "url": "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals"
+    },
+    {
+      "id": "audit",
+      "label": "Audit Trail",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "Record who or what called a tool and with what effect, without leaking sensitive data into logs."
+    },
+    {
+      "id": "egress",
+      "label": "Outbound Network Controls",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "Limit where an agent environment or integration can send data."
+    },
+    {
+      "id": "exfiltration",
+      "label": "Data Exfiltration",
+      "type": "risk",
+      "layer": "Security and Trust",
+      "description": "Sensitive data can leave through responses, tools, logs, or network traffic if access and outbound paths are too broad."
+    },
+    {
+      "id": "supply-chain",
+      "label": "Supply Chain and Tool Risk",
+      "type": "risk",
+      "layer": "Security and Trust",
+      "description": "Third-party MCP servers, packages, skills, and tool descriptions may change or contain unwanted behavior."
+    },
+    {
+      "id": "side-effect",
+      "label": "Side Effect",
+      "type": "concept",
+      "layer": "Security and Trust",
+      "description": "An action that changes a live system, publication, or an artifact later deployed. Its risk must be explicit."
+    },
+    {
+      "id": "input-validation",
+      "label": "Argument Validation",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "Tools must check types, permitted values, and target resources before acting. Schema validation does not replace authorization."
+    },
+    {
+      "id": "data-minimization",
+      "label": "Data Minimization",
+      "type": "control",
+      "layer": "Security and Trust",
+      "description": "Fetch and send only the fields a task needs to reduce exposure during errors or compromise."
+    },
+    {
+      "id": "jev",
+      "label": "Jev (TypeSafe AI)",
+      "type": "product",
+      "layer": "Jev and Decisions",
+      "description": "A model for typed judgments about supplied state. It does not generate prose; it is one possible part of an agent workflow, not MCP itself.",
+      "url": "https://docs.typesafe.ai/introduction"
+    },
+    {
+      "id": "typed-decision",
+      "label": "Typed Decision",
+      "type": "concept",
+      "layer": "Jev and Decisions",
+      "description": "A result code can use directly, such as a choice, ordinal score, or yes/no probability."
+    },
+    {
+      "id": "choice",
+      "label": "Choice",
+      "type": "Jev primitive",
+      "layer": "Jev and Decisions",
+      "description": "Selects among explicit options and returns a probability distribution and confidence.",
+      "url": "https://docs.typesafe.ai/primitives"
+    },
+    {
+      "id": "score",
+      "label": "Score",
+      "type": "Jev primitive",
+      "layer": "Jev and Decisions",
+      "description": "Judges ordered rubric levels and returns a level, probabilities, and confidence.",
+      "url": "https://docs.typesafe.ai/primitives"
+    },
+    {
+      "id": "noul",
+      "label": "Noul",
+      "type": "Jev primitive",
+      "layer": "Jev and Decisions",
+      "description": "Returns a 0–1 value for a yes/no question; it has no separate confidence field.",
+      "url": "https://docs.typesafe.ai/primitives"
+    },
+    {
+      "id": "confidence",
+      "label": "Confidence and Probability",
+      "type": "concept",
+      "layer": "Jev and Decisions",
+      "description": "For Choice and Score, confidence summarizes the distribution; it is not a guarantee that the answer is correct. Noul returns only a probability.",
+      "url": "https://docs.typesafe.ai/confidence"
+    },
+    {
+      "id": "decision-policy",
+      "label": "Decision Policy",
+      "type": "control",
+      "layer": "Jev and Decisions",
+      "description": "Code defines thresholds, consequences, and permitted actions. A model result alone should not trigger irreversible actions."
+    },
+    {
+      "id": "uncertainty-route",
+      "label": "Uncertainty → Review / Fallback",
+      "type": "pattern",
+      "layer": "Jev and Decisions",
+      "description": "For unclear or high-risk results, gather more data, use another method, or involve a person. Test thresholds on your own data."
+    },
+    {
+      "id": "tracing",
+      "label": "Tracing",
+      "type": "operations",
+      "layer": "Quality and Operations",
+      "description": "Records model calls, tool calls, handoffs, and outcomes for debugging and audit.",
+      "url": "https://developers.openai.com/api/docs/guides/agent-evals"
+    },
+    {
+      "id": "evals",
+      "label": "Evaluations (Evals)",
+      "type": "method",
+      "layer": "Quality and Operations",
+      "description": "Measure whether an agent selects appropriate tools, completes tasks, and follows policy on representative cases.",
+      "url": "https://developers.openai.com/api/docs/guides/agent-evals"
+    },
+    {
+      "id": "eval-dataset",
+      "label": "Evaluation Dataset",
+      "type": "artifact",
+      "layer": "Quality and Operations",
+      "description": "Captures real tasks, edge cases, attacks, and expected outcomes. Maintain it as the system changes."
+    },
+    {
+      "id": "regression",
+      "label": "Regression Checks",
+      "type": "control",
+      "layer": "Quality and Operations",
+      "description": "Compare new agent versions against previous quality, cost, and risk before rollout."
+    },
+    {
+      "id": "budget",
+      "label": "Time and Cost Budget",
+      "type": "control",
+      "layer": "Quality and Operations",
+      "description": "Limit tool calls, runtime, and cost; stop loops that are not making progress."
+    },
+    {
+      "id": "retry",
+      "label": "Retry and Failure Strategy",
+      "type": "pattern",
+      "layer": "Quality and Operations",
+      "description": "Handle temporary errors with bounded retries; distinguish safe reads from side-effecting calls."
+    },
+    {
+      "id": "idempotency",
+      "label": "Idempotency",
+      "type": "control",
+      "layer": "Quality and Operations",
+      "description": "Where possible, repeating an operation should not create duplicates or additional effects; important for retries and unreliable networks."
+    },
+    {
+      "id": "human-oversight",
+      "label": "Human Ownership",
+      "type": "principle",
+      "layer": "Quality and Operations",
+      "description": "People set goals, grant access, assess consequences, and retain final responsibility."
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-001",
+      "source": "domain-models",
+      "target": "llm",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-002",
+      "source": "domain-models",
+      "target": "tokens",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-003",
+      "source": "domain-models",
+      "target": "context",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-004",
+      "source": "domain-models",
+      "target": "prompt",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-005",
+      "source": "domain-models",
+      "target": "function-calling",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-006",
+      "source": "domain-models",
+      "target": "structured-output",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-007",
+      "source": "domain-models",
+      "target": "embeddings",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-008",
+      "source": "domain-models",
+      "target": "rag",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-009",
+      "source": "domain-models",
+      "target": "hallucination",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-010",
+      "source": "domain-agents",
+      "target": "agent",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-011",
+      "source": "domain-agents",
+      "target": "agent-loop",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-012",
+      "source": "domain-agents",
+      "target": "harness",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-013",
+      "source": "domain-agents",
+      "target": "builtin-tools",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-014",
+      "source": "domain-agents",
+      "target": "shell-cli",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-015",
+      "source": "domain-agents",
+      "target": "artifact",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-016",
+      "source": "domain-agents",
+      "target": "live-system",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-017",
+      "source": "domain-agents",
+      "target": "multi-agent",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-018",
+      "source": "domain-agents",
+      "target": "memory",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-019",
+      "source": "domain-agents",
+      "target": "autonomy",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-020",
+      "source": "domain-mcp",
+      "target": "mcp",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-021",
+      "source": "domain-mcp",
+      "target": "mcp-host",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-022",
+      "source": "domain-mcp",
+      "target": "mcp-client",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-023",
+      "source": "domain-mcp",
+      "target": "mcp-server",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-024",
+      "source": "domain-mcp",
+      "target": "mcp-tool",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-025",
+      "source": "domain-mcp",
+      "target": "mcp-resource",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-026",
+      "source": "domain-mcp",
+      "target": "mcp-prompt",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-027",
+      "source": "domain-mcp",
+      "target": "tool-schema",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-028",
+      "source": "domain-mcp",
+      "target": "task-shaped-tool",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-029",
+      "source": "domain-mcp",
+      "target": "rest-api",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-030",
+      "source": "domain-mcp",
+      "target": "crm-read",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-031",
+      "source": "domain-mcp",
+      "target": "tag-read",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-032",
+      "source": "domain-mcp",
+      "target": "alarm-ack",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-033",
+      "source": "domain-development",
+      "target": "agentic-development",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-034",
+      "source": "domain-development",
+      "target": "repository",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-035",
+      "source": "domain-development",
+      "target": "plan",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-036",
+      "source": "domain-development",
+      "target": "implementation",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-037",
+      "source": "domain-development",
+      "target": "tests",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-038",
+      "source": "domain-development",
+      "target": "code-review",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-039",
+      "source": "domain-development",
+      "target": "ci-cd",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-040",
+      "source": "domain-development",
+      "target": "skills",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-041",
+      "source": "domain-development",
+      "target": "git-diff",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-042",
+      "source": "domain-security",
+      "target": "trust-boundary",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-043",
+      "source": "domain-security",
+      "target": "prompt-injection",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-044",
+      "source": "domain-security",
+      "target": "untrusted-output",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-045",
+      "source": "domain-security",
+      "target": "least-privilege",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-046",
+      "source": "domain-security",
+      "target": "authorization",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-047",
+      "source": "domain-security",
+      "target": "secrets",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-048",
+      "source": "domain-security",
+      "target": "sandbox",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-049",
+      "source": "domain-security",
+      "target": "approval",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-050",
+      "source": "domain-security",
+      "target": "audit",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-051",
+      "source": "domain-security",
+      "target": "egress",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-052",
+      "source": "domain-security",
+      "target": "exfiltration",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-053",
+      "source": "domain-security",
+      "target": "supply-chain",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-054",
+      "source": "domain-security",
+      "target": "side-effect",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-055",
+      "source": "domain-security",
+      "target": "input-validation",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-056",
+      "source": "domain-security",
+      "target": "data-minimization",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-057",
+      "source": "domain-jev",
+      "target": "jev",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-058",
+      "source": "domain-jev",
+      "target": "typed-decision",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-059",
+      "source": "domain-jev",
+      "target": "choice",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-060",
+      "source": "domain-jev",
+      "target": "score",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-061",
+      "source": "domain-jev",
+      "target": "noul",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-062",
+      "source": "domain-jev",
+      "target": "confidence",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-063",
+      "source": "domain-jev",
+      "target": "decision-policy",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-064",
+      "source": "domain-jev",
+      "target": "uncertainty-route",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-065",
+      "source": "domain-quality",
+      "target": "tracing",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-066",
+      "source": "domain-quality",
+      "target": "evals",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-067",
+      "source": "domain-quality",
+      "target": "eval-dataset",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-068",
+      "source": "domain-quality",
+      "target": "regression",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-069",
+      "source": "domain-quality",
+      "target": "budget",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-070",
+      "source": "domain-quality",
+      "target": "retry",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-071",
+      "source": "domain-quality",
+      "target": "idempotency",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-072",
+      "source": "domain-quality",
+      "target": "human-oversight",
+      "relation": "covers"
+    },
+    {
+      "id": "edge-073",
+      "source": "llm",
+      "target": "tokens",
+      "relation": "processes"
+    },
+    {
+      "id": "edge-074",
+      "source": "llm",
+      "target": "context",
+      "relation": "reads"
+    },
+    {
+      "id": "edge-075",
+      "source": "prompt",
+      "target": "context",
+      "relation": "is placed in"
+    },
+    {
+      "id": "edge-076",
+      "source": "rag",
+      "target": "context",
+      "relation": "adds sources to"
+    },
+    {
+      "id": "edge-077",
+      "source": "embeddings",
+      "target": "rag",
+      "relation": "can support search in"
+    },
+    {
+      "id": "edge-078",
+      "source": "rag",
+      "target": "untrusted-output",
+      "relation": "can retrieve"
+    },
+    {
+      "id": "edge-079",
+      "source": "llm",
+      "target": "hallucination",
+      "relation": "can produce"
+    },
+    {
+      "id": "edge-080",
+      "source": "llm",
+      "target": "function-calling",
+      "relation": "can propose"
+    },
+    {
+      "id": "edge-081",
+      "source": "function-calling",
+      "target": "tool-schema",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-082",
+      "source": "structured-output",
+      "target": "typed-decision",
+      "relation": "is a format, not a judgment model"
+    },
+    {
+      "id": "edge-083",
+      "source": "agent",
+      "target": "llm",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-084",
+      "source": "agent",
+      "target": "agent-loop",
+      "relation": "operates through"
+    },
+    {
+      "id": "edge-085",
+      "source": "harness",
+      "target": "agent-loop",
+      "relation": "runs"
+    },
+    {
+      "id": "edge-086",
+      "source": "harness",
+      "target": "builtin-tools",
+      "relation": "provides"
+    },
+    {
+      "id": "edge-087",
+      "source": "harness",
+      "target": "mcp-host",
+      "relation": "can act as"
+    },
+    {
+      "id": "edge-088",
+      "source": "builtin-tools",
+      "target": "repository",
+      "relation": "reads and edits"
+    },
+    {
+      "id": "edge-089",
+      "source": "shell-cli",
+      "target": "rest-api",
+      "relation": "can call"
+    },
+    {
+      "id": "edge-090",
+      "source": "artifact",
+      "target": "ci-cd",
+      "relation": "can be activated by"
+    },
+    {
+      "id": "edge-091",
+      "source": "agent",
+      "target": "live-system",
+      "relation": "can access through tools"
+    },
+    {
+      "id": "edge-092",
+      "source": "agent",
+      "target": "multi-agent",
+      "relation": "can delegate to"
+    },
+    {
+      "id": "edge-093",
+      "source": "memory",
+      "target": "context",
+      "relation": "can populate"
+    },
+    {
+      "id": "edge-094",
+      "source": "autonomy",
+      "target": "agent-loop",
+      "relation": "sets limits on"
+    },
+    {
+      "id": "edge-095",
+      "source": "mcp",
+      "target": "mcp-host",
+      "relation": "defines interaction with"
+    },
+    {
+      "id": "edge-096",
+      "source": "mcp-host",
+      "target": "mcp-client",
+      "relation": "creates"
+    },
+    {
+      "id": "edge-097",
+      "source": "mcp-client",
+      "target": "mcp-server",
+      "relation": "connects to"
+    },
+    {
+      "id": "edge-098",
+      "source": "mcp-server",
+      "target": "mcp-tool",
+      "relation": "exposes"
+    },
+    {
+      "id": "edge-099",
+      "source": "mcp-server",
+      "target": "mcp-resource",
+      "relation": "exposes"
+    },
+    {
+      "id": "edge-100",
+      "source": "mcp-server",
+      "target": "mcp-prompt",
+      "relation": "exposes"
+    },
+    {
+      "id": "edge-101",
+      "source": "tool-schema",
+      "target": "mcp-tool",
+      "relation": "describes"
+    },
+    {
+      "id": "edge-102",
+      "source": "task-shaped-tool",
+      "target": "mcp-tool",
+      "relation": "is a design of"
+    },
+    {
+      "id": "edge-103",
+      "source": "mcp-tool",
+      "target": "rest-api",
+      "relation": "can use"
+    },
+    {
+      "id": "edge-104",
+      "source": "mcp-tool",
+      "target": "live-system",
+      "relation": "can access"
+    },
+    {
+      "id": "edge-105",
+      "source": "mcp",
+      "target": "rest-api",
+      "relation": "does not replace"
+    },
+    {
+      "id": "edge-106",
+      "source": "task-shaped-tool",
+      "target": "least-privilege",
+      "relation": "can support"
+    },
+    {
+      "id": "edge-107",
+      "source": "mcp-tool",
+      "target": "crm-read",
+      "relation": "can provide"
+    },
+    {
+      "id": "edge-108",
+      "source": "mcp-tool",
+      "target": "tag-read",
+      "relation": "can provide"
+    },
+    {
+      "id": "edge-109",
+      "source": "mcp-tool",
+      "target": "alarm-ack",
+      "relation": "can provide"
+    },
+    {
+      "id": "edge-110",
+      "source": "agentic-development",
+      "target": "agent",
+      "relation": "uses"
+    },
+    {
+      "id": "edge-111",
+      "source": "agentic-development",
+      "target": "plan",
+      "relation": "starts with"
+    },
+    {
+      "id": "edge-112",
+      "source": "plan",
+      "target": "implementation",
+      "relation": "guides"
+    },
+    {
+      "id": "edge-113",
+      "source": "implementation",
+      "target": "repository",
+      "relation": "changes"
+    },
+    {
+      "id": "edge-114",
+      "source": "implementation",
+      "target": "tests",
+      "relation": "is checked by"
+    },
+    {
+      "id": "edge-115",
+      "source": "implementation",
+      "target": "git-diff",
+      "relation": "produces"
+    },
+    {
+      "id": "edge-116",
+      "source": "git-diff",
+      "target": "code-review",
+      "relation": "is reviewed in"
+    },
+    {
+      "id": "edge-117",
+      "source": "tests",
+      "target": "ci-cd",
+      "relation": "runs in"
+    },
+    {
+      "id": "edge-118",
+      "source": "code-review",
+      "target": "ci-cd",
+      "relation": "can gate"
+    },
+    {
+      "id": "edge-119",
+      "source": "skills",
+      "target": "harness",
+      "relation": "is used by"
+    },
+    {
+      "id": "edge-120",
+      "source": "repository",
+      "target": "untrusted-output",
+      "relation": "can contain"
+    },
+    {
+      "id": "edge-121",
+      "source": "untrusted-output",
+      "target": "prompt-injection",
+      "relation": "can carry"
+    },
+    {
+      "id": "edge-122",
+      "source": "mcp-resource",
+      "target": "untrusted-output",
+      "relation": "must be treated as"
+    },
+    {
+      "id": "edge-123",
+      "source": "mcp-prompt",
+      "target": "trust-boundary",
+      "relation": "may cross"
+    },
+    {
+      "id": "edge-124",
+      "source": "prompt-injection",
+      "target": "agent",
+      "relation": "can redirect"
+    },
+    {
+      "id": "edge-125",
+      "source": "prompt-injection",
+      "target": "exfiltration",
+      "relation": "can trigger"
+    },
+    {
+      "id": "edge-126",
+      "source": "trust-boundary",
+      "target": "prompt-injection",
+      "relation": "limits influence from"
+    },
+    {
+      "id": "edge-127",
+      "source": "authorization",
+      "target": "mcp-server",
+      "relation": "must be enforced by"
+    },
+    {
+      "id": "edge-128",
+      "source": "least-privilege",
+      "target": "mcp-tool",
+      "relation": "limits"
+    },
+    {
+      "id": "edge-129",
+      "source": "secrets",
+      "target": "mcp-server",
+      "relation": "can be managed by"
+    },
+    {
+      "id": "edge-130",
+      "source": "secrets",
+      "target": "harness",
+      "relation": "must be protected in"
+    },
+    {
+      "id": "edge-131",
+      "source": "sandbox",
+      "target": "shell-cli",
+      "relation": "constrains"
+    },
+    {
+      "id": "edge-132",
+      "source": "approval",
+      "target": "side-effect",
+      "relation": "gates"
+    },
+    {
+      "id": "edge-133",
+      "source": "audit",
+      "target": "mcp-tool",
+      "relation": "tracks calls to"
+    },
+    {
+      "id": "edge-134",
+      "source": "egress",
+      "target": "exfiltration",
+      "relation": "reduces"
+    },
+    {
+      "id": "edge-135",
+      "source": "supply-chain",
+      "target": "mcp-server",
+      "relation": "can affect"
+    },
+    {
+      "id": "edge-136",
+      "source": "input-validation",
+      "target": "mcp-tool",
+      "relation": "validates arguments to"
+    },
+    {
+      "id": "edge-137",
+      "source": "data-minimization",
+      "target": "crm-read",
+      "relation": "constrains"
+    },
+    {
+      "id": "edge-138",
+      "source": "alarm-ack",
+      "target": "side-effect",
+      "relation": "is"
+    },
+    {
+      "id": "edge-139",
+      "source": "tag-read",
+      "target": "least-privilege",
+      "relation": "requires"
+    },
+    {
+      "id": "edge-140",
+      "source": "side-effect",
+      "target": "autonomy",
+      "relation": "should be constrained by"
+    },
+    {
+      "id": "edge-141",
+      "source": "jev",
+      "target": "typed-decision",
+      "relation": "returns"
+    },
+    {
+      "id": "edge-142",
+      "source": "jev",
+      "target": "choice",
+      "relation": "provides"
+    },
+    {
+      "id": "edge-143",
+      "source": "jev",
+      "target": "score",
+      "relation": "provides"
+    },
+    {
+      "id": "edge-144",
+      "source": "jev",
+      "target": "noul",
+      "relation": "provides"
+    },
+    {
+      "id": "edge-145",
+      "source": "choice",
+      "target": "confidence",
+      "relation": "returns"
+    },
+    {
+      "id": "edge-146",
+      "source": "score",
+      "target": "confidence",
+      "relation": "returns"
+    },
+    {
+      "id": "edge-147",
+      "source": "noul",
+      "target": "confidence",
+      "relation": "has no separate field for"
+    },
+    {
+      "id": "edge-148",
+      "source": "confidence",
+      "target": "decision-policy",
+      "relation": "informs"
+    },
+    {
+      "id": "edge-149",
+      "source": "decision-policy",
+      "target": "uncertainty-route",
+      "relation": "defines"
+    },
+    {
+      "id": "edge-150",
+      "source": "uncertainty-route",
+      "target": "human-oversight",
+      "relation": "can escalate to"
+    },
+    {
+      "id": "edge-151",
+      "source": "jev",
+      "target": "agent-loop",
+      "relation": "can route within"
+    },
+    {
+      "id": "edge-152",
+      "source": "decision-policy",
+      "target": "approval",
+      "relation": "does not replace"
+    },
+    {
+      "id": "edge-153",
+      "source": "tracing",
+      "target": "agent-loop",
+      "relation": "observes"
+    },
+    {
+      "id": "edge-154",
+      "source": "evals",
+      "target": "tracing",
+      "relation": "can evaluate"
+    },
+    {
+      "id": "edge-155",
+      "source": "eval-dataset",
+      "target": "evals",
+      "relation": "is used in"
+    },
+    {
+      "id": "edge-156",
+      "source": "evals",
+      "target": "regression",
+      "relation": "supports"
+    },
+    {
+      "id": "edge-157",
+      "source": "budget",
+      "target": "agent-loop",
+      "relation": "constrains"
+    },
+    {
+      "id": "edge-158",
+      "source": "retry",
+      "target": "idempotency",
+      "relation": "is needed for side effects"
+    },
+    {
+      "id": "edge-159",
+      "source": "human-oversight",
+      "target": "agentic-development",
+      "relation": "sets goals for"
+    },
+    {
+      "id": "edge-160",
+      "source": "human-oversight",
+      "target": "approval",
+      "relation": "performs"
+    }
+  ]
+}

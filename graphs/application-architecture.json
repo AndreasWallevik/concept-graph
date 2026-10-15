@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "application-architecture",
   "title": "Applikasjon og foreslått UniMicro-integrasjon",
-  "description": "Dagens komponenter og en foreslått, isolert dataflyt fra UniMicro V3 til en publiserbar produktgraf. Foreslåtte komponenter er ikke implementert. Se docs/unimicro-integration.md for beslutninger og forutsetninger.",
+  "description": "Dagens komponenter og en foreslått, isolert dataflyt fra UniMicro V3 til en publiserbar produktgraf. Foreslåtte komponenter er ikke implementert. Se docs/integrations/unimicro-integration.md for beslutninger og forutsetninger.",
   "color_by": "type",
   "discovery_mode": true,
   "nodes": [

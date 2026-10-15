@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Federated Knowledge Platform – målbilde</title>
+  <desc id="desc">Eksterne kildesystemer eier data. Separate skrivebeskyttede adaptere leverer godkjente data til uavhengige kunnskapsgrafer. Et felles søke- og API-lag med tilgangskontroll brukes av grafgrensesnitt, apper, AI-tjenester og eksterne klienter. Diagrammet viser planlagt arkitektur, ikke implementerte integrasjoner.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#8293a6"/></marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #183047; }
+      .heading { font-size: 26px; font-weight: 700; }
+      .status { font-size: 14px; font-weight: 700; fill: #9a5e16; }
+      .section { font-size: 15px; font-weight: 700; }
+      .label { font-size: 17px; font-weight: 700; text-anchor: middle; }
+      .small { font-size: 13px; fill: #53677c; text-anchor: middle; }
+      .line { fill: none; stroke: #8293a6; stroke-width: 2; marker-end: url(#arrow); }
+      .source { fill: #f4f7fa; stroke: #aec0d1; stroke-width: 2; }
+      .adapter { fill: #e9f5f2; stroke: #79b3a8; stroke-width: 2; }
+      .graph { fill: #eef2ff; stroke: #8199d1; stroke-width: 2; }
+      .autic { fill: #fff3e1; stroke: #d9a65e; stroke-width: 2; }
+      .api { fill: #e9eff9; stroke: #6e90bc; stroke-width: 2; }
+      .client { fill: #fff; stroke: #bcc9d5; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="1200" height="650" fill="#f8fafc"/>
+  <text x="40" y="42" class="heading">Federated Knowledge Platform</text>
+  <text x="1155" y="42" class="status" text-anchor="end">MÅLBILDE · IKKE IMPLEMENTERT</text>
+
+  <text x="40" y="82" class="section">Datakilder · hver kilde beholder eierskap</text>
+  <rect x="40" y="98" width="210" height="50" rx="9" class="source"/>
+  <rect x="268" y="98" width="210" height="50" rx="9" class="source"/>
+  <rect x="496" y="98" width="210" height="50" rx="9" class="source"/>
+  <rect x="724" y="98" width="210" height="50" rx="9" class="source"/>
+  <rect x="952" y="98" width="210" height="50" rx="9" class="source"/>
+  <text x="145" y="129" class="label">UniMicro</text>
+  <text x="373" y="129" class="label">Zendesk</text>
+  <text x="601" y="129" class="label">HubSpot</text>
+  <text x="829" y="129" class="label">SharePoint</text>
+  <text x="1057" y="129" class="label">Andre kilder</text>
+
+  <text x="40" y="190" class="section">Integrasjon · separat, skrivebeskyttet adapter per kilde</text>
+  <rect x="40" y="205" width="210" height="54" rx="9" class="adapter"/>
+  <rect x="268" y="205" width="210" height="54" rx="9" class="adapter"/>
+  <rect x="496" y="205" width="210" height="54" rx="9" class="adapter"/>
+  <rect x="724" y="205" width="210" height="54" rx="9" class="adapter"/>
+  <rect x="952" y="205" width="210" height="54" rx="9" class="adapter"/>
+  <text x="145" y="237" class="label">Adapter</text>
+  <text x="373" y="237" class="label">Adapter</text>
+  <text x="601" y="237" class="label">Adapter</text>
+  <text x="829" y="237" class="label">Adapter</text>
+  <text x="1057" y="237" class="label">Adapter</text>
+  <path d="M145 148 V203 M373 148 V203 M601 148 V203 M829 148 V203 M1057 148 V203" class="line"/>
+
+  <text x="40" y="306" class="section">Kunnskapslag · normalisering, identitetsmatching og relasjoner</text>
+  <rect x="40" y="319" width="1122" height="99" rx="12" fill="#fff" stroke="#ccd6e0" stroke-width="2"/>
+  <rect x="60" y="334" width="340" height="68" rx="9" class="graph"/>
+  <rect x="430" y="334" width="340" height="68" rx="9" class="autic"/>
+  <rect x="800" y="334" width="342" height="68" rx="9" class="graph"/>
+  <text x="230" y="362" class="label">Generiske grafer</text>
+  <text x="230" y="384" class="small">f.eks. læringsgrafer</text>
+  <text x="600" y="362" class="label">Autic Knowledge Graph</text>
+  <text x="600" y="384" class="small">mulig intern anvendelse</text>
+  <text x="971" y="362" class="label">Andre domenegrafer</text>
+  <text x="971" y="384" class="small">selvstendige eiere og livsløp</text>
+  <path d="M145 259 V282 H600 V332 M373 259 V282 M601 259 V282 M829 259 V282 M1057 259 V282 H600" class="line"/>
+
+  <rect x="40" y="452" width="1122" height="70" rx="11" class="api"/>
+  <text x="601" y="481" class="label">Felles søk og API</text>
+  <text x="601" y="503" class="small">autentisering · autorisasjon · sporbarhet · live-oppslag eller godkjent cache</text>
+  <path d="M230 402 V435 H601 V450 M600 402 V434 M971 402 V435 H601" class="line"/>
+
+  <rect x="40" y="565" width="262" height="56" rx="9" class="client"/>
+  <rect x="327" y="565" width="262" height="56" rx="9" class="client"/>
+  <rect x="614" y="565" width="262" height="56" rx="9" class="client"/>
+  <rect x="901" y="565" width="261" height="56" rx="9" class="client"/>
+  <text x="171" y="599" class="label">Knowledge Graph UI</text>
+  <text x="458" y="599" class="label">Separate tjenester</text>
+  <text x="745" y="599" class="label">AI / agenter</text>
+  <text x="1031" y="599" class="label">Eksterne klienter</text>
+  <path d="M601 522 V543 H171 V563 M601 543 H458 V563 M601 543 H745 V563 M601 543 H1031 V563" class="line"/>
+</svg>

@@ -2,7 +2,7 @@
 
 **Status:** Forslag til vurdering, ikke implementert integrasjon  
 **Sist vurdert:** 14. oktober 2026  
-**Tilhørende tegning:** [Arkitektur og dataflyt](architecture-data-flow.svg)  
+**Tilhørende tegning:** [Arkitektur og dataflyt](../architecture-data-flow.svg)  
 **Utforskbar graf i appen:** `?graph=application-architecture`
 
 ## Mål og beslutning

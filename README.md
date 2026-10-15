@@ -15,13 +15,22 @@ database or external business system is connected.
 | [Security & Networking](graphs/security-networking.json) | Networking and security concepts organized into domains and prerequisites. |
 | [Autic Product Graph](graphs/autic-products.json) | Public-source portfolio sample connecting products, brands, protocols, applications, and industries. |
 | [Application Architecture](graphs/application-architecture.json) | Current app components and a proposed UniMicro V3 product-data flow. |
+| [AI, MCP, and Agentic Development](graphs/agentic-development.json) | Concepts and relationships across LLMs, agent tools, MCP, Jev, security, and evaluation. |
 
 `graphs/` holds the current, editable versions. `graph_starters/` holds the
 versions used by **Reset current graph**. Both directories are committed to Git;
 only reset backups in `graphs/.backups/` are ignored.
 
-The proposed UniMicro V3/MSSQL integration is documented in
-[docs/unimicro-integration.md](docs/unimicro-integration.md), with an
+The [AI, MCP, and Agentic Development graph](graphs/agentic-development.json) has a
+[reading guide and sources](docs/graphs/agentic-development.md). Open it in the local
+Flask app with `?graph=agentic-development`, then use **All domains** to focus
+one part of the map. It is a learning graph and does not connect to an AI,
+MCP, CRM, or OT service.
+
+The [architecture overview](docs/architecture-overview.md) separates the current
+app from a proposed federated platform with independent graphs and shared
+infrastructure. The proposed UniMicro V3/MSSQL integration is documented in
+[docs/integrations/unimicro-integration.md](docs/integrations/unimicro-integration.md), with an
 [SVG architecture diagram](docs/architecture-data-flow.svg). This is a design
 proposal; the app does not connect to UniMicro. In the local Flask app, select
 **Applikasjon og foreslått UniMicro-integrasjon** or open

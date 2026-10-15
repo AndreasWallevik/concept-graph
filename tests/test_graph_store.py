@@ -44,11 +44,11 @@ class GraphStoreTests(unittest.TestCase):
         self.assertEqual(self.graph["id"], GRAPH_ID)
         self.assertEqual(self.store.list()[0]["title"], "Industrial & Digital Systems")
 
-    def test_repository_contains_six_independent_graphs(self):
+    def test_repository_contains_seven_independent_graphs(self):
         graphs = GraphStore(PROJECT_ROOT / "graphs")
         self.assertEqual(
             {item["id"] for item in graphs.list()},
-            {GRAPH_ID, "ignition-core", "isa95-purdue", "security-networking", "autic-products", "application-architecture"},
+            {GRAPH_ID, "ignition-core", "isa95-purdue", "security-networking", "autic-products", "application-architecture", "agentic-development"},
         )
         self.assertIn("ignition", {node["id"] for node in graphs.load("ignition-core")["nodes"]})
 
